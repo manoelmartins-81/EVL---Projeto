@@ -1,0 +1,187 @@
+Arquivo Atualizado: mapa.html (Arquitetura Informativa no Nível 3)
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa do Site - Arquitetura EVL</title>
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed; color: white;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+        }
+        .logo-mapa { height: 50px; filter: drop-shadow(0 0 10px rgba(108,92,231,0.5)); }
+        .btn-voltar {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s;
+        }
+        .btn-voltar:hover { background: white; color: var(--primary); }
+        
+        main {
+            max-width: 1100px; width: 95%; margin: 40px 0;
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: #ffeaa7; text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 50px; font-weight: 300; }
+        
+        .hierarquia-container { display: grid; gap: 40px; }
+        
+        .secao-mapa {
+            padding-left: 25px;
+            border-left: 2px solid rgba(255, 234, 167, 0.4);
+        }
+        
+        .secao-titulo {
+            font-weight: 800; color: #ffeaa7; text-transform: uppercase;
+            font-size: 1.2em; display: block; margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .grid-subitens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .item-mapa {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+        
+        /* Itens com link têm hover e sublinhado */
+        .link-mapa { text-decoration: none; color: inherit; display: block; }
+        .link-mapa .item-mapa:hover { background: rgba(255, 255, 255, 0.1); border-color: #ffeaa7; }
+        .link-mapa strong { text-decoration: underline; }
+
+        /* Itens apenas informativos (Nível 3) */
+        .item-informativo { border-style: dashed; opacity: 0.9; }
+        .item-informativo strong { color: #ffeaa7; display: block; margin-bottom: 5px; font-size: 0.95em; }
+
+        .item-mapa strong { display: block; color: #ffeaa7; margin-bottom: 5px; font-size: 0.95em; }
+        .item-mapa span { font-size: 0.85em; opacity: 0.8; line-height: 1.4; display: block; }
+
+        .seta-conector { text-align: center; color: #ffeaa7; font-size: 1.5em; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo-evl.png" alt="EVL" class="logo-mapa">
+        <a href="index.html" class="btn-voltar">Voltar para a Home</a>
+    </header>
+
+    <main>
+        <h1>Arquitetura Estrutural do Espaço Virtual de Leitura</h1>
+        
+        <div class="hierarquia-container">
+            <!-- NÍVEL 1: LINKS ATIVOS -->
+            <div class="secao-mapa">
+                <span class="secao-titulo">Nível 1: Porta de Entrada</span>
+                <div class="grid-subitens">
+                    <a href="index.html" class="link-mapa">
+                        <div class="item-mapa">
+                            <strong>Página Inicial</strong>
+                            <span>Matriz temática baseada nos Temas Contemporâneos Transversais (TCTs).</span>
+                        </div>
+                    </a>
+                    <a href="sobre.html" class="link-mapa">
+                        <div class="item-mapa">
+                            <strong>Sobre o Projeto</strong>
+                            <span>Fundamentação teórica em EPT, Politecnia e Omnilateralidade.</span>
+                        </div>
+                    </a>
+                    <a href="mapa.html" class="link-mapa">
+                        <div class="item-mapa">
+                            <strong>Mapa do Site</strong>
+                            <span>Visualização da estrutura hierárquica e navegação do portal.</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="seta-conector">▼</div>
+
+            <!-- NÍVEL 2: LINKS ATIVOS -->
+            <div class="secao-mapa">
+                <span class="secao-titulo">Nível 2: Abordagem por Temas</span>
+                <div class="grid-subitens">
+                    <a href="multiculturalismo.html" class="link-mapa">
+                        <div class="item-mapa">
+                            <strong>Nossa Matriz, Nossas Raízes</strong>
+                            <span>Contextualização do Multiculturalismo e Relações Étnico-Raciais.</span>
+                        </div>
+                    </a>
+                    <a href="etica.html" class="link-mapa">
+                        <div class="item-mapa">
+                            <strong>Ética e Vida Social</strong>
+                            <span>Abordagem da Cidadania e Civismo na formação social brasileira.</span>
+                        </div>
+                    </a>
+                    <a href="cidadania.html" class="link-mapa">
+                        <div class="item-mapa">
+                            <strong>Paisagens e Identidades</strong>
+                            <span>Relações entre Meio Ambiente e a função social da terra e moradia.</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="seta-conector">▼</div>
+
+            <!-- NÍVEL 3: APENAS INFORMATIVO (SEM LINKS) -->
+            <div class="secao-mapa">
+                <span class="secao-titulo">Nível 3: Imersão Literária (A Obra)</span>
+                <div class="grid-subitens">
+                    <div class="item-mapa item-informativo">
+                        <strong>Contexto da Obra</strong>
+                        <span>Análise sociológica e histórica integrada ao problema contemporâneo.</span>
+                    </div>
+                    <div class="item-mapa item-informativo">
+                        <strong>Leitura de Excertos</strong>
+                        <span>Ambiente de leitura interativo com foco em trechos estratégicos.</span>
+                    </div>
+                    <div class="item-mapa item-informativo">
+                        <strong>Autor(a)</strong>
+                        <span>Dados biográficos.</span>
+                    </div>
+                    <div class="item-mapa item-informativo">
+                        <strong>Movimento literário</strong>
+                        <span>Informações e características sobre a escola literária da obra.</span>
+                    </div>
+                    <div class="item-mapa item-informativo">
+                        <strong>Glossário</strong>
+                        <span>Resgate e elucidação de termos arcaicos e vocabulário de época.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="seta-conector">▼</div>
+
+            <!-- NÍVEL 4: LINK ATIVO -->
+            <div class="secao-mapa" style="border-left-color: #6c5ce7;">
+                <span class="secao-titulo">Nível 4: Mediação Pedagógica</span>
+                <div class="grid-subitens">
+                    <a href="professor.html" class="link-mapa">
+                        <div class="item-mapa">
+                            <strong>Espaço do Professor</strong>
+                            <span>Roteiros didáticos, competências da BNCC e orientações integradas.</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

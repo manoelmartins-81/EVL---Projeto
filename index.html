@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVL - Espaço Virtual de Leitura</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            height: 100vh;
+            overflow: hidden; 
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), 
+                        url('estante-livros4.jpg'); 
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex; flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            padding: 10px 40px;
+            display: flex; justify-content: flex-end;
+            box-sizing: border-box;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .nav-topo { display: flex; gap: 15px; }
+        .btn-nav {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s;
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main {
+            flex: 1;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: space-evenly; 
+            padding: 10px 20px;
+        }
+
+        .logo-central {
+            width: 100%; max-width: 368px; height: auto;
+            filter: drop-shadow(0 0 15px rgba(108, 92, 231, 0.5));
+        }
+
+        .bloco-citacoes {
+            text-align: center;
+            width: 100%;
+            max-width: 1200px; 
+            background: rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            border-radius: 20px;
+        }
+
+        .citacao-unica {
+            font-size: 1.05em;
+            font-style: italic;
+            line-height: 1.4;
+            margin: 12px 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .autor-inline {
+            font-weight: 800; text-transform: uppercase; color: #ffeaa7;
+            font-style: normal; font-size: 0.85em; margin-left: 10px;
+        }
+
+        .matriz-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px; width: 100%; max-width: 1200px;
+        }
+
+        .card-tema {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px;
+            padding: 25px 15px; text-align: center; text-decoration: none; color: white;
+            transition: 0.4s; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .card-tema:hover { transform: translateY(-8px); border-color: #ffeaa7; }
+
+        .icon-tema { font-size: 2.5em; margin-bottom: 10px; }
+        .card-tema h3 { margin: 0; font-size: 1.3em; color: #ffeaa7; line-height: 1.2; }
+
+        .tag-tct {
+            display: inline-block; margin-top: 12px; font-size: 0.85em;
+            color: #dfe6e9; font-style: italic; border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 8px; width: 90%;
+        }
+
+        @media (max-width: 1100px) {
+            .citacao-unica { font-size: 0.95em; }
+            .logo-central { max-width: 280px; }
+        }
+
+        @media (max-width: 768px) {
+            body { overflow-y: auto; height: auto; }
+            main { justify-content: flex-start; gap: 25px; padding-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-topo">
+            <!-- LINK AGORA APONTANDO PARA mapa.html -->
+            <a href="mapa.html" class="btn-nav">Mapa do Site</a>
+            <a href="sobre.html" class="btn-nav">Sobre o Projeto</a>
+        </nav>
+    </header>
+
+    <main>
+        <img src="logo-evl.png" alt="Espaço Virtual de Leitura" class="logo-central">
+
+        <div class="bloco-citacoes">
+            <p class="citacao-unica">
+                "A leitura de todos os bons livros é como uma conversa com as mentes mais brilhantes dos séculos passados."
+                <span class="autor-inline">— René Descartes, 1637</span>
+            </p>
+            <p class="citacao-unica">
+                "Muitos homens iniciaram uma nova era na sua vida a partir da leitura de um livro."
+                <span class="autor-inline">— Henry David Thoreau, 1854</span>
+            </p>
+        </div>
+
+        <div class="matriz-container">
+            <a href="multiculturalismo.html" class="card-tema">
+                <span class="icon-tema">🌍</span>
+                <h3>Nossa Matriz,<br>Nossas Raízes</h3>
+                <span class="tag-tct">Inspirado no Tema Contemporâneo Transversal Multiculturalismo</span>
+            </a>
+
+            <a href="etica.html" class="card-tema">
+                <span class="icon-tema">⚖️</span>
+                <h3>Ética e<br>Vida Social</h3>
+                <span class="tag-tct">Inspirado no Tema Contemporâneo Transversal Cidadania e Civismo</span>
+            </a>
+
+            <a href="cidadania.html" class="card-tema">
+                <span class="icon-tema">🌱</span>
+                <h3>Paisagens e Identidades</h3>
+                <span class="tag-tct">Inspirado no Tema Contemporâneo Transversal Meio Ambiente</span>
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>

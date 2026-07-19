@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Matriz, Nossas Raízes - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), 
+                        url('estante-livros4.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            display: flex; flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 15px 40px;
+            display: flex; justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .btn-nav {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s;
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        .logo-secao { height: 45px; filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.5)); }
+
+        main {
+            max-width: 1100px;
+            width: 90%;
+            margin: 40px 0;
+            display: flex; flex-direction: column; gap: 40px;
+        }
+
+        .card-apresentacao {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        h1, h2 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+        
+        .texto-amigavel {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* GRID DE VÍDEOS */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .video-item { text-decoration: none; color: white; transition: 0.3s; }
+
+        .video-container {
+            width: 100%;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .video-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+
+        .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5em; transition: 0.3s;
+        }
+
+        .video-caption {
+            text-align: center; font-size: 0.9em; margin-top: 12px; font-weight: bold;
+            display: block; line-height: 1.4;
+        }
+        .video-source {
+            display: block; font-size: 0.75em; opacity: 0.8; font-weight: normal; margin-top: 4px;
+        }
+
+        /* TEXTO DE CONDUÇÃO UNIFICADO */
+        .conducao-leitura {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 25px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 30px;
+        }
+        .conducao-leitura p {
+            font-size: 1.05em;
+            line-height: 1.7;
+            text-align: justify;
+            margin-bottom: 20px;
+            color: #f1f2f6;
+        }
+
+        /* GRID DE OBRAS */
+        .obra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .card-obra {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.4s;
+            text-decoration: none;
+            color: white;
+            display: flex; flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-obra:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .card-obra h3 { margin: 0 0 10px 0; color: var(--accent); font-size: 1.5em; }
+        .autor-nome { font-weight: bold; font-size: 0.9em; color: #dfe6e9; margin-bottom: 15px; display: block; }
+        .card-obra p { font-size: 0.95em; line-height: 1.6; margin: 0; opacity: 0.9; text-align: justify; }
+
+        .btn-explorar {
+            margin-top: 25px; padding: 12px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-weight: 800;
+            border-radius: 12px;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            transition: 0.3s;
+        }
+        .card-obra:hover .btn-explorar { background: var(--accent); color: #2c3e50; }
+
+        .secao-referencias {
+            max-width: 1100px; width: 90%;
+            margin: 50px auto 30px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.85em;
+            line-height: 1.6;
+            color: #dfe6e9;
+        }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-top: 0; }
+        .ref-item { margin-bottom: 12px; text-align: justify; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo-evl.png" alt="EVL" class="logo-secao">
+        <nav>
+            <a href="index.html" class="btn-nav">Voltar para a Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="card-apresentacao">
+            <h1>Nossa Matriz, Nossas Raízes</h1>
+            <p class="texto-amigavel">
+                O multiculturalismo, tema que inspira o eixo "Nossa Matriz, Nossas Raízes", é a ideia de que todas as culturas que formam o Brasil devem ser valorizadas e respeitadas de verdade, combatendo o silenciamento de tantas identidades. Esse conceito é o nosso ponto de partida para entender como o racismo e as desigualdades sociais moldaram a construção do nosso país. É importante que você perceba que os livros clássicos não estão presos ao passado, mas nos ajudam a questionar o que vivemos hoje. Trata-se de um convite para você usar a leitura como uma ferramenta para entender a nossa diversidade, descobrir sua própria história e fortalecer o seu papel na sociedade.
+            </p>
+
+            <h2 style="font-size: 1.1em; margin-bottom: 20px;">🔍 Explore as Raízes do Brasil</h2>
+            <div class="video-grid">
+                <!-- Raiz Indígena -->
+                <a href="https://www.youtube.com/watch?v=cQkA5PDow2s" target="_blank" class="video-item">
+                    <div class="video-container" style="border-color: #55efc4;">
+                        <img src="https://img.youtube.com/vi/cQkA5PDow2s/hqdefault.jpg" alt="Os Indígenas">
+                        <div class="play-overlay">🏹</div>
+                    </div>
+                    <span class="video-caption">Os Indígenas<span class="video-source">Fonte: Enraizando</span></span>
+                </a>
+
+                <!-- Raiz Portuguesa -->
+                <a href="https://www.youtube.com/watch?v=HfaeWT6qZl0" target="_blank" class="video-item">
+                    <div class="video-container" style="border-color: #74b9ff;">
+                        <img src="https://img.youtube.com/vi/HfaeWT6qZl0/hqdefault.jpg" alt="Os Portugueses">
+                        <div class="play-overlay">⛵</div>
+                    </div>
+                    <span class="video-caption">Os Portugueses<span class="video-source">Fonte: Enraizando</span></span>
+                </a>
+
+                <!-- Raiz Africana -->
+                <a href="https://www.youtube.com/watch?v=fGUFwFYx46s" target="_blank" class="video-item">
+                    <div class="video-container" style="border-color: #fab1a0;">
+                        <img src="https://img.youtube.com/vi/fGUFwFYx46s/hqdefault.jpg" alt="Os Africanos">
+                        <div class="play-overlay">⛓️</div>
+                    </div>
+                    <span class="video-caption">Os Africanos<span class="video-source">Fonte: Enraizando</span></span>
+                </a>
+            </div>
+
+            <div class="conducao-leitura">
+                <p>
+                    Uma das portas de entrada para essa reflexão é o romance <strong>Úrsula</strong>, publicado em 1859. A obra é um marco pioneiro na literatura brasileira por ser o primeiro romance escrito por uma mulher no país, Maria Firmina dos Reis, e uma das primeiras produções de temática abolicionista. A narrativa acompanha a história de amor entre os jovens Úrsula e Tancredo, um romance que acaba sendo atravessado pelas crueldades do escravismo e pela perseguição do vilão Comendador Fernando, ilustrando as feridas históricas da nossa sociedade.
+                </p>
+                <p>
+                    Em <strong>Macunaíma: o herói sem nenhum caráter</strong>, publicado em 1928 por Mário de Andrade, a identidade nacional ganha novos contornos. Essa rapsódia modernista narra a trajetória de um índio amazônico que viaja até São Paulo para recuperar o seu amuleto mágico. O livro funde elementos do folclore, surrealismo e forte crítica social, funcionando como uma alegoria que retrata a miscigenação e a complexidade do povo brasileiro.
+                </p>
+            </div>
+        </section>
+
+        <section class="obra-grid">
+            <!-- Link Corrigido: ursula - contexto.html -->
+            <a href="ursula - contexto.html" class="card-obra">
+                <div>
+                    <h3>Úrsula</h3>
+                    <span class="autor-nome">Maria Firmina dos Reis</span>
+                    <p>Mergulhe no primeiro romance abolicionista do Brasil e descubra como uma voz feminina negra rompeu o silêncio para denunciar as marcas da escravidão.</p>
+                </div>
+                <div class="btn-explorar">Explorar Contexto</div>
+            </a>
+
+            <a href="contexto-macunaima.html" class="card-obra">
+                <div>
+                    <h3>Macunaíma</h3>
+                    <span class="autor-nome">Mário de Andrade</span>
+                    <p>Explore a jornada do "herói sem nenhum caráter" e entenda como as lendas e a mistura de culturas formaram o mosaico da nossa identidade.</p>
+                </div>
+                <div class="btn-explorar">Explorar Contexto</div>
+            </a>
+        </section>
+    </main>
+
+    <aside class="secao-referencias">
+        <h4>Referências</h4>
+        <div class="ref-item">BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 02 jul. 2026.</div>
+        <div class="ref-item">ENRAIZANDO. <strong>Série Raízes do Brasil</strong> (Os Africanos, Os Indígenas, Os Portugueses). YouTube, 2021. Disponível em: https://www.youtube.com/@enraizando. Acesso em: 02 jul. 2026.</div>
+        <div class="ref-item">IVANICSKA, R. F. et al. (orgs.). <strong>Temas contemporâneos</strong>: valorização do multiculturalismo. Cruz Alta: Ilustração, 2021. Disponível em: https://www.academia.edu/45581016/TEMAS_CONTEMPOR%C3%82NEOS_VALORIZA%C3%87%C3%83O_DO_MULTICULTURALISMO_POR_MEIO_DA_EDUCA%C3%87%C3%83O_E_DO_DIREITO. Acesso em: 02 jul. 2026.</div>
+        <div class="ref-item">NAGATA, Aline Akemi. <strong>Multiculturalismo e literatura</strong>: as fronteiras do currículo oficial. Pbarros, 2020. Disponível em: https://revistas.usp.br/Rumores/pt_BR/article/view/51130/55200. Acesso em: 02 jul. 2026.</div>
+    </aside>
+
+</body>
+</html>

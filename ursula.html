@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de Excertos: Úrsula - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7; --accent: #ffeaa7; --bg-body: #1a1a1a;
+            --bg-card: rgba(255, 255, 255, 0.08); --text-color: #ffffff;
+            --font-reader: 'Merriweather', serif; --glossary-bg: #ffeaa7; --glossary-text: #2d3436;
+        }
+        body.sepia { --bg-body: #f4ecd8; --bg-card: rgba(255, 255, 255, 0.6); --text-color: #433422; --primary: #8c7ae6; }
+        body.dark { --bg-body: #0f0f0f; --bg-card: rgba(20, 20, 20, 0.8); --text-color: #e0e0e0; }
+
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('estante-livros4.jpg') no-repeat center center fixed;
+            background-size: cover; color: var(--text-color); transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.85em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        .controles-visualizacao { margin: 20px 0; display: flex; gap: 10px; }
+        .btn-theme { padding: 8px 15px; border-radius: 10px; border: 1px solid var(--primary); background: var(--bg-card); color: var(--text-color); cursor: pointer; font-size: 0.8em; }
+        
+        main { max-width: 850px; width: 92%; margin-bottom: 120px; }
+        .card-leitura { background: var(--bg-card); backdrop-filter: blur(15px); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 550px; }
+        
+        .pagina { display: none; animation: fadeIn 0.5s; }
+        .pagina.ativa { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .texto-obra { font-family: var(--font-reader); font-size: 1.22em; line-height: 2; text-align: justify; }
+        h2 { font-family: 'Inter', sans-serif; color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 30px; font-size: 1.4em; }
+
+        .termo { border-bottom: 2px dashed var(--primary); cursor: help; position: relative; font-weight: bold; }
+        .termo:hover::after { content: attr(data-def); position: absolute; bottom: 120%; left: 0; background: var(--glossary-bg); color: var(--glossary-text); padding: 10px; border-radius: 10px; font-size: 0.75em; width: 220px; z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: 'Inter', sans-serif; font-weight: normal; }
+
+        .progresso-footer { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .bar-container { width: 100%; max-width: 600px; height: 8px; background: #333; border-radius: 10px; overflow: hidden; }
+        #bar-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+        .controles-paginacao { display: flex; gap: 30px; }
+        .btn-page { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-page:hover:not(:disabled) { transform: scale(1.05); background: #5649c0; }
+        .btn-page:disabled { opacity: 0.3; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="ursula - contexto.html" class="btn-nav">Sair da Leitura</a></nav>
+    </header>
+
+    <div class="controles-visualizacao">
+        <button class="btn-theme" onclick="setTheme('default')">☀ Padrão</button>
+        <button class="btn-theme" onclick="setTheme('sepia')">📜 Sépia</button>
+        <button class="btn-theme" onclick="setTheme('dark')">🌙 Noturno</button>
+    </div>
+
+    <main>
+        <article class="card-leitura texto-obra">
+            
+            <!-- PÁGINA 1: PRÓLOGO -->
+            <div class="pagina ativa" id="p1">
+                <h2>Prólogo (Autocrítica)</h2>
+                <p>Mesquinho e humilde livro é este que vos apresento, leitor. Sei que passará entre o indiferentismo glacial de uns e o riso mofador de outros, e ainda assim o dou a lume.Não é a vaidade de adquirir nome que me cega, nem o amor próprio de autor. Sei que pouco vale este romance, porque escrito por uma mulher, e mulher brasileira, de educação acanhada e sem o trato e a conversação dos homens ilustrados, que aconselham, que discutem e que corrigem; com uma instrução misérrima, apenas conhecendo a língua de seus pais, e pouco lida, o seu cabedal intelectual é quase nulo. Então por que o publicas? – perguntará o leitor. Como uma tentativa, e mais ainda, por este amor materno, que não tem limites, que tudo desculpa – os defeitos, os achaques, as deformidades do filho – e gosta de enfeitá-lo e aparecer com ele em toda a parte, mostrá-lo a todos os conhecidos e vê-lo mimado e acariciado. O nosso romance, gerou-o a imaginação, e não o soube colorir, nem aformosentar. Pobre avezinha silvestre, anda terra a terra, e nem olha para as planuras onde gira a águia. Mas, ainda assim, não o abandoneis na sua humildade e obscuridade, senão morrerá à míngua, sentido e magoado, só afagado pelo carinho materno.
+</p>
+            </div>
+
+            <!-- PÁGINA 2: INÍCIO -->
+            <div class="pagina" id="p2">
+                <h2>Túlio salva Tancredo</h2>
+                <p>O mancebo ocultava parte de suas formas num amplo capote de lã, cujas dobras apenas descobriam-lhe as mãos cuidadosamente calçadas com luvas de camurça. Numa destas mãos o jovem cavaleiro reclinara a face pálida e melancólica, com a outra frouxamente tomava as rédeas ao seu ginete. Mas este simples traje, este como que abandono de si próprio, não podia arredar do desconhecido certo ar de perfeita distinção que bem dava a conhecer que era ele pessoa da alta sociedade.
+
+De repente o cavalo, baldo de vigor, em uma das cavidades onde o ter-reno se acidentava mais, mal podendo conter-se pelo langor dos seus lassos membros, distendeu as pernas, dilatou o pescoço, e dando uma volta sobre si, caiu redondamente. O choque era demais violento para não despertar o meditabundo viajor: quis ainda evitar a queda, mas era tarde, e de envolta com o animal rolou no chão. Houvera mais que descuido no incerto e indolente viajar desse singular desconhecido: não previa ele um acontecimento fatal nessa divagação de tanto abandono, de tão grande desleixo? E malgrado o langor do cavalo, sempre a prosseguir, cada vez mais submerso em seu melancólico cismar! Caiu, e de um jato perdeu o sentimento da própria vida; porque a queda lhe ofendeu o crânio e, aturdido e maltratado, desmaiou completamente. Para mais desastre, o pobre animal, no último arranco do existir, distendendo as pernas, foi comprimir acerbadamente o pé direito do mancebo, que inerte e imóvel, como se fora frio cadáver, nenhuma resistência lhe opôs.Era apenas o alvorecer do dia, dissemos nós, e esse dia era belo como soem ser os do nosso clima equatorial onde a luz se derrama a flux – brilhante, pura e intensa.
+Vastos currais de gado por ali havia; mas tão desertos a essa hora matutina, que nenhuma esperança havia de que alguém socorresse o jovem cavaleiro, que acabava de desmaiar. E o sol já mais brilhante, e mais ardente e abrasador, subia pressuroso a eterna escadaria do seu trono de luz, e dardejava seus raios sobre o infeliz mancebo!
+Nesse comenos alguém despontou longe, como se fora um ponto negro no extremo horizonte. Esse alguém, que pouco e pouco avultava, era um homem, e mais tarde suas formas já melhor se distinguiam. Trazia ele um quer que era que de longe mal se conhecia e que, descansando sobre um dos ombros, obrigava-o a reclinar a cabeça para o lado oposto. Todavia essa carga era bastante leve – um cântaro ou uma bilha; o homem ia sem dúvida em demanda de alguma fonte. Caminhava com cuidado, e parecia bastante familiarizado com o lugar cheio de barrocais, e ainda mais com o calor do dia em pino, porque cami-nhava tranquilo. E mais e mais se aproximava ele do cavaleiro desmaiado; porque seus passos para ali se dirigiam, como se a Providência os guiasse. Ao endireitar-se para um bosque à cata sem dúvida da fonte que procurava, seus olhos se fixaram sobre aquele triste espetáculo.
+—	Deus meu! – exclamou correndo para o desconhecido.
+E ao coração tocou-lhe piedoso interesse, vendo esse homem lançado por terra, tinto em seu próprio sangue, e ainda oprimido pelo animal já morto. E ao aproximar-se contemplou em silêncio o rosto desfigurado do mancebo; curvou-se e pôs-lhe a mão sobre o peito, e sentiu lá no fundo frouxas e espaçadas pulsações, e assomou-lhe ao rosto riso fagueiro de completo enlevo; da mais íntima satisfação. O mancebo respirava ainda.
+—	Que ventura! – então disse ele, erguendo as mãos ao céu – que ven-tura, podê-lo salvar!
+O homem que assim falava era um pobre rapaz, que ao muito parecia contar vinte e cinco anos, e que na franca expressão de sua fisionomia dei-xava adivinhar toda a nobreza de um coração bem formado. O sangue afri-cano fervia-lhe nas veias; o mísero ligava-se à odiosa cadeia da escravidão; e embalde o sangue ardente que herdara de seus pais, e que o nosso clima e a servidão não puderam resfriar, embalde – dissemos – se revoltava, porque se lhe erguia como barreira – o poder do forte contra o fraco!...
+Ele entanto resignava-se; e se uma lágrima a desesperação lhe arran-cava, escondia-a no fundo da sua miséria.
+Assim é que o triste escravo arrasta a vida de desgostos e de martírios, sem esperança e sem gozos!
+Oh! Esperança! Só a tem os desgraçados no refúgio que a todos oferece a sepultura!... Gozos!... Só na eternidade os anteveem eles!
+Coitado do escravo! Nem o direito de arrancar do imo peito um quei-xume de amargurada dor!...
+Tentou então erguer-se como envergonhado de uma fraqueza a que irremissivelmente qualquer cedera; porém desalentado e amortecido foi cair nos braços do compassivo escravo, única testemunha de tão longas dores e desmaios, e que em silêncio o observava. Mas esta segunda síncope, menos prolongada que a primeira, não afligiu tanto ao mísero rapaz, que dedicada-mente o reanimava. A febre começou a tingir de rubor aquela fronte pálida, dando vida fictícia a uns olhos, que um momento antes pareciam descair para o túmulo.
+—	Quem és? – perguntou o mancebo ao escravo apenas saído do seu letargo. – Por que assim mostras interessar-te por mim?...
+—	Senhor! – balbuciou o negro – vosso estado... Eu – continuou, com o acanhamento que a escravidão gerava – suposto nenhum serviço vos possa prestar, todavia quisera poder ser-vos útil. Perdoai-me!...
+—	Eu? – atalhou o cavaleiro com efusão de reconhecimento – Eu perdoar-te! Pudera todos os corações assemelharem-se ao teu. E fitando-o, apesar da perturbação do seu cérebro, sentiu pelo jovem negro interesse igual talvez ao que este sentia por ele. Então nesse breve cambiar de vistas, como que essas duas almas mutuamente se falharam, exprimindo uma o pensamento apenas vago que na outra errava.
+Entretanto o pobre negro, fiel ao humilde hábito do escravo, com os braços cruzados sobre o peito, descaía agora a vista para a terra, aguardando tímido uma nova interrogação.
+— Meu senhor, permiti que vos leve à fazenda que ali vedes – e apontava para a outra extremidade do campo –, ali habita com sua filha única a pobre senhora Luísa B., de quem talvez não ignoreis a triste vida. Essa infeliz paralítica todo o bem que vos poderá prestar limitar-se-á a uma franca e generosa hospitalidade; mas aí está sua filha, que é um anjo de beleza e de candura, e os desvelos, que infelizmente vos não posso prestar, dar-vo-los-á ela com singular bondade.
+Imerso entanto em novo cismar, o mancebo parecia nada ouvir do que lhe dizia o jovem negro, deixando-se conduzir por ele, que como se fora leve carga o levava sobre seus ombros nus e musculosos.
+Foi um momento de meditação, a febre, a dor, e o movimento arrancaram-no a ela, e soltando um frouxo suspiro perguntou ao seu condutor:
+—	Como te chamas, generoso amigo? Qual é a tua condição?
+—	Eu, meu senhor – tornou-lhe o escravo, redobrando suas forças para não mostrar cansaço – chamo-me Túlio.
+—	Túlio! – repetiu o cavaleiro, e de novo interrogou:
+—	A tua condição, Túlio?
+Então o pobre e generoso rapaz, engolindo um suspiro magoado, res-pondeu com amargura, malgrado seu, mal disfarçada:
+—	A minha condição é a de mísero escravo! Meu senhor – continuou – não me chameis amigo. Calculastes já, sondastes vós a distância que nos separa? Ah! O escravo é tão infeliz!... Tão mesquinha e rasteira é a sua sorte, que...
+—	Cala-te, oh! Pelo céu, cala-te, meu pobre Túlio – interrompeu o jovem cavaleiro – dia virá em que os homens reconheçam que são todos irmãos. Túlio, meu amigo, eu avalio a grandeza de dores sem lenitivo que te bor-bulha na alma, compreendo tua amargura, e amaldiçoo em teu nome ao primeiro homem que escravizou a seu semelhante. Sim – prosseguiu – tens razão; o branco desdenhou a generosidade do negro, e cuspiu sobre a pureza dos seus sentimentos! Sim, acerbo deve ser o seu sofrer, e eles que o não compreendem! Mas, Túlio, espera; porque Deus não desdenha aquele que ama ao seu próximo... E eu te auguro um melhor futuro... 
+</p>
+            </div>
+
+            <!-- PÁGINA 3: ÚRSULA -->
+            <div class="pagina" id="p3">
+                <h2>Descrição de Úrsula</h2>
+                <p>A lua ia já alta na azulada abóbada, prateando o cume das árvores, e a superfície da terra e, apesar disso, Úrsula, a mimosa filha de Luísa B., a flor daquelas solidões, não adormecera um instante. É que agora esse anjo de sublime doçura repartia com seu hóspede os diuturnos cuidados que dava a sua mãe enferma; e assim, duplicadas as suas ocupações, sentia fugir-lhe nessa noite o sono.
+Bela como o primeiro raio de esperança, transpunha ela a essa hora mágica da noite o lumiar da porta, em cuja câmara debatia-se entre dores e violenta febre o pobre enfermo.
+Era ela tão caridosa... Tão bela... E tanta compaixão lhe inspirava o sofri-mento alheio, que lágrimas de tristeza e de sincero pesar se lhe escaparam dos olhos, negros, formosos, e melancólicos. Úrsula, com a timidez da corsa, vinha desempenhar à cabeceira desse leito de dores os cuidados que exigia o penoso estado do desconhecido.
+Nenhuma exageração havia nesse piedoso desempenho; porque Úrsula era ingênua e singela em todas as suas ações; e porque esse interesse todo caridoso, o mancebo não podia avaliá-lo, tendo as faculdades transtornadas pela moléstia. Este sentimento era pois natural em seu coração, e a donzela não se envergonhava de o patentear.
+</p>
+            </div>
+
+            <!-- PÁGINA 4: PASSADO -->
+            <div class="pagina" id="p4">
+                <h2>Adelaide e os Pais de Tancredo</h2>
+                <p>—	Eu a vi! – exclamou, erguendo a voz, num transporte de satisfação – Vi-a, era bela como a rosa a desabrochar, e em sua pureza semelhava-se a açucena cândida e vaporosa! E eu amei-a!... Maldição!... Não... nunca a amei... E calou-se.
+Essa mulher figurava-se-lhe bela como um anjo, sedutora como uma fada, maligna como um demônio, e entretanto amada, muito amada; e o seu nome lhe queimava o coração, como se lá estivesse escrito com letras de fogo.
+E há de ele amá-la? – repetia Úrsula a si própria com uma pertinácia, que a teria admirado, se nisso pudesse atentar. Amor! – prosseguia – o que é amor? Creio que jamais amarei. Mas Adelaide deve ser muita amada por ele... mas eu o ouvi amaldiçoá-la!... Por que diz que lhe queima os beiços o seu nome? Oh! Não é possível, ele já não a ama! E Úrsula, perdida nestes loucos pensamentos, não atendia ao que em torno de si havia.
+O doente tinha adormecido.
+...
+—	Meu filho – disse-me minha mãe, apresentando-me a formosa don-zela – eis Adelaide, a minha querida Adelaide. É filha de minha prima, e órfã de mãe e pai. Recolhi-a e amo-a como se fora minha própria filha.
+—	Tancredo – continuou – não poderei esperar de ti desvelada proteção para aquela que adotei por filha, para aquela que tem enxugado as lágrimas de tua mãe na ausência de seu filho?!...
+—	Minha Úrsula adorada, de joelhos prometi a minha infeliz mãe ser o escudo da formosa órfã.
+Então ela, em sinal de reconhecimento, estendeu-me a mão, que apertei com enlevo. Creio que meus olhos exprimiam algum sentimento terno a seu respeito; porque seu rosto se tingiu de carmim, e depois um débil suspiro, como que a muito reprimido, saiu meio abafado de seus róseos lábios.
+Ouvi-o, e julguei, – louco de mim! – que esse suspiro era a primeira expressão de um repentino e profundo afeto: julguei que sonhava, porque nunca havia sentido o que então se passava em mim.
+Mais tarde, veio meu pai felicitar-me. Mostrava-se feliz e orgulhoso de seu filho; e abraçou-me com transporte.
+Não sei por quê; mas nunca pude dedicar a meu pai amor filial que riva-lizasse com aquele que sentia por minha mãe, e sabeis por quê? É que entre ele e sua esposa estava colocado o mais despótico poder: meu pai era o tirano de sua mulher; e ela, triste vítima, chorava em silêncio, e resignava-se com sublime brandura.
+Meu pai era para com ela um homem desapiedado e orgulhoso – minha mãe era uma santa e humilde mulher.
+Quantas vezes na infância, malgrado meu, testemunhei cenas dolorosas que magoavam, e de louca prepotência, que revoltavam! E meu coração alvoroçava-se nessas ocasiões apesar das prudentes admoestações de minha pobre mãe.
+É que as lágrimas da infeliz, e os desgostos que a minavam, tocavam o fundo da minha alma.
+E meu pai ressentia-se da afeição que tributava a esse ente de candura e bondade; mas foram as suas carícias, os seus meigos conselhos, que soaram a meus ouvidos, que me entretiveram nos primeiros anos; ao passo que o gênio rude de meu pai me amedrontava.
+O desprazer de ver preferida a si a mulher que odiava, fez com que meu implacável pai me apartasse dela seis longos anos, não me permitindo uma só visita ao ninho paterno; e minha mãe finava-se de saudades; mas sofria a minha ausência, porque era a vontade de seu esposo. Mas eu voltava agora para o seu amor, e seus dias vinham a ser belos e cheios de doce esperança. Entretanto, eu também era feliz. Aprazia-me ver Adelaide, no arrebol da vida, tão casta, tão encantadora, compartilhando ora a dor, que nos oprimia, ora o prazer que enchia os nossos corações. Em Adelaide minha mãe encon-trara uma desvelada amiga; a sua extrema beleza, e a dedicação àquela mulher, que eu tanto amava, atraíam-me incessantemente para ela; e a pri-
+meira vez que a vi, o meu coração adivinhou que havia de amá-la.
+...
+Tancredo, meu filho, não cedas a um amor que te pode vir a ser funesto.
+Adelaide é pobre órfã, e teu pai não consentirá que sejas seu esposo.
+Adelaide entrou, sorriu-se para mim, e foi abraçar minha mãe, e eu con-tinuei a conversação.
+—	Sim, minha querida mãe, amo Adelaide, e seu coração retribui-me, meu pai ama-me, não poderá portanto contrariar a minha primeira incli-nação. Não, minha mãe, abençoai primeiro que ele o nosso amor; porque esta há de ser a esposa do vosso filho. Não é verdade, minha Adelaide?
+Ela corou de pejo, e redarguiu:
+—	Tancredo, sou uma pobre órfã, vosso pai...
+—	Oh! Pelo céu – interrompi-a – pelo céu... Meu pai não tem coração de tigre.
+—	Ah! Meu filho! – objetou minha pobre mãe com voz tão trêmula que semelhou um choro amargo: – Receio...
+—	Receais!...
+—	Receio a prepotência de teu pai, e uma oposição tenaz e exorbitante.
+—	Tendes razão! – disse-lhe, porque as recordações do passado se erguiam ante mim como pavorosos fantasmas de dor e de vergonha. – Creio no entanto que ele cederá a seu filho o único favor que lhe há pedido em toda a vida.
+—	Duvido! – replicou, abanando tristemente a cabeça – Meus filhos, o céu que lhe ilumine as trevas do pensamento cobiçoso e que eu os veja unidos e felizes.
+—	Sim, minha boa e terna mãe – lhe tornei com convicção – haveis de ver-nos felizes, e vós o sereis também. Estou que meu pai não me poderá negar a esposa que meu coração escolheu.
+...
+Adelaide permanecia indiferente.
+—	Mulher infame! – disse-lhe – perjura... onde estão os teus votos? É assim que retribuíste a estremecida paixão que te rendi? É com um requinte de vil e vergonhosa traição que compensaste o ardente afeto de minha alma? Compreendeste ou sondaste já o profundo abismo de infame execração, e de baixa degradação, em que te despenhaste?
+—	Silêncio, senhor – bradou-me com orgulho e desdém – silêncio – estais na presença da mulher de vosso pai, e respeitai-a.
+—	Não, não me hei de calar, – redargui furioso – não me pode esmagar o teu desdenhoso acento. Monstro, demônio, mulher fementida, restitui-me minha pobre mãe, essa que também foi tua mãe, que agasalhou no seio a áspide que havia mordê-la! Oh! Dívida é esta que jamais poderás pagar; mas a Deus, ao inferno, a pagarás sem dúvida. Foi essa a gratidão com que lhe compensaste os desvelos de que te cercou na infância, a generosidade com que te amou?!!
+...
+
+
+</p>
+            </div>
+
+            <!-- PÁGINA 5: LUÍSA B. -->
+            <div class="pagina" id="p5">
+                <h2>A Enfermidade de Luísa B.</h2>
+                <p>Luísa B. o tinha incumbido do serviço exclusivo do seu hóspede, que começava a recobrar as forças, o que ele atribuía aos cuidados do jovem negro e da formosa donzela, e ao ar puro que ali respirava. Com efeito ele ia a melhor, e cada dia dava esperanças de próxima convales-cença. Aprazia-se com essa notícia a boa senhora Luísa B.; mas a encanta-dora Úrsula, melancólica, e mais bela que nunca, sentia um indefinível pesar ao lembrar-se que em breve volveria para o seu antigo exulamento, e ainda maior que dantes: o cavaleiro falava de sua próxima partida.
+E ele entrou; mas ao aproximar-se do leito de Luísa B., uma comoção de pesar lhe feriu a alma. É que nesse esqueleto vivo, que a custo meneava os braços, o mancebo não podia descobrir sem grande custo os restos de uma penosa existência, que se finava lenta e dolorosamente.
+Estremeceu de compaixão ao vê-la; porque em seu rosto estavam estampados os sofrimentos profundos, pungentes e inexprimíveis da sua alma. E os lábios lívidos e trêmulos, e a fronte pálida, e descarnada, e os olhos negros, e alquebrados diziam bem quanta dor, quanto sofrimento lhe retalhava o peito.
+Luísa B. fora bela na sua mocidade, e ainda no fundo da sua enfermi-dade podiam descobrir-se leves traços de uma passada formosura.
+Úrsula herdara as doces feições de sua mãe. Então o mancebo contemplou-a com religioso respeito, e o que sentiu em presença desse leito de tão apuradas dores mal poderia dizer.
+Semelhava um cadáver a quem o galvanismo emprestara movimento limitado às extremidades superiores, mirradas e pálidas, e brilho a uns olhos negros, mas encovados.
+...
+—	Há doze anos – começou Luísa B. suspirando aquele suspiro que vem do fundo da alma, não para comover a outrem, e captar a sua atenção, ou a sua bondade; mas aquele suspiro que é o momentâneo, mas triste alívio de um sofrimento apurado e baldo de toda esperança. – Há doze anos que arrasto a custo esta penosa existência. Deus conhece o sacrifício, que hei feito para conservá-la. Parece-vos isto incompreensível? – interrogou ela ao mancebo, que atento a escutava. – Sou mãe, senhor! Vede minha pobre filha! É um anjo de doçura e de bondade, e abandoná-la, e deixá-la só sobre este mundo, que ela mal conhece, é a maior dor de quantas dores hei provado na vida. Sim, é a maior dor – continuou ela com amargo acento – porque então perderá o único apoio que ainda lhe resta! Ao menos se meu irmão pudesse esquecer o seu ódio, e protegê-la!...
+ 
+—	Vosso irmão, senhora? – interrogou o cavaleiro, como admirado de que um irmão pudesse odiar a sua irmã.
+—	Sim – tornou ela – meu irmão. Mas, senhor, ele é implacável no ódio, e nunca o esquecerá.
+—	Não é possível, senhora. – objetou o cavaleiro – Vosso irmão, quem quer que seja, não vos pode odiar. O vosso estado, e as desgraças que por certo tem pesado sobre vós, que ele talvez não ignore, lavarão toda a ofensa, que por ventura lhe houverdes feito.
+—	Lavarão, dizeis vós, todas as ofensas que lhe hei feito? Ah! Pudera assim acontecer! Mas não, eu chamei seu ódio sobre minha cabeça, eu o conhecia: seu coração só se abriu uma vez, foi para o amor fraterno. Amou-me, amou-me muito; mas quando tive a infelicidade de incorrer no seu desagrado, todo esse amor tornou-se em ódio, implacável, terrível e vingativo. Meu irmão jamais me poderá perdoar.
+—	Talvez! O tempo...
+Luísa B. meneou tristemente os olhos, e interrompeu o cavaleiro:
+—	Então, senhor, não conheceis o comendador F. de P***!...
+—	O comendador P***?! – exclamou o moço admirado. – É ele vosso irmão?...
+—	Sim, senhor – tornou-lhe a mãe de Úrsula, – e um desvelado irmão foi ele. Conhecei-lo talvez pela sua reputação de fereza de ânimo; mas esse homem tão implacável como o vedes, era um terno e carinhoso irmão. Amou-me na infância com tanto extremo e carinho que o enobreciam aos olhos de meus pais, que o adoravam, e depois que ambos caíram no sepulcro, ele continuou sua fraternal ternura para comigo. Mais tarde, um amor irresis-tível levou-me a desposar um homem, que meu irmão no seu orgulho julgou inferior a nós pelo nascimento e pela fortuna. Chamava-se Paulo B.
+—	Ah! Senhor! – continuou a infeliz mulher – Este desgraçado consórcio, que atraiu tão vivamente sobre os dois esposos a cólera de um irmão ofen-dido, fez toda a desgraça da minha vida. Paulo B. não soube compreender a grandeza de meu amor, cumulou-me de desgostos e de aflições domés-ticas, desrespeitou seus deveres conjugais, e sacrificou minha fortuna em favor de suas loucas paixões. Não tivera eu uma filha, que jamais de meus lábios cairia sobre ele uma só queixa! Mas ele me perdoará do fundo do seu sepulcro; porque sua filha mais tarde foi o objeto de toda a sua ternura, e a dor de fracamente poder reabilitar sua casa em favor dela lhe consumia, e ocupava o tempo. E ele teria sido bom; sua regeneração tornar-se-ia com-pleta, se o ferro do assassino lhe não tivesse cortado em meio à existência!
+E uma lágrima pendeu dos olhos alquebrados da desditosa viúva.
+—	Assassinaram vosso marido, senhora? – interrompeu-a o hóspede horrorizado.
+—	Assassinaram-no, sim – tornou Luísa B. com voz pausada.
+
+</p>
+            </div>
+
+            <!-- PÁGINA 6: RELATO DE MÃE SUSANA -->
+            <div class="pagina" id="p6">
+                <h2>Relato de Mãe Susana (Cativeiro)</h2>
+                <p>Vou contar-te o meu cativeiro.
+Tinha chegado o tempo da colheita, e o milho e o inhame e o amendoim eram em abundância nas nossas roças. Era um destes dias em que a natu-reza parece entregar-se toda a brandos folgares, era uma manhã risonha, e bela, como o rosto de um infante, entretanto eu tinha um peso enorme no coração. Sim, eu estava triste, e não sabia a que atribuir minha tristeza. Era a primeira vez que me afligia tão incompreensível pesar. Minha filha sorria-se para mim, era ela gentilzinha, e em sua inocência semelhava um anjo. Desgraçada de mim! Deixei-a nos braços de minha mãe, e fui-me à roça colher milho. Ah! Nunca mais devia eu vê-la...
+Ainda não tinha vencido cem braças do caminho, quando um assobio, que repercutiu nas matas, me veio orientar acerca do perigo iminente, que aí me aguardava. E logo dois homens apareceram, e amarraram-me com cordas. Era uma prisioneira – era uma escrava! Foi embalde que supliquei em nome de minha filha, que me restituíssem a liberdade: os bárbaros sorriam-se das minhas lágrimas, e olhavam-me sem compaixão. Julguei enlouquecer, jul-guei morrer, mas não me foi possível... a sorte me reservava ainda longos combates. Quando me arrancaram daqueles lugares, onde tudo me ficava – pátria, esposo, mãe e filha, e liberdade! Meu Deus! O que se passou no fundo da minha alma, só vós o pudestes avaliar!...
+ 
+Meteram-me a mim e a mais trezentos companheiros de infortúnio e de cativeiro no estreito e infecto porão de um navio. Trinta dias de cruéis tormentos, e de falta absoluta de tudo quanto é mais necessário à vida pas-samos nessa sepultura até que abordamos às praias brasileiras. Para caber a mercadoria humana no porão fomos amarrados em pé e para que não hou-vesse receio de revolta, acorrentados como os animais ferozes das nossas matas, que se levam para recreio dos potentados da Europa. Davam-nos a água imunda, podre e dada com mesquinhez, a comida má e ainda mais porca: vimos morrer ao nosso lado muitos companheiros à falta de ar, de alimento e de água. É horrível lembrar que criaturas humanas tratem a seus semelhantes assim e que não lhes doa a consciência de levá-los à sepultura asfixiados e famintos!
+Muitos não deixavam chegar esse último extremo – davam-se à morte. Nos dois últimos dias não houve mais alimento. Os mais insofridos entraram a vozear. Grande Deus! Da escotilha lançaram sobre nós água e
+breu fervendo, que nos escaldou e veio dar a morte aos cabeças do motim.
+A dor da perda da pátria, dos entes caros, da liberdade foi sufocada nessa viagem pelo horror constante de tamanhas atrocidades.
+Não sei ainda como resisti – é que Deus quis poupar-me para provar a paciência de sua serva com novos tormentos que aqui me aguardavam.
+O comendador P. foi o senhor que me escolheu. Coração de tigre é o seu! Gelei de horror ao aspecto de meus irmãos... os tratos por que passaram doeram-me até o fundo do coração! O comendador P. derramava sem se hor-rorizar o sangue dos desgraçados negros por uma leve negligência, por uma obrigação mais tibiamente cumprida, por falta de inteligência! E eu sofri com resignação todos os tratos que se dava a meus irmãos, e tão rigorosos como os que eles sentiam. E eu também os sofri, como eles, e muitas vezes com a mais cruel injustiça.
+</p>
+            </div>
+
+            <!-- PÁGINA 7: O VILÃO -->
+            <div class="pagina" id="p7">
+                <h2>O Comendador Fernando</h2>
+                <p>—	O comendador P***?! – exclamou o moço admirado. – É ele vosso irmão?...
+—	Sim, senhor – tornou-lhe a mãe de Úrsula, – e um desvelado irmão foi ele. Conhecei-lo talvez pela sua reputação de fereza de ânimo; mas esse homem tão implacável como o vedes, era um terno e carinhoso irmão. Amou-me na infância com tanto extremo e carinho que o enobreciam aos olhos de meus pais, que o adoravam, e depois que ambos caíram no sepulcro, ele continuou sua fraternal ternura para comigo. Mais tarde, um amor irresis-tível levou-me a desposar um homem, que meu irmão no seu orgulho julgou inferior a nós pelo nascimento e pela fortuna. Chamava-se Paulo B.
+...
+—	O comendador habita estes arredores? – perguntou o cavaleiro.
+—	Sim, senhor – a fazenda de Santa Cruz está a meia légua de nós.
+—	E eu tenho-lhe tanto horror, – disse Úrsula a tremer – que mal posso suportar a ideia de que estejamos sempre tão próximas dele. Parece-me que esse homem ainda me há de ser funesto. E algumas lágrimas lhe orvalharam as faces.
+—	Pelo céu, minha filha, – disse a mãe angustiada – essas lágrimas me matam. Não, eu quero ver-te risonha e feliz.
+—	Sim, feliz! – interrompeu o mancebo tão comovido que tocou o coração de Luísa B. – Contai comigo, senhora, vossa filha há de ser feliz, prometo-o sob juramento
+...
+O comendador P. derramava sem se hor-rorizar o sangue dos desgraçados negros por uma leve negligência, por uma obrigação mais tibiamente cumprida, por falta de inteligência! E eu sofri com resignação todos os tratos que se dava a meus irmãos, e tão rigorosos como os que eles sentiam. E eu também os sofri, como eles, e muitas vezes com a mais cruel injustiça.
+...
+—	Luísa! Luísa, minha querida irmã! – bradou o comendador, correndo para ela, e unindo-a ao seu coração.
+Este brado terno e comovido revocou a infeliz mulher a uma vida, que ela já julgava extinta, e esquecendo por um instante todo o amargor que Fernando lhe derramara no coração, sorriu-se para o irmão que amara, e por momentos brilhou-lhe no rosto a alegria, e disse:
+—	Meu irmão!
+E Fernando cedeu então ao mais belo transporte da sua alma, ao único sentimento virtuoso, que Deus aí lhe implantara, e que embalde tinha lutado por abafar, ou destruir.
+Fernando combatia há dezoito anos o poder desse amor fraterno, e seu orgulho conseguiu, por algum tempo, o que o coração repugnava, o que a razão e a inteligência condenavam, e o que ele sentia dolorosamente; porque só nesse afeto lhe estava a ventura de toda a sua vida.
+E para vencer-se, obstinadamente evitava a vista de sua irmã, a que não poderia resistir, para bem saciar a sua vingança, para bem flagelar-se, flagelando-a na sua desgraça.
+Fernando tinha vivido solitário, e desesperado com essa luta terrível do coração com o orgulho: e esses desgostos íntimos, que ele próprio forjava, o
+ 
+tinham embrutecido, e tanto lhe afearam a moral, que era odiado, e temido de quantos o praticavam ou conheciam de nome.
+Ele tornara-se odioso e temível aos seus escravos: nunca fora benigno e generoso para com eles; porém o ódio, e o amor, que lhe torturavam de contínuo, fizeram-no uma fera – um celerado.
+Nunca mais cansou de duplicar rigores às pobres criaturas, que eram seus escravos! Apraziam-lhe os sofrimentos destes; porque ele também sofria.
+Eis aí pois a alma implacável na maldade do irmão de Luísa.
+E Úrsula! Onde estava ela?
+Pobre menina! Correu sem tino, e sem consciência do que fazia, porque acabava de reconhecer em seu tio o caçador, cuja voz e cujas expressões não podiam ser esquecidas. Seu aspecto, suas ameaças, seu amor violento e libi-dinoso já o tornavam repelente, e agora via nele Fernando P., o perseguidor de sua mãe e talvez o assassino de seu pai!...
+...
+Ainda as casas dos escravos, que outrora tinham sido de um aspecto agradável, tapadas de barro e cobertas de telha, hoje mal representavam esse singelo asseio de outras eras. Já arruinadas, desmoronavam-se aqui e ali; porque os desgraçados escravos do comendador, espectros ambulantes, não dispunham de uma só hora no dia, que pudessem dedicar em benefício de suas moradas; à noite trabalhavam ordinariamente até o primeiro cantar do galo. Esfaimados, seminus, espancados cruelmente, suspiravam pelas duas ou três horas de sono fatigado, que lhes concedia a dureza de seu senhor.
+Desgraçados! Que até a hora das trevas e do repouso, à hora em que a brisa geme apaixonada, como amante que anela o ardente hálito do seu ado-rador, em que a erva escuta o segredo terno da viração, em que o cantor da espessura afaga o plumígero habitante de seu ninho amoroso, um momento de sossego e amor lhes é vedado!
+Não há descanso para o seu corpo, nem tranquilidade para seu espírito desvairado pelo terror de tantos e tão contínuos sofrimentos!
+
+</p>
+            </div>
+
+            <!-- PÁGINA 8: SEQUESTRO -->
+            <div class="pagina" id="p8">
+                <h2>O Sequestro de Túlio</h2>
+                <p>Nesse pressuposto estava Tancredo, que já esquecido mesmo dos tristes precedentes da sua vida, porque acabava de ver Úrsula, esse anjo de paz, que lhe sorria, chamou o seu fiel Túlio para encarregá-lo de algumas ordens, que
+só por ele seriam bem desempenhadas. Mas Túlio não apareceu.
+Era o dia destinado para celebrar-se no convento de *** a cerimônia do seu casamento; e por isso a desaparição de Túlio assaz o surpreendeu.
+Entretanto a noite começava a povoar de sombras o espaço da terra.
+A demora de Túlio indo a mais, Tancredo passou da surpresa à inquie-tação, e uma ideia terrível lhe atravessou a mente. Mas tratou de repelir tão funesto pensamento que lhe voltava sempre, e cada vez tomando maiores proporções de realidade.
+Então procurou informações sobre o comendador, ninguém lhas soube dar; e antes suspeitavam todos que estivesse em Santa Cruz.
+Depois de fazer em vão procurar por Túlio, aflito por um aconteci-mento aliás tão estranho, Tancredo, acompanhado de alguns de seus amigos, seguiu para o convento de ***, onde devia receber aos pés do altar a mulher de suas adorações.
+A noite ia já adiantada quando eles franquearam a porta do santuário. Os círios, que iluminavam o trono do Senhor de misericórdia e de bondade, os sinos, que tocavam alegremente no alto da torre, as flores, que juncavam o pavimento da igreja, não distraíram a Tancredo de seus tristes pressenti-mentos acerca da desaparição de Túlio, e o coração gemia de angústia. Ele então, indagando a si mesmo, achava estranho o sentimento penoso que
+ 
+lhe nascia na alma, porém embalde tentava recobrar a serenidade de ânimo. Túlio figurava-se-lhe em perigo iminente, e toda a felicidade que o aguar-dava não lhe apagava esse crescente desassossego; 
+...
+Túlio conheceu que estava perdido; mas recobrando toda a sua energia, como sucede sempre ao homem nos lances apertados da existência, res-pondeu sem hesitar:
+—	Dizei, meu senhor, o que determinais ao vosso escravo?
+—	Dize-me, onde está Tancredo?
+Como se fora um ferro na brasa, esse nome pareceu requeimar-lhe os lábios, que tingiram-se de uma cor lívida, e tremeram convulsos.
+—	Creio que está em sua casa – redarguiu o negro sem perturbar-se.
+—	Mentes! – gritou-lhe o comendador, devorando-o com horrível olhar – Mentes! ... Parvos! Julgam que o meu ódio os não segue como as suas próprias sombras!
+E tu, vil escravo! Pretendes iludir-me?! Sim, demais me tarda a hora da vingança!... Úrsula, encerrada no convento de *** aguarda hoje pela ceri-mônia que a vai unir para sempre ao homem da sua escolha... ao homem por quem desprezou meu amor, e até meu ódio! Oh! Juro-lhe pelo inferno, que o sorriso de sonhadas delícias, que sorriem sobre a minha desesperação, apa-gará de seus lábios minha justa e completa vingança. Tancredo! Hoje mesmo o anjo pálido da morte te dará o beijo de idolatrada esposa; e a terra úmida do sepulcro serrará sobre ti as brancas cortinas do leito nupcial.
+—	Introduz-me no seu quarto, Túlio – continuou delirante – quero matar esse homem antes que seja o esposo de Úrsula! Eu te cumularei de favores; dar-te-ei metade da minha fortuna se ma pedires.
+—	Senhor! – exclamou Túlio aceso em legítima cólera – Que ação tão vil pratiquei eu algum dia que possa merecer-vos semelhante conceito?
+—	Estás louco, imbecil? Não vês que peço, quando podia mandar?
+ 
+—	Covarde! – bradou Túlio, esquecendo a pessoa com quem falava, e quanto essa palavra insultuosa o poderia perder – Matai-me muito embora, estou em vosso poder; mas não me insulteis! Não, nunca espereis que pro-teja o assassino, mormente contra aquele que me arrancou da escravidão!
+—	Cala-te! – interrompeu o comendador roxo de ira – Esqueceste acaso de quem sou? – Fechou os punhos, e dos lábios gotejou-lhe sangue, rugiu como uma onça, e arremessou-se sobre o negro.
+...
+Túlio deixou o padre, e de novo começou a correr, e não tardou muito em descobrir as negras paredes do templo, onde uma lua minguada proje-tava tíbia claridade.
+E Túlio avistou um coche, cujos cavalos, mordendo o freio, iam já partir para a cidade.
+Depois ouviu pronunciar-se um adeus, logo depois outro, e o coche partiu a trote largo. Outro coche, porém, estava ainda postado à porta da igreja.
+Faltavam-lhe já forças, estava aniquilado de cansaço, entretanto corria sempre; porque o coche que passou não era o dos noivos, e ainda talvez fosse tempo de salvá-los.
+Na sua carreira, pressentiu um vago rumor à beira da estrada, e um vulto negro que se escondeu atrás de uma árvore copada. Uma tal aparição veio dar-lhe novas forças, e a suspeita fê-lo ativar a sua carreira.
+—	São eles! – disse a si mesmo, e no ardor da sua dedicação gritou com voz que repercutiu na solidão.
+—	Cilada, senhor... Querem assassi...
+Dois tiros de pistola disparados ao mesmo tempo ressoaram com pavo-roso estampido, e Túlio não acabou a palavra!
+A mão que os disparou era certeira, e ele, moribundo, só pôde exclamar:
+—	Jesus! Eu mor...ro!...
+ 
+Então Tancredo e sua jovem esposa, que acabavam de entrar no coche, tremeram de dor e de surpresa. Reconheceram que a voz era a de Túlio, que lhes advertia na íntima desesperação da sua alma.
+E Tancredo bradou desatinado:
+—	É ele, é o meu fiel Túlio! Monstros! Porque o assassinaram? – e deu um passo para ir socorrê-lo; mas Úrsula puxou-o pelo braço, dizendo-lhe:
+—	Não ouvistes o seu aviso? Ah! Tancredo, querem assassinar-vos! – E cobriu-o com seus níveos braços.
+...
+
+</p>
+            </div>
+
+            <!-- PÁGINA 9: CASAMENTO -->
+            <div class="pagina" id="p9">
+                <h2>O Casamento no Convento</h2>
+                <p>Era o dia destinado para celebrar-se no convento de *** a cerimônia do seu casamento; e por isso a desaparição de Túlio assaz o surpreendeu.
+...
+Vinha acompanhada das jovens religiosas, que já a amavam: no meio dessas virgens consagradas ao Senhor, era como uma rosa entre açucenas. Trajava simples vestido de seda preta, e mimosas pérolas ornavam-lhe o colo de neve, brandamente agitado pelo voluptuoso arfar do peito. A fronte altiva, e jaspeada agrinaldava-a uma capela de odoríferas flores de laranja, e o véu de castidade flutuava-lhe sobre os ombros nus e bem contornados, e encobria-lhe os negros e aveludados cabelos.
+Assim era ela mais formosa que nunca, e Tancredo, vendo-a tão radiante de mocidade e de amor, olvidou suas penosas inquietações para só rever-se nela, para render-lhe um culto de apaixonada veneração.
+E ela sorriu com um sorriso que transportou-o de felicidade, e esse sorriso feiticeiro e angélico arrancou-lhe do fundo da alma o orgulho feminil – era como a lembrança de que seu amor apagara ainda mesmo as cinzas do de Adelaide.
+O cântico das virgens, tão solene e santo, começou, e suas notas melo-diosas confundiram-se com os acentos ternos e acordes do órgão: os círios projetavam uma luz vívida, que se derramava em ondas por todo o santuário, e iluminava esse quadro de felicidade.
+E o cântico das virgens do Senhor, e a melodia do órgão, se lhe inter-navam pelo coração, e pareciam-lhe um coro de anjos nas moradas celestiais.
+A benção do sacerdote unia-os para sempre, e o incenso ondulava em torno do altar.
+Por fim cessaram a música e os cânticos, e as felicitações sinceras dos amigos acolheram Úrsula e a Tancredo: – o ato religioso do casamento estava consumado. Seus corações transbordavam de prazer, o universo não bastava para conter seus corações.
+...
+—	Sim. Acabo de fazer aí um casamento, – redarguiu o retardatário via-jante, que era um sacerdote.
+—	E os noivos, senhor?
+—	Deixei-os na igreja, filho.
+...
+
+</p>
+            </div>
+
+            <!-- PÁGINA 10: TRAGÉDIA -->
+            <div class="pagina" id="p10">
+                <h2>A Morte e a Loucura</h2>
+                <p>Estava agora face a face com Tancredo, que desarmado só podia esperar a morte fria e cruel que lhe preparava seu implacável inimigo.
+ 
+E vendo a esposa desmaiada aos pés do comendador, abaixou-se e tomou-a em seus braços.
+E essa beleza adormecida e pálida como o lírio do vale, parecia sorrir-
+-lhe com celeste meiguice, e o jovem esposo, transportado de amor e de aflição, imprimiu nesses lábios de voluptuosa perfeição um beijo ardente com que parecia ir-lhe a vida – era o seu último adeus.
+Ao contato desses lábios amados, ela abriu seus grandes olhos alque-brados pela dor, e com um olhar que exprimia a mais singular e indefinível ternura, pareceu dizer-lhe:
+—	Amo-te!
+Depois esses dois astros de amor, que guiavam ainda no perigo, ou nas trevas da desesperação, ao infeliz mancebo, recaíram em seu lânguido torpor. Esse beijo foi a expressão profunda de tão sublime amor: foi o primeiro,
+o casto e puro ósculo de amor, que o comendador jurou ser o derradeiro.
+Esse ósculo pareceu-lhe insultuosa ofensa: rangeu os dentes de raiva, e arremessando-se contra o seu odioso rival, arrancou-o com força do ódio dos braços de sua jovem esposa.
+...
+Luta desesperada travou-se entre ambos. Os asseclas do comendador agarraram Tancredo pelas costas, e o covarde comendador embebeu-lhe no peito o punhal que trazia na mão.
+—	Mataste-me! – exclamou o infeliz Tancredo. — Farta-te de sangue, fera indômita e cruel! Mas eu te juro à hora suprema da minha existência que Úrsula não será tua esposa.
+ 
+Fernando P., essa menina, que jaz desfalecida, ama-me muito para poder esquecer-me; e odeia-te demais para poder perdoar-te. O teu amor será a punição do teu crime.
+Entretanto Fernando, vitorioso e triunfante, uivava de feroz alegria, e vociferou rangendo os dentes:
+—	Mentes! Mentes! Olha-a pela derradeira vez; não é ela formosa como um anjo? Não é assim? Achei-a também, amei-a, rendi-lhe um culto de louca adoração, e agora é minha. Amaste-a, Tancredo? Amou-te ela? Oh! Há de amar-me também, quando tuas cinzas já frias no sepulcro lhe não recor-darem tua passada ternura.
+E o infeliz Tancredo, no último transe de sua íntima agonia, estendeu os braços e exclamou com delírio amoroso:
+—	Úrsula! Minha Úrsula!
+Então a donzela despertou de seu dorido letargo, abriu os olhos, e num excesso de amor apaixonado, e de uma dor íntima, lançou-se sobre seu des-ditoso esposo, e unindo-o ao coração recebeu-lhe o derradeiro suspiro.
+Um mar de sangue tingiu-lhe as mãos e os puros seios! Tinha os olhos fixos e pasmados sobre o doloroso espetáculo, e entretanto parecia nada ver; estava absorta em sua dor suprema, muda, e impassível em presença de tão monstruosa desgraça!...
+...
+A infeliz enlouqueceu de dor, e a sua loucura mirrou-vos a esperança do seu amor!
+...
+A cena que se apresentou a seus olhos quebrou-lhe o coração de angústias.
+Úrsula sorria, afagando invisível sombra, mas esse sorriso era débil e vaporoso – era o derradeiro esforço de uma alma que está prestes a quebrar as prisões do corpo.
+O comendador fechou os olhos, e agarrou-se à porta para não cair.
+E ela, como se a ninguém visse, murmurava em voz baixa, e depois tornava a sorrir-se.
+—	Vem – disse com voz débil, mas repassada de ternura, – tanto tempo há que te procuro embalde.
+Tancredo! Porque me fugias? Onde estavas?
+ 
+Espera... agora me recordo. Túlio disse-me que muito longe te levava não sei que negócio urgente!... E eu sentia a dor da separação; porque era já longa, e triste.
+E depois tirando dos cabelos uma florzinha seca, última que lhe restava da capela, beijou-a, e sorriu-se com ternura.
+Não as vês, Tancredo? São as flores do meu noivado. São tão lindas... amo-as!...
+E apertou-a ao coração.
+Depois soltou um profundo suspiro, e erguendo as mãos súplices para o sacerdote, em quem só então reparara, exclamou com voz que revelava a mais aflitiva angústia:
+—	Por compaixão! Oh! Não o mateis! Que horror!... Oh! Matai-me antes!... O monstro ri-se com prazer e sem piedade! Ah! Maldição... maldição sobre ele! Seus olhos brilharam ainda uma derradeira vez com um fulgir vívido,
+depois cerraram-se.
+Era como a luz, que no seu último viver, antes de extinguir-se para sempre, avulta e cresce por clarões vagos e interrompidos.
+Após de longa pausa, sempre com os olhos fechados, continuou:
+—	Deus meu! Porque assassinou ele a Tancredo? Oh! Era noite... Bem o vi, seus olhos eram os de um tigre!
+Arredai-vos! Arredai-vos! – disse, pegando ao acaso a mão do sacer-dote, que lhe aguardava o último momento – Não vedes que aí há sangue?... Sangue!... Muito sangue!
+Muito, muito sangue derramou ele, e esse sangue caiu-me todo aqui no coração.
+Sinto uma aflição, que me mata! Ai que dor!!... – E com a mão sobre o coração se pôs a soluçar com tanta dor, que partiria o coração ainda o mais embrutecido.
+O sacerdote acenou então para o comendador, que estava imóvel e pálido: este entrou.
+—	Meu filho, – disse o padre – ajoelhemo-nos.
+Ambos caíram prostrados aos pés da infeliz louca, que entregava a alma ao Criador.
+
+</p>
+            </div>
+
+            <!-- PÁGINA 11: EPITÁFIO -->
+            <div class="pagina" id="p11">
+                <h2>Epitáfio Final</h2>
+                <p>De todas essas vítimas do amor, apenas restam vestígios sobre a terra da desditosa Úrsula.
+No convento de ***, junto ao altar da Senhora das Dores encontra-se uma lápide rasa e singela com estas palavras – ORAI PELA INFELIZ ÚRSULA!
+</p>
+            </div>
+
+        </article>
+    </main>
+
+    <footer class="progresso-footer">
+        <div class="bar-container"><div id="bar-fill"></div></div>
+        <span id="label-progresso" style="font-size: 0.9em; color: var(--accent); font-weight: bold;">Página 1 de 11</span>
+        <div class="controles-paginacao">
+            <button class="btn-page" id="btnPrev" onclick="mudarPagina(-1)" disabled>Anterior</button>
+            <button class="btn-page" id="btnNext" onclick="mudarPagina(1)">Próxima</button>
+        </div>
+    </footer>
+
+    <script>
+        let paginaAtual = 1;
+        const totalPaginas = 11; // ATUALIZADO PARA 11 PÁGINAS
+
+        function mudarPagina(direcao) {
+            document.getElementById(`p${paginaAtual}`).classList.remove('ativa');
+            paginaAtual += direcao;
+            document.getElementById(`p${paginaAtual}`).classList.add('ativa');
+
+            document.getElementById('btnPrev').disabled = (paginaAtual === 1);
+            document.getElementById('btnNext').disabled = (paginaAtual === totalPaginas);
+
+            const progresso = ((paginaAtual - 1) / (totalPaginas - 1)) * 100;
+            document.getElementById('bar-fill').style.width = progresso + "%";
+            document.getElementById('label-progresso').innerText = `Página ${paginaAtual} de ${totalPaginas}`;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setTheme(theme) {
+            document.body.className = '';
+            if(theme !== 'default') document.body.classList.add(theme);
+        }
+    </script>
+</body>
+</html>

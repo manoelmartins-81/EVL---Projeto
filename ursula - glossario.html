@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário: Úrsula - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --secondary: #a29bfe;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            display: flex; flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+
+        .btn-nav {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s;
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 90%; margin: 40px 0; }
+
+        .card-glossario {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 20px; }
+        
+        .instrucoes {
+            text-align: center; margin-bottom: 30px; font-size: 0.95em; line-height: 1.6;
+            background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px;
+        }
+
+        .busca-container {
+            display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 40px;
+        }
+
+        .input-group {
+            width: 100%; max-width: 600px; display: flex; gap: 10px;
+        }
+
+        #inputBusca {
+            flex: 1; padding: 14px 20px; border-radius: 30px; border: 2px solid var(--accent);
+            background: rgba(255,255,255,0.1); color: white; font-size: 1em; outline: none;
+        }
+
+        .btn-dicionario {
+            background: var(--primary); color: white; border: none; padding: 0 25px;
+            border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 0.9em;
+            transition: 0.3s; text-transform: uppercase;
+        }
+        .btn-dicionario:hover { background: #5649c0; transform: scale(1.05); }
+
+        .glossario-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+        }
+
+        .item-termo {
+            background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px;
+            border-left: 5px solid var(--primary); transition: 0.3s;
+        }
+        .item-termo:hover { background: rgba(108, 92, 231, 0.2); }
+
+        .item-termo strong { color: var(--accent); display: block; margin-bottom: 8px; font-size: 1.1em; }
+        .item-termo p { margin: 0; font-size: 0.95em; line-height: 1.5; opacity: 0.9; }
+
+        .secao-referencias {
+            margin-top: 50px; padding: 30px; background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; font-size: 0.85em;
+        }
+        .ref-item { margin-bottom: 12px; text-align: justify; color: #dfe6e9; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="ursula - contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-glossario">
+            <h1>Glossário: Úrsula</h1>
+            
+            <section class="instrucoes">
+                <p>
+                    Abaixo, pré-selecionamos alguns dos termos mais desafiadores presentes na obra de 1859 para facilitar sua compreensão. 
+                    Caso encontre outra palavra desconhecida durante a leitura, utilize o campo de busca e clique no botão 
+                    <strong>"Pesquisar no Dicionário"</strong> para consultar o significado em tempo real no portal Michaelis.
+                </p>
+            </section>
+
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="inputBusca" placeholder="Digite um termo da obra..." onkeyup="filtrarGlossario()">
+                    <button class="btn-dicionario" onclick="pesquisarMichaelis()">Pesquisar no Dicionário</button>
+                </div>
+                <small style="opacity: 0.7;">O filtro abaixo funciona automaticamente para a lista selecionada.</small>
+            </div>
+
+            <div class="glossario-grid" id="listaGlossario">
+                <div class="item-termo"><strong>Acerbo</strong><p>Amargo, rigoroso ou que causa sofrimento profundo.</p></div>
+                <div class="item-termo"><strong>Alvião</strong><p>Ferramenta de ferro usada para escavações ou cavar a terra.</p></div>
+                <div class="item-termo"><strong>Amodorraram</strong><p>Suavizaram ou acalmaram (dores e sentidos) como se fizessem dormir.</p></div>
+                <div class="item-termo"><strong>Arruído</strong><p>Ruído repentino, barulho ou estrépito.</p></div>
+                <div class="item-termo"><strong>Baldo</strong><p>Privado de algo; nulo, sem efeito ou sem esperança.</p></div>
+                <div class="item-termo"><strong>Bonançosa</strong><p>Que está em estado de calma ou serenidade.</p></div>
+                <div class="item-termo"><strong>Cabedal</strong><p>Conjunto de bens ou repertório de conhecimentos e talentos.</p></div>
+                <div class="item-termo"><strong>Cândido</strong><p>Branco, puro, inocente.</p></div>
+                <div class="item-termo"><strong>Cicia</strong><p>Produz um som suave e sibilante, como um sussurro.</p></div>
+                <div class="item-termo"><strong>Dardejava</strong><p>Lançava com força raios de luz ou calor.</p></div>
+                <div class="item-termo"><strong>Entrevada</strong><p>Paralisada ou que perdeu os movimentos.</p></div>
+                <div class="item-termo"><strong>Estultícia</strong><p>Tolice, parvoíce ou falta de juízo.</p></div>
+                <div class="item-termo"><strong>Exprobava</strong><p>Censurava ou repreendia alguém severamente.</p></div>
+                <div class="item-termo"><strong>Franças</strong><p>Folhagem terminal dos ramos; a copa das árvores.</p></div>
+                <div class="item-termo"><strong>Ginetes</strong><p>Cavalos ágeis, nobres e bem adestrados.</p></div>
+                <div class="item-termo"><strong>Inefáveis</strong><p>Que não se pode exprimir por palavras; indescritível.</p></div>
+                <div class="item-termo"><strong>Louçã</strong><p>Elegante, vistosa ou cheia de viço.</p></div>
+                <div class="item-termo"><strong>Mancebo</strong><p>Homem jovem; rapaz ou moço.</p></div>
+                <div class="item-termo"><strong>Nefanda</strong><p>Abominável, detestável ou que causa horror.</p></div>
+                <div class="item-termo"><strong>Opulência</strong><p>Grande riqueza, luxo ou bens em abundância.</p></div>
+                <div class="item-termo"><strong>Pejo</strong><p>Sentimento de vergonha, modéstia ou timidez.</p></div>
+                <div class="item-termo"><strong>Rastear</strong><p>Arrastar-se pelo chão; perder a elevação.</p></div>
+                <div class="item-termo"><strong>Viração</strong><p>Vento brando e fresco.</p></div>
+            </div>
+        </article>
+    </main>
+
+    <aside class="secao-referencias">
+        <h4 style="color: var(--accent); text-transform: uppercase;">Referências </h4>
+        
+        <div class="ref-item">MICHAELIS. <strong>Dicionário Brasileiro da Língua Portuguesa</strong>. São Paulo: Melhoramentos, 2026. Disponível em: https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro. Acesso em: 13 jul. 2026.</div>
+        
+     </aside>
+
+    <script>
+        // Função para filtrar a lista interna
+        function filtrarGlossario() {
+            let input = document.getElementById('inputBusca').value.toLowerCase();
+            let termos = document.getElementsByClassName('item-termo');
+            
+            for (let i = 0; i < termos.length; i++) {
+                let txtTermo = termos[i].textContent || termos[i].innerText;
+                if (txtTermo.toLowerCase().indexOf(input) > -1) {
+                    termos[i].style.display = "";
+                } else {
+                    termos[i].style.display = "none";
+                }
+            }
+        }
+
+        // Função para pesquisar no Michaelis Externo
+        function pesquisarMichaelis() {
+            let termo = document.getElementById('inputBusca').value;
+            if (termo) {
+                let url = "https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro/" + encodeURIComponent(termo);
+                window.open(url, '_blank');
+            } else {
+                alert("Por favor, digite uma palavra para pesquisar no dicionário.");
+            }
+        }
+    </script>
+</body>
+</html>

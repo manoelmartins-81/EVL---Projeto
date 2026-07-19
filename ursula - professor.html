@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço do Professor: Úrsula - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg'); 
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .secao-card { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        h1 { color: var(--accent); text-transform: uppercase; text-align: center; margin-bottom: 5px; }
+        .subtitulo { color: white; text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 30px; opacity: 0.9; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: var(--accent); font-size: 1.1em; margin-top: 25px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.05em; }
+        .grid-conceitos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .box-conceito { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; border-left: 5px solid var(--primary); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(0,0,0,0.2); border-radius: 15px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9em; vertical-align: top; }
+        th { background: var(--primary); color: white; text-transform: uppercase; font-size: 0.8em; }
+        .badge-bncc { background: var(--accent); color: #2d3436; padding: 2px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8em; display: block; text-align: center; }
+        .box-apoio { background: rgba(108, 92, 231, 0.1); padding: 25px; border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="ursula - contexto.html" class="btn-nav">Voltar ao Contexto</a><a href="index.html" class="btn-nav">Página Inicial</a></nav>
+    </header>
+
+    <main>
+        <article class="secao-card">
+            <h1>Espaço do Professor</h1>
+            <div class="subtitulo">Um Guia Sugestivo de Mediação Pedagógica - Úrsula</div>
+            
+            <p>
+                Este espaço visa trazer ao professor uma proposta pedagógica que sirva de guia para a abordagem em sala de aula, porém, a título de sugestão. Tentamos reunir um material que pode e deve ser trabalhado pelo docente conforme a sua visão e o conhecimento que detém sobre seus alunos, sem estar preso a uma didática pré-estabelecida. Nosso objetivo, ao criar este espaço, é apenas contribuir. 
+            </p>
+            <p>
+                A visão deste produto educacional é que ele ofereça ao aluno subsídios para aprender em seu tempo e ritmo próprios. Para isso, ele foi construído em níveis que vão se tornando mais complexos à medida que são avançados. Procuramos triangular conceitos de multiletramentos, politecnia e omnilateralidade ao interconectar os diferentes conteúdos ao ao redor de uma obra literária. Para isso, foram incluídas seções que analisam os assuntos tratados através de um olhar específico de várias disciplinas. 
+            </p>
+            <p>
+                Contudo, esse produto educacional não é totalmente autoinstrucional, mas dependente do olhar e tratamento docente, que saberá usufruir da melhor maneira possível aquilo que estamos depositando em suas mãos. Organizamos o espaço para que você o utilize da maneira que lhe for conveniente!
+            </p>
+
+            <h2>1. Fundamentação Teórica</h2>
+            <div class="grid-conceitos">
+                <div class="box-conceito">
+                    <strong>⚙️ Politecnia:</strong> Articulação da estética literária com os fundamentos históricos e as bases técnicas da cartografia e sociologia.
+                </div>
+                <div class="box-conceito">
+                    <strong>🌐 Omnilateralidade:</strong> Formação integral que une as dimensões intelectual, ética e estética para a compreensão da totalidade social da obra.
+                </div>
+            </div>
+
+            <h2>2. Alinhamento com a BNCC (Ensino Médio)</h2>
+            <p>Abaixo, transcrevemos integralmente as habilidades que sustentam a arquitetura pedagógica dessa proposta:</p>
+            
+            <table>
+                <thead>
+                    <tr><th style="width: 120px;">Área / Código</th><th>Habilidade </th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="badge-bncc">EM13LP48</span></td><td>Identificar assimilações, rupturas e permanências no processo de constituição da literatura brasileira e ao longo de sua trajetória, por meio da leitura e análise de obras fundamentais do cânone ocidental, em especial da literatura portuguesa, para perceber a historicidade de matrizes e procedimentos estéticos.</td></tr>
+                    <tr><td><span class="badge-bncc">EM13LP49</span></td><td>Perceber as peculiaridades estruturais e estilísticas de diferentes gêneros literários (a apreensão pessoal do cotidiano nas crônicas, a manifestação livre e subjetiva do eu lírico diante do mundo nos poemas, a múltipla perspectiva da vida humana e social dos romances, a dimensão política e social de textos da literatura marginal e da periferia etc.) para experimentar os diferentes ângulos de apreensão do indivíduo e do mundo pela literatura.</td></tr>
+                    <tr><td><span class="badge-bncc">EM13LP52</span></td><td>Analisar obras significativas das literaturas brasileiras e de outros países e povos, em especial a portuguesa, a indígena, a africana e a latino-americana, com base em ferramentas da crítica literária (estrutura da composição, estilo, aspectos discursivos) ou outros critérios relacionados a diferentes matrizes culturais, considerando o contexto de produção (visões de mundo, diálogos com outros textos, inserções em movimentos estéticos e culturais etc.) e o modo como dialogam com o presente.</td></tr>
+                    <tr><td><span class="badge-bncc">EM13CHS201</span></td><td>Analisar e caracterizar as dinâmicas das populações, das mercadorias e do capital nos diversos continentes, com destaque para a mobilidade e a fixação de pessoas, grupos humanos e povos, em função de eventos naturais, políticos, econômicos, sociais, religiosos e culturais, de modo a compreender e posicionar-se criticamente em relação a esses processos e às possíveis relações entre eles.</td></tr>
+                    <tr><td><span class="badge-bncc">EM13CHS204</span></td><td>Comparar e avaliar os processos de ocupação do espaço e a formação de territórios, territorialidades e fronteiras, identificando o papel de diferentes agentes (como grupos sociais e culturais, impérios, Estados Nacionais e organismos internacionais) e considerando os conflitos populacionais (internos e externos), a diversidade étnico-cultural e as características socioeconômicas, políticas e tecnológicas.</td></tr>
+                    <tr><td><span class="badge-bncc">EM13CHS601</span></td><td>Identificar e analisar as demandas e os protagonismos políticos, sociais e culturais dos povos indígenas e das populações afrodescendentes (incluindo as quilombolas) no Brasil contemporâneo considerando a história das Américas e o contexto de exclusão e inclusão precária desses grupos na ordem social e econômica atual, promovendo ações para a redução das desigualdades étnico-raciais no país.</td></tr>
+                    <tr><td><span class="badge-bncc">EM13CHS605</span></td><td>Analisar os princípios da declaração dos Direitos Humanos, recorrendo às noções de justiça, igualdade e fraternidade, identificar os progressos e entraves à concretização desses direitos nas diversas sociedades contemporâneas e promover ações concretas diante da desigualdade e das violações desses direitos em diferentes espaços de vivência, respeitando a identidade de cada grupo e de cada indivíduo.</td></tr>
+                </tbody>
+            </table>
+
+            <p>
+                A articulação dessas habilidades visa concretizar a omnilateralidade e a politecnia ao transformar o estudo literário em uma análise totalizante da realidade. O uso do tema transversal Multiculturalismo funciona como indutor para despertar o interesse dos alunos-leitores, conectando a denúncia de Maria Firmina dos Reis aos problemas do mundo real. Os vídeos sobre as Raízes do Brasil e a presença de mapas de fluxo escravista não são meros acessórios, mas ferramentas que permitem ao aluno compreender a desterritorialização forçada de Mãe Susana sob uma ótica geopolítica e econômica. Ao confrontar o texto de 1859 com a Declaração Universal dos Direitos Humanos, a proposta busca que o estudante identifique os silenciamentos históricos e valorize o protagonismo afrodescendente, transformando o letramento em um instrumento de resistência e formação cidadã.
+            </p>
+
+            <h2>3. Sugestão de Abordagem: Do Passado ao Presente</h2>
+            <p>
+                Sugerimos que a mediação utilize eventos recentes para contextualizar a obra. O objetivo é que o aluno identifique que o racismo estrutural não é um conceito abstrato, mas uma realidade que opera através de gestos e palavras que buscam ferir a dignidade humana, assim como Maria Firmina denunciou em 1859.
+            </p>
+
+            <div class="box-apoio">
+                <h3 style="margin-top: 0;">📰 Textos de Apoio Docente</h3>
+                <ul style="padding-left: 20px; margin-bottom: 0; line-height: 1.8;">
+                    <li>
+                        <strong>Caso Vini Júnior:</strong> Em novo episódio de racismo, torcedores jogam casca de banana contra o jogador brasileiro na Espanha. 
+                        <a href="https://almapreta.com.br/sessao/cotidiano/em-novo-caso-de-racismo-torcedor-joga-casca-de-banana-em-vini-jr-diz-imprensa-espanhola/" target="_blank" style="color: var(--accent);">Acesse a notícia (Alma Preta)</a>.
+                    </li>
+                    <li>
+                        <strong>Caso da Advogada no Rio:</strong> Advogada é detida após imitar macaco para atendentes de bar e afirma que as leis brasileiras são "muito severas". 
+                        <a href="https://www.cnnbrasil.com.br/nacional/sudeste/rj/advogada-re-por-racismo-volta-a-argentina-lei-no-brasil-e-muito-severa/" target="_blank" style="color: var(--accent);">Acesse a notícia (CNN Brasil)</a>.
+                    </li>
+                </ul>
+            </div>
+
+            <h2>4. Propostas de Atividades Pedagógicas</h2>
+            <ul style="line-height: 1.8;">
+                <li>
+                    <strong>Atividade 1: Produção Textual Crítica</strong><br>
+                    Elaboração de um texto argumentativo-dissertativo com o tema: <em>"Racismo estrutural no Brasil contemporâneo: verdade ou mimimi?"</em>. Sugere-se o uso dos textos de apoio, dos mapas da FGV e da Declaração de Direitos Humanos como base documental.
+                </li>
+                <li>
+                    <strong>Atividade 2: Dinâmica da Lousa Coletiva</strong><br>
+                    Os alunos devem ir ao quadro e escrever uma única palavra relacionada ao conteúdo estudado (sem repetir palavras já escritas). Ao final, cada aluno deve escolher uma palavra escrita por um colega e redigir uma frase relacionando-a à resistência negra na obra <em>Úrsula</em>.
+                </li>
+            </ul>
+        </article>
+    </main>
+
+    <aside style="width: 90%; max-width: 1100px; margin-bottom: 40px; font-size: 0.85em; opacity: 0.8; text-align: left;">
+        <strong>Referências Bibliográficas e de Apoio:</strong><br>
+        ALMA PRETA. <strong>Em novo caso de racismo, torcedor joga casca de banana em Vini Jr</strong>. 2024. Disponível em: https://almapreta.com.br. Acesso em: 19 jul. 2026.<br>
+        BRASIL. <strong>Base Nacional Comum Curricular (BNCC)</strong>. Brasília: MEC, 2018.<br>
+        CNN BRASIL. <strong>Advogada ré por racismo volta à Argentina</strong>. 2024. Disponível em: https://www.cnnbrasil.com.br. Acesso em: 19 jul. 2026.<br>
+        FUNDAÇÃO GETULIO VARGAS. <strong>Atlas Histórico do Brasil</strong>. Rio de Janeiro: FGV, [s.d.]. Disponível em: https://atlas.fgv.br. Acesso em: 19 jul. 2026.<br>
+        ORGANIZAÇÃO DOS ESTADOS AMERICANOS (OEA). <strong>Declaração Universal dos Direitos Humanos</strong>. 1948. Disponível em: https://www.oas.org. Acesso em: 19 jul. 2026.<br>
+        REIS, Maria Firmina dos. Úrsula e outras obras. Brasília: Câmara dos Deputados, Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/bitstreams/fd82b580-2b83-4d4c-abc9-d1cf5077e5b2/download. Acesso em: 15 jul. 2026.<br>
+        SAVIANI, D. <strong>O choque teórico da politecnia</strong>. Trabalho, Educação e Saúde, 2003.
+    </aside>
+</body>
+</html>

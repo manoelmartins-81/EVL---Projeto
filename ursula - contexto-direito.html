@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Úrsula: do ponto de vista da História... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        main { max-width: 900px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        h1, h2 { color: var(--accent); text-transform: uppercase; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; }
+        .bloco-lei { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; border-left: 5px solid var(--accent); margin: 20px 0; }
+        .highlight { background: rgba(255, 234, 167, 0.2); padding: 2px 5px; border-radius: 4px; color: var(--accent); font-weight: bold; }
+        
+        .btn-download { color: var(--primary); font-weight: bold; text-decoration: underline; transition: 0.3s; }
+        .btn-download:hover { color: var(--accent); }
+
+        .secao-referencias { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .ref-item { font-size: 0.85em; color: #dfe6e9; text-align: justify; margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="ursula - contexto.html" class="btn-nav">Voltar ao Contexto</a></nav>
+    </header>
+
+    <main>
+        <article class="card">
+            <h1>Úrsula: do ponto de vista da História...</h1>
+            <p>
+                Em 1859, Maria Firmina dos Reis escreveu uma frase que ecoaria por séculos: <strong style="color: var(--accent);">"A mente, esta ninguém pode escravizar"</strong>. Sob a ótica da Sociologia do Direito, esta afirmação é um ato de resistência política que desafiava a legalidade da escravidão, que na época tratava seres humanos como meras propriedades.
+            </p>
+
+            <p>
+                Quase cem anos antes da <strong>Declaração Universal dos Direitos Humanos (DUDH)</strong> de 1948, <em>Úrsula</em> já denunciava a desumanização. Abaixo, veja como os artigos da Declaração dialogam com a obra de Firmina:
+            </p>
+
+            <div class="bloco-lei">
+                <strong>Artigo 1º:</strong> Todos os seres humanos nascem <span class="highlight">livres e iguais em dignidade e em direitos.</span> Dotados de razão e de consciência, devem agir uns para com os outros em espírito de fraternidade. </span>.
+            </div>
+
+            <div class="bloco-lei">
+                <strong>Artigo 4º:</strong> Ninguém será mantido em <span class="highlight">escravidão ou servidão</span>; a escravidão e o tráfico de escravos serão proibidos em todas as suas formas.
+            </div>
+
+            <div class="bloco-lei">
+                <strong>Artigo 18º:</strong> Todo ser humano tem direito à <span class="highlight">liberdade de pensamento</span>, de consciência e de religião;
+este direito implica a liberdade de mudar de religião ou de convicção, assim como a liberdade de manifestar a religião ou convicção, sozinho ou em comum, tanto em público como em privado, pelo ensino, pela prática, pelo culto e pelos ritos.
+            </div>
+
+            <p style="background: rgba(108, 92, 231, 0.2); padding: 20px; border-radius: 15px; border: 1px dashed var(--accent);">
+                <a href="https://www.oas.org/dil/port/1948%20declara%C3%A7%C3%A3o%20universal%20dos%20direitos%20humanos.pdf" target="_blank" class="btn-download">Clique aqui</a>, para baixar a Declaração Universal de Direitos Humanos, traduzida pela UNITED NATIONS HIGH COMMISSIONER FOR HUMAN RIGHTS.
+            </p>
+
+            <section class="secao-referencias">
+                <h2>Referências</h2>
+                <div class="ref-item">
+                    ORGANIZAÇÃO DOS ESTADOS AMERICANOS (OEA). <strong>Declaração Universal dos Direitos Humanos</strong>. Tradução: United Nations High Commissioner for Human Rights. 1948. Disponível em: https://www.oas.org/dil/port/1948%20declara%C3%A7%C3%A3o%20universal%20dos%20direitos%20humanos.pdf. Acesso em: 19 jul. 2026.
+                </div>
+            </section>
+        </article>
+    </main>
+</body>
+</html>

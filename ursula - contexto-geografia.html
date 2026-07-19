@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Úrsula: do ponto de vista da Geografia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #6c5ce7; 
+            --bg-glass: rgba(255, 255, 255, 0.12); 
+            --accent: #ffeaa7; 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+
+        header { 
+            width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); 
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; 
+            display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; 
+        }
+
+        .btn-nav { 
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; 
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; 
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+
+        .card { 
+            background: var(--bg-glass); backdrop-filter: blur(15px); padding: 40px; 
+            border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+        }
+
+        h1 { color: var(--accent); text-transform: uppercase; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); text-transform: uppercase; text-align: left; margin-top: 40px; }
+        
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; }
+
+        .mapa-container { 
+            width: 100%; border: 2px solid var(--accent); border-radius: 20px; 
+            overflow: hidden; margin: 25px 0 10px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            background: #000;
+        }
+        .mapa-container img { width: 100%; display: block; }
+
+        .fonte-mapa { 
+            font-size: 0.85em; text-align: center; opacity: 0.8; 
+            margin-bottom: 30px; color: #dfe6e9; font-style: italic;
+        }
+
+        .secao-referencias { 
+            margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); 
+            text-align: left; 
+        }
+        .ref-item { font-size: 0.85em; color: #dfe6e9; text-align: left; margin-bottom: 12px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="ursula - contexto.html" class="btn-nav">Voltar ao Contexto</a></nav>
+    </header>
+
+    <main>
+        <article class="card">
+            <h1>Úrsula: do ponto de vista da Geografia...</h1>
+            <p>
+                A Geografia estuda a relação entre o homem e o espaço. No Capítulo IX de <em>Úrsula</em>, a personagem Mãe Susana narra um processo de <strong>desterritorialização forçada</strong>. O mar, para ela, não é apenas um elemento físico, mas um abismo político e social que rompeu sua identidade africana para aprisioná-la na estrutura de poder de uma fazenda maranhense.
+            </p>
+
+            <h2>A Geopolítica do Tráfico Transatlântico</h2>
+            <p>
+                O fluxo de seres humanos através do Atlântico foi um dos maiores movimentos migratórios forçados da história, moldando a demografia do continente americano. Veja abaixo a amplitude dessas rotas:
+            </p>
+
+            <!-- MAPA LOCAL 1 (EXTENSÃO .PNG) -->
+            <div class="mapa-container">
+                <img src="mapa-fgv-1.png" alt="Mapa Tráfico Negreiro 1502-1866">
+            </div>
+            <div class="fonte-mapa">
+                Figura 1: Tráfico negreiro (1502-1866). Fonte: Atlas Histórico do Brasil / FGV.
+            </div>
+
+            <h2>O Brasil na Rota do Desterro</h2>
+            <p>
+                Estima-se que chegaram ao Brasil cerca de 5 milhões de africanos entre 1500 e 1850. Observe no detalhe abaixo como as rotas se concentravam em portos estratégicos, como o de São Luís, porta de entrada para a realidade Maranhense vivida e denunciada por Maria Firmina dos Reis:
+            </p>
+
+            <!-- MAPA LOCAL 2 (EXTENSÃO .PNG) -->
+            <div class="mapa-container">
+                <img src="mapa-fgv-2.png" alt="Mapa Rotas do Tráfico antes de 1850">
+            </div>
+            <div class="fonte-mapa">
+                Figura 2: Rotas internas e externas do tráfico antes de 1850. Fonte: Atlas Histórico do Brasil / FGV.
+            </div>
+
+            <p style="margin-top: 30px;">
+               Ao ler os excertos, perceba como o espaço geográfico da fazenda do Comendador Fernando é organizado para a vigilância e controle, refletindo a estrutura social e a exclusão precária de grupos na ordem econômica, determinando as características sociais do território.
+            </p>
+
+            <section class="secao-referencias">
+                <h2>Referências</h2>
+                <div class="ref-item">
+                    FUNDAÇÃO GETULIO VARGAS. <strong>Tráfico negreiro (1502-1866)</strong>. Atlas Histórico do Brasil. Rio de Janeiro: FGV, [s.d.]. Disponível em: https://atlas.fgv.br/marcos/trabalho-e-escravidao/mapas/trafico-negreiro-1502-1866. Acesso em: 19 jul. 2026.
+                </div>
+                <div class="ref-item">
+                    FUNDAÇÃO GETULIO VARGAS. <strong>Rotas internas e externas do tráfico antes de 1850</strong>. Atlas Histórico do Brasil. Rio de Janeiro: FGV, [s.d.]. Disponível em: https://atlas.fgv.br/marcos/do-escravo-ao-imigrante/mapas/rotas-internas-e-externas-do-trafico-antes-de-1850. Acesso em: 19 jul. 2026.
+                </div>
+                <div class="ref-item">
+                   REIS, Maria Firmina dos. <strong>Úrsula e outras obras</strong>. Brasília: Câmara dos Deputados, Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/bitstreams/fd82b580-2b83-4d4c-abc9-d1cf5077e5b2/download.  Acesso em: 15 jul. 2026.</div>
+
+                </div>
+            </section>
+        </article>
+    </main>
+</body>
+</html>

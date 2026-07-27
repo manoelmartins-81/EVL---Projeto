@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário: O Enfermeiro - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; margin-left: 10px; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        
+        main { max-width: 1000px; width: 95%; margin: 40px 0; }
+        .card-glossario { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 45px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        
+        h1 { color: var(--accent); text-transform: uppercase; margin-bottom: 25px; font-size: 2.2em; text-align: center; }
+        
+        .instrucoes { line-height: 1.8; text-align: center; font-size: 1.05em; margin-bottom: 30px; opacity: 0.95; padding: 0 20px; }
+
+        .busca-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 45px; }
+        .input-group { width: 100%; max-width: 700px; display: flex; gap: 10px; }
+        #inputBusca { flex: 1; padding: 16px 25px; border-radius: 40px; border: 2px solid var(--accent); background: rgba(255,255,255,0.1); color: white; font-size: 1em; outline: none; transition: 0.3s; }
+        #inputBusca:focus { background: rgba(255,255,255,0.2); box-shadow: 0 0 15px rgba(255, 234, 167, 0.3); }
+        .btn-dicionario { background: var(--primary); color: white; border: 1.5px solid white; padding: 0 25px; border-radius: 40px; cursor: pointer; font-weight: bold; font-size: 0.9em; transition: 0.3s; text-transform: uppercase; }
+        .btn-dicionario:hover { background: white; color: var(--primary); transform: scale(1.05); }
+
+        .glossario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .item-termo { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; border-left: 5px solid var(--primary); transition: 0.3s; }
+        .item-termo:hover { background: rgba(108, 92, 231, 0.2); transform: translateX(5px); }
+        .item-termo strong { color: var(--accent); display: block; margin-bottom: 8px; font-size: 1.1em; text-transform: lowercase; font-variant: small-caps; }
+        .item-termo p { margin: 0; font-size: 0.95em; line-height: 1.5; opacity: 0.9; }
+
+        .referencias-secao { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .referencias-secao h3 { color: var(--accent); text-transform: uppercase; font-size: 1.1em; margin-bottom: 15px; }
+        .ref-item { font-size: 0.85em; line-height: 1.6; opacity: 0.7; text-align: left; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="o-enfermeiro-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-glossario">
+            <h1>Glossário: O Enfermeiro</h1>
+            
+            <p class="instrucoes">
+                Abaixo, selecionamos alguns dos termos e expressões mais marcantes de Machado de Assis para facilitar sua compreensão da estética realista. 
+                Caso encontre outra palavra desconhecida, utilize o campo de busca e clique em 
+                <strong>"Pesquisar no Dicionário"</strong> para consultar o portal Michaelis.
+            </p>
+
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="inputBusca" placeholder="Busque um termo ou use o Michaelis..." onkeyup="filtrarGlossario()">
+                    <button class="btn-dicionario" onclick="pesquisarMichaelis()">Pesquisar no Dicionário</button>
+                </div>
+            </div>
+
+            <div class="glossario-grid" id="listaGlossario">
+                <div class="item-termo"><strong>Documento humano</strong><p>Expressão usada pelo narrador para designar um relato fiel e sem filtros sobre as contradições e sombras da natureza humana.</p></div>
+                <div class="item-termo"><strong>Tênia moral</strong><p>Metáfora para um sentimento de culpa ou prazer insidioso que consome o indivíduo por dentro, como um parasita.</p></div>
+                <div class="item-termo"><strong>Arruda</strong><p>Planta de cheiro forte usada pelo narrador como analogia para o seu relato, que pode não ser "cheiroso" ou agradável como rosas.</p></div>
+                <div class="item-termo"><strong>Estúrdio</strong><p>Diz respeito a alguém excêntrico, extravagante ou esquisito; usado para descrever o temperamento do Coronel Felisberto.</p></div>
+                <div class="item-termo"><strong>Gatuno</strong><p>Aquele que furta; ladrão. Termo de insulto usado com frequência pelo coronel contra seus antigos enfermeiros.</p></div>
+                <div class="item-termo"><strong>Enfarado</strong><p>Sentimento de tédio, fastio ou cansaço extremo de uma atividade; Procópio estava enfarado de copiar textos latinos.</p></div>
+                <div class="item-termo"><strong>Aneurisma</strong><p>Dilatação anormal de uma artéria, uma das graves enfermidades físicas que afligiam o patrão de Procópio.</p></div>
+                <div class="item-termo"><strong>Espórtula</strong><p>Pequena quantia em dinheiro dada como esmola, oferta religiosa ou gratificação por um serviço.</p></div>
+                <div class="item-termo"><strong>Teólogo</strong><p>Pessoa que se dedica ao estudo da divindade e das religiões; Procópio ironiza sua "formação" por copiar estudos de teologia.</p></div>
+                <div class="item-termo"><strong>Valongo</strong><p>Sobrenome do protagonista que remete a uma localidade histórica do Rio de Janeiro; o coronel o considerava "nome de coisa".</p></div>
+            </div>
+
+            <section class="referencias-secao">
+                <h3>Referências</h3>
+                <div class="ref-item">
+                    ASSIS, Machado de. <strong>O Enfermeiro</strong>. In: Várias Histórias. Rio de Janeiro: Laemmert, 1896. Disponível em: http://www.dominiopublico.gov.br/download/texto/ua000171.pdf. Acesso em: 26 jul. 2026.
+                </div>
+                <div class="ref-item">
+                    MICHAELIS. <strong>Dicionário Brasileiro da Língua Portuguesa</strong>. São Paulo: Melhoramentos, 2026. Disponível em: https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro. Acesso em: 26 jul. 2026.
+                </div>
+                <div class="ref-item">
+                    SILVA, Eliane da Conceição. <strong>Estudos da violência</strong>: uma análise sociológica dos contos de Machado de Assis. 2008. 195 f. Dissertação (Mestrado em Sociologia) – UNESP, Araraquara, 2008. Disponível em: https://repositorio.unesp.br/. Acesso em: 26 jul. 2026.
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <script>
+        function filtrarGlossario() {
+            let input = document.getElementById('inputBusca').value.toLowerCase();
+            let termos = document.getElementsByClassName('item-termo');
+            for (let i = 0; i < termos.length; i++) {
+                let txtTermo = termos[i].textContent || termos[i].innerText;
+                termos[i].style.display = txtTermo.toLowerCase().indexOf(input) > -1 ? "" : "none";
+            }
+        }
+
+        function pesquisarMichaelis() {
+            let termo = document.getElementById('inputBusca').value;
+            if (termo) {
+                let url = "https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro/" + encodeURIComponent(termo);
+                window.open(url, '_blank');
+            } else {
+                alert("Por favor, digite uma palavra para pesquisar no Michaelis.");
+            }
+        }
+    </script>
+</body>
+</html>

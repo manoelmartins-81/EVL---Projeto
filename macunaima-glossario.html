@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário: Macunaíma - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg'); 
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; margin-left: 10px; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        
+        main { max-width: 1000px; width: 95%; margin: 40px 0; }
+        .card-glossario { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 45px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        
+        h1 { color: var(--accent); text-transform: uppercase; margin-bottom: 25px; font-size: 2.2em; text-align: center; }
+        
+        /* TEXTO DE INSTRUÇÃO */
+        .instrucoes { line-height: 1.8; text-align: center; font-size: 1.05em; margin-bottom: 30px; opacity: 0.95; padding: 0 20px; }
+
+        /* BUSCA E DICIONÁRIO EXTERNO */
+        .busca-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 45px; }
+        .input-group { width: 100%; max-width: 700px; display: flex; gap: 10px; }
+        #inputBusca { flex: 1; padding: 16px 25px; border-radius: 40px; border: 2px solid var(--accent); background: rgba(255,255,255,0.1); color: white; font-size: 1em; outline: none; transition: 0.3s; }
+        #inputBusca:focus { background: rgba(255,255,255,0.2); box-shadow: 0 0 15px rgba(255, 234, 167, 0.3); }
+        .btn-dicionario { background: var(--primary); color: white; border: 1.5px solid white; padding: 0 25px; border-radius: 40px; cursor: pointer; font-weight: bold; font-size: 0.9em; transition: 0.3s; text-transform: uppercase; }
+        .btn-dicionario:hover { background: white; color: var(--primary); transform: scale(1.05); }
+
+        /* GRID DE TERMOS */
+        .glossario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .item-termo { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; border-left: 5px solid var(--primary); transition: 0.3s; }
+        .item-termo:hover { background: rgba(108, 92, 231, 0.2); transform: translateX(5px); }
+        .item-termo strong { color: var(--accent); display: block; margin-bottom: 8px; font-size: 1.1em; text-transform: lowercase; font-variant: small-caps; }
+        .item-termo p { margin: 0; font-size: 0.95em; line-height: 1.5; opacity: 0.9; }
+
+        /* SEÇÃO DE REFERÊNCIAS */
+        .referencias-secao { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .referencias-secao h3 { color: var(--accent); text-transform: uppercase; font-size: 1.1em; margin-bottom: 15px; }
+        .ref-item { font-size: 0.85em; line-height: 1.6; opacity: 0.7; text-align: left; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="macunaima-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-glossario">
+            <h1>Glossário: Macunaíma</h1>
+            
+            <!-- TEXTO DE INSTRUÇÃO SOLICITADO -->
+            <p class="instrucoes">
+                Abaixo, pré-selecionamos alguns dos termos mais desafiadores presentes na obra para facilitar sua compreensão. 
+                Caso encontre outra palavra desconhecida durante a leitura, utilize o campo de busca e clique no botão 
+                <strong>"Pesquisar no Dicionário"</strong> para consultar o significado em tempo real no portal Michaelis.
+            </p>
+
+            <!-- CAMPO DE BUSCA E LINK MICHAELIS -->
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="inputBusca" placeholder="Busque um termo ou digite para o Michaelis..." onkeyup="filtrarGlossario()">
+                    <button class="btn-dicionario" onclick="pesquisarMichaelis()">Pesquisar no Dicionário</button>
+                </div>
+            </div>
+
+            <div class="glossario-grid" id="listaGlossario">
+                <!-- TERMOS SELECIONADOS -->
+                <div class="item-termo"><strong>Muiraquitã</strong><p>Amuleto em forma de sapo ou jacaré, motor central da busca de Macunaíma.</p></div>
+                <div class="item-termo"><strong>Cunhatã</strong><p>Termo tupi que designa moça, rapariga ou jovem indígena.</p></div>
+                <div class="item-termo"><strong>Curumim</strong><p>Criança ou menino indígena.</p></div>
+                <div class="item-termo"><strong>Ubá</strong><p>Pequena canoa indígena feita de um único tronco de árvore.</p></div>
+                <div class="item-termo"><strong>Tembetá</strong><p>Adorno labial de pedra ou osso usado por povos indígenas.</p></div>
+                <div class="item-termo"><strong>Maloca</strong><p>Habitação comunitária de povos indígenas.</p></div>
+                <div class="item-termo"><strong>Igarapé</strong><p>Pequeno curso de água ou canal estreito que corta a mata.</p></div>
+                <div class="item-termo"><strong>Puíto</strong><p>Termo usado na obra como gíria para orifício ou botoeira.</p></div>
+                <div class="item-termo"><strong>Mocambo</strong><p>Habitação rústica ou aldeamento marginalizado.</p></div>
+                <div class="item-termo"><strong>Icamiabas</strong><p>Mulheres guerreiras da lenda amazônica, as "Amazonas" brasileiras.</p></div>
+                <div class="item-termo"><strong>Piaimã</strong><p>O gigante Venceslau Pietro Pietra, grande vilão da narrativa.</p></div>
+                <div class="item-termo"><strong>Uraricoera</strong><p>Rio de Roraima onde começa e termina a saga do herói.</p></div>
+                <div class="item-termo"><strong>Sapopemba</strong><p>Raízes tabulares e expostas de grandes árvores da floresta.</p></div>
+                <div class="item-termo"><strong>Capei</strong><p>A Lua, divindade da cosmogonia mítica da obra.</p></div>
+                <div class="item-termo"><strong>Boiúna</strong><p>Cobra-grande mítica que habita as profundezas dos rios.</p></div>
+                <div class="item-termo"><strong>Tapanhumas</strong><p>A tribo de origem de Macunaíma no fundo do mato virgem.</p></div>
+                <div class="item-termo"><strong>Jiguê</strong><p>Um dos irmãos do herói, representante da força bruta.</p></div>
+                <div class="item-termo"><strong>Maanape</strong><p>Irmão mais velho, símbolo da paciência e da tradição.</p></div>
+                <div class="item-termo"><strong>Vei</strong><p>A Sol, divindade que interage com o herói durante a jornada.</p></div>
+                <div class="item-termo"><strong>Pau-d'arco</strong><p>Nome popular dado ao Ipê; árvore de madeira resistente e flores vistosas.</p></div>
+            </div>
+
+            <!-- SEÇÃO DE REFERÊNCIAS ABNT SOLICITADA -->
+            <section class="referencias-secao">
+                <h3> Referências</h3>
+                <div class="ref-item">
+                    ANDRADE, Mário de. <strong>Macunaíma</strong>: o herói sem nenhum caráter. Organizadores: Ana Heloíse Pereira Vicentini, André Luiz da Silva, Jennifer Teixeira da Silva, Bruna Belo Sales. Alfenas-MG: Editora Unifal-MG, 2024. E-book. Disponível em: https://www.unifal-mg.edu.br/extensao/wp-content/uploads/sites/96/2024/04/Macunaima.pdf. Acesso em: 21 jul. 2026.
+                </div>
+                <div class="ref-item">
+                    MICHAELIS. <strong>Dicionário Brasileiro da Língua Portuguesa</strong>. São Paulo: Melhoramentos, 2026. Disponível em: https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro. Acesso em: 13 jul. 2026.
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <script>
+        function filtrarGlossario() {
+            let input = document.getElementById('inputBusca').value.toLowerCase();
+            let termos = document.getElementsByClassName('item-termo');
+            for (let i = 0; i < termos.length; i++) {
+                let txtTermo = termos[i].textContent || termos[i].innerText;
+                if (txtTermo.toLowerCase().indexOf(input) > -1) {
+                    termos[i].style.display = "";
+                } else {
+                    termos[i].style.display = "none";
+                }
+            }
+        }
+
+        function pesquisarMichaelis() {
+            let termo = document.getElementById('inputBusca').value;
+            if (termo) {
+                let url = "https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro/" + encodeURIComponent(termo);
+                window.open(url, '_blank');
+            } else {
+                alert("Por favor, digite uma palavra para pesquisar no Michaelis.");
+            }
+        }
+    </script>
+</body>
+</html>

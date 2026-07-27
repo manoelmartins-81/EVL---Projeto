@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ética e Vida Social - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), 
+                        url('estante-livros4.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            display: flex; flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header { 
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between; 
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3); 
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0; 
+        }
+        .btn-nav { 
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; 
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; 
+            transition: 0.3s; 
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 40px; }
+        
+        .card-apresentacao { 
+            background: var(--bg-glass); backdrop-filter: blur(15px); 
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+        }
+        h1, h2 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+        .texto-principal { font-size: 1.1em; line-height: 1.8; text-align: justify; margin-bottom: 30px; opacity: 0.95; }
+
+        .video-grid { display: flex; justify-content: center; margin: 25px 0; }
+        .video-item { text-decoration: none; color: white; transition: 0.3s; width: 100%; max-width: 700px; }
+        .video-container { 
+            width: 100%; position: relative; border-radius: 15px; overflow: hidden; 
+            border: 2px solid var(--accent); aspect-ratio: 16 / 9; background: #000; 
+        }
+        .video-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        .play-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; 
+            font-size: 2.5em; transition: 0.3s; 
+        }
+        .video-caption { text-align: center; font-size: 0.9em; margin-top: 12px; font-weight: bold; display: block; line-height: 1.4; }
+        .video-source { display: block; font-size: 0.75em; opacity: 0.8; font-weight: normal; margin-top: 4px; }
+        .tag-externo { background: #ff7675; color: white; padding: 2px 10px; border-radius: 5px; font-size: 0.7em; font-weight: bold; text-transform: uppercase; display: inline-block; margin-bottom: 10px; }
+
+        .conducao-leitura { 
+            background: rgba(255, 255, 255, 0.05); padding: 30px; 
+            border-radius: 25px; border-top: 1px solid rgba(255, 255, 255, 0.2); 
+            margin-top: 30px; 
+        }
+        .conducao-leitura p { font-size: 1.05em; line-height: 1.8; text-align: justify; color: #f1f2f6; }
+
+        .obra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .card-obra { 
+            background: var(--bg-glass); backdrop-filter: blur(10px); 
+            padding: 30px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); 
+            transition: 0.4s; text-decoration: none; color: white; 
+            display: flex; flex-direction: column; justify-content: space-between; 
+        }
+        .card-obra:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(255, 255, 255, 0.18); }
+        .card-obra h3 { margin: 0 0 10px 0; color: var(--accent); font-size: 1.5em; }
+        .autor-nome { font-weight: bold; font-size: 0.9em; color: #dfe6e9; margin-bottom: 15px; display: block; }
+        .btn-explorar { 
+            margin-top: 25px; padding: 12px; text-align: center; 
+            background: rgba(255,255,255,0.1); color: white; font-weight: 800; 
+            border-radius: 12px; text-transform: uppercase; font-size: 0.85em; transition: 0.3s; 
+        }
+        .card-obra:hover .btn-explorar { background: var(--accent); color: #2c3e50; }
+
+        .secao-referencias { 
+            max-width: 1100px; width: 90%; margin: 50px auto 30px; 
+            padding: 30px; background: rgba(0, 0, 0, 0.2); 
+            border-top: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; 
+            font-size: 0.85em; line-height: 1.6; color: #dfe6e9; 
+        }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-top: 0; }
+        .ref-item { margin-bottom: 15px; text-align: justify; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav><a href="index.html" class="btn-nav">Voltar para a Home</a></nav>
+    </header>
+
+    <main>
+        <section class="card-apresentacao">
+            <h1>Ética e Vida Social</h1>
+            <p class="texto-principal">
+                O eixo "Ética e Vida Social" convida você a refletir sobre como o comportamento individual ressoa no destino coletivo. Inspirado no tema contemporâneo <strong>Cidadania e Civismo</strong>, este espaço utiliza a literatura clássica como um laboratório para analisar as contradições da natureza humana e os dilemas que moldam a nossa vida em sociedade. A leitura deixa de ser apenas um exercício estético para tornar-se uma ferramenta de desvelamento da realidade, permitindo que você questione o mundo e a si mesmo.
+            </p>
+            <p class="texto-principal">
+                Para navegar nesta jornada, é fundamental compreender a distinção entre dois pilares da conduta humana: a <strong>moral</strong>, que reside na nossa interioridade e é o julgamento que o "eu" faz sobre os limites da sua própria ação; e a <strong>ética</strong>, que nasce da decisão coletiva de proteger a convivência, harmonizando os espaços compartilhados para que a busca pela felicidade de um não anule a do outro. Compreender essa tensão entre o desejo individual e o bem comum é o primeiro passo para o exercício de uma cidadania plena, pautada pela responsabilidade e pelo combate à indiferença.
+            </p>
+
+            <h2 style="font-size: 1.1em; margin-bottom: 20px;">Reflexão com o Professor Clóvis de Barros</h2>
+            <div class="video-grid">
+                <a href="https://www.youtube.com/watch?v=DB-egMDjlr8" target="_blank" class="video-item">
+                    <div style="text-align: center;"><span class="tag-externo">Conteúdo Externo</span></div>
+                    <div class="video-container">
+                        <img src="https://img.youtube.com/vi/DB-egMDjlr8/maxresdefault.jpg" alt="O que é ética?">
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <span class="video-caption">
+                        O que é ética?
+                        <span class="video-source">Fonte: Canal Oficial do Professor Clóvis de Barros Filho (@clovisdebarrosoficial)</span>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <div class="conducao-leitura">
+            <p>
+                Para aprofundar essa jornada, mergulharemos no <strong>Realismo</strong> de Machado de Assis. Conhecido por sua ironia fina e análise psicológica profunda, Machado rompe com as idealizações do passado para mostrar o ser humano como ele realmente é. Diferente dos extensos romances, focaremos aqui no gênero <strong>conto</strong>: uma narrativa curta e concisa que se concentra em um acontecimento único e impactante. 
+            </p>
+            <p>
+                Nesse formato, a brevidade intensifica o efeito da história, funcionando como um recorte cirúrgico que permite ao autor analisar os comportamentos sociais com rapidez e clareza. É nesta precisão que Machado revela as feridas da alma e da sociedade, expondo como a hipocrisia e a vaidade moldam as relações de forma silenciosa. Através dos contos selecionados, exploraremos a tensão entre o interesse privado e o bem comum, utilizando a ficção como um espelho crítico para os dilemas éticos da nossa vida em sociedade.
+            </p>
+        </div>
+
+        <section class="obra-grid">
+            <a href="o-enfermeiro-contexto.html" class="card-obra">
+                <div>
+                    <h3>O Enfermeiro</h3>
+                    <span class="autor-nome">Machado de Assis</span>
+                    <p>Um mergulho sombrio nos limites da moralidade individual. Acompanhe a história de Procópio e descubra até onde um homem pode ir quando sua ambição confronta o dever ético em silêncio.</p>
+                </div>
+                <div class="btn-explorar">Explorar Contexto</div>
+            </a>
+
+            <a href="um-apologo-contexto.html" class="card-obra">
+                <div>
+                    <h3>Um Apólogo</h3>
+                    <span class="autor-nome">Machado de Assis</span>
+                    <p>Uma alegoria afiada sobre a função social e a vaidade. Através da disputa entre uma agulha e um novelo de linha, Machado satiriza as hierarquias que governam o comportamento público.</p>
+                </div>
+                <div class="btn-explorar">Explorar Contexto</div>
+            </a>
+        </section>
+    </main>
+
+    <footer class="secao-referencias">
+        <h4>Referências das Fontes Consultadas</h4>
+        
+        <div class="ref-item">BARROS FILHO, Clóvis de. <strong>O que é ética?</strong>. YouTube, 2023. Disponível em: https://www.youtube.com/watch?v=DB-egMDjlr8. Acesso em: 26 jul. 2026.</div>
+        
+        <div class="ref-item">BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>: Ensino Médio. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 26 jul. 2026.</div>
+        
+        <div class="ref-item">COHN, Gabriel. <strong>Civilização, cidadania e civismo</strong>: a teoria política frente aos novos desafios. CLACSO, [s.d.]. Disponível em: https://bibliotecavirtual.clacso.org.ar/ar/libros/secret/filopolconbr/Cohn.pdf. Acesso em: 26 jul. 2026.</div>
+        
+        <div class="ref-item">SANTOS, Antônio Carlos dos. Variações conceituais entre a ética e a moral. <strong>Filosofia Unisinos</strong>, São Leopoldo, v. 22, n. 2, p. 206-214, 2021. Disponível em: https://www.scielo.br/j/fun/a/L373KJHwbW4TcWk6Lcjyfvg/?format=html&lang=pt. Acesso em: 26 jul. 2026.</div>
+
+        <div class="ref-item">SILVA, Eliane da Conceição. <strong>Estudos da violência</strong>: uma análise sociológica dos contos de Machado de Assis. 2008. 195 f. Dissertação (Mestrado em Sociologia) – Universidade Estadual Paulista, Faculdade de Ciências e Letras, Campus de Araraquara, 2008. Disponível em: https://repositorio.unesp.br/server/api/core/bitstreams/14f1efbc-29ad-49e7-b533-7e1842a9de0d/content. Acesso em: 26 jul. 2026.</div>
+    </footer>
+</body>
+</html>

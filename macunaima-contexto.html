@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macunaíma: o herói sem nenhum caráter - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+        main { max-width: 1000px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-contexto {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+        .video-fake-player {
+            position: relative; width: 100%; aspect-ratio: 16 / 9;
+            background: #000 url('capa-filme-macunaima.jpg') no-repeat center center;
+            background-size: cover; border-radius: 20px; overflow: hidden; cursor: pointer;
+            margin: 30px 0 10px; border: 2px solid var(--accent); display: block;
+        }
+        .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.2);
+        }
+        .play-button {
+            width: 80px; height: 80px; background: var(--video-btn); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-size: 30px; box-shadow: 0 0 30px rgba(231, 76, 60, 0.5);
+        }
+        .nota-etica {
+            font-size: 0.85em; background: rgba(0,0,0,0.4); padding: 20px;
+            border-radius: 15px; border-left: 4px solid var(--primary); margin: 20px 0;
+        }
+        .grid-acoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+        .btn-acao {
+            background: rgba(255,255,255,0.08); padding: 25px; border-radius: 25px;
+            text-align: center; text-decoration: none; color: white; transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column;
+            align-items: center; gap: 10px;
+        }
+        .btn-acao:hover { background: var(--primary); border-color: var(--accent); transform: translateY(-5px); }
+        .btn-acao strong { font-size: 1.1em; color: var(--accent); }
+        .btn-acao span { font-size: 2.5em; }
+        .secao-referencias {
+            margin-top: 50px; padding: 40px; background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px; font-size: 0.85em; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .ref-item { margin-bottom: 15px; color: #dfe6e9; text-align: justify; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="multiculturalismo.html" class="btn-nav-topo">Voltar ao Eixo</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+    <main>
+        <article class="card-contexto">
+            <h1>Macunaíma: o herói sem nenhum caráter</h1>
+            <section>
+                <p>A década de 1920 no Brasil foi um verdadeiro turbilhão de mudanças, funcionando como um <strong>"termômetro"</strong> de uma sociedade que não suportava mais as velhas estruturas políticas e sociais. O país vivia o esgotamento da <strong>República Velha</strong>, dominada pela oligarquia cafeeira, enquanto via o nascimento acelerado de novas forças: o crescimento das indústrias, a agitação do operariado urbano e o surgimento de uma intelectualidade desejosa por transformações profundas. Esse clima de transição gerava uma tensão constante entre o Brasil agrário do passado e a promessa de um futuro moderno que começava a se materializar nos centros urbanos.</p>
+                <p>No campo das ideias, essa efervescência atingiu seu ápice na <strong>Semana de Arte Moderna de 1922</strong>. Artistas e intelectuais, sob a liderança de figuras como Mário de Andrade, perceberam que os padrões estéticos europeus eram incompatíveis com a realidade brasileira e não expressavam o novo século. Era urgente o projeto de <strong>"realizar o Brasil"</strong>, rompendo com o academicismo tradicional para descobrir o que nos tornava únicos como nação. Essa busca pela "brasilidade" não era apenas uma questão artística, mas um movimento político para valorizar as nossas raízes e a pluralidade étnica, combatendo a ideia de que a nossa cultura era uma mera cópia inferior da civilização europeia.</p>
+                <p>A obra <em>Macunaíma</em> (1928) surge como a síntese perfeita desse conflito entre o <strong>"mato virgem"</strong> do interior e a <strong>"metrópole desvairada"</strong>. Naquela época, enquanto São Paulo se transformava em um centro de progresso técnico, com máquinas, automóveis e uma vida mental acelerada, o restante do país ainda era visto como um arquipélago de regiões isoladas e "atrasadas". Mário de Andrade utilizou o herói para conectar esses dois Brasis, mostrando que a nossa identidade não estava apenas na tecnologia importada, mas na mistura contraditória entre a herança ancestral e a modernidade que alterava irremediavelmente a paisagem.</p>
+                <p>Portanto, ler esta rapsódia é compreender um Brasil que tentava se olhar no espelho sem os filtros estrangeiros pela primeira vez. O contexto de publicação da obra reflete as dores de um povo em construção, que enfrentava o preconceito linguístico e o racismo estrutural, mas que, através do movimento modernista, buscava transformar o seu "atraso" em uma potência cultural original e independente.</p>
+            </section>
+            
+            <section>
+                <h2>O Presente explica o Passado</h2>
+                <p>Para ler <strong>Macunaíma</strong> com olhos críticos, é essencial compreender como Mário de Andrade articulou anos de pesquisas etnográficas ao turbulento cenário político e social da década de 1920. O vídeo abaixo, produzido pelo <a href="https://www.youtube.com/watch?v=zkiq1VGIlog" target="_blank" style="color: var(--accent); font-weight: bold;">Canal Antofágica</a> para a divulgação de uma edição especial da obra, oferece uma análise brilhante que transcende o seu objetivo comercial. O material explora com maestria o pensamento do autor e a efervescência de sua época, contando com a participação do ator Antonio Fagundes, as ilustrações de Camille Sproesser e as perspectivas críticas de Tom Zé e do escritor indígena Cristino Wapichana:</p>
+                <a href="https://www.youtube.com/watch?v=zkiq1VGIlog" target="_blank" style="text-decoration:none;">
+                    <div class="video-fake-player">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                </a>
+                <p style="font-size: 0.85em; text-align: center; color: #dfe6e9; font-style: italic;">Fonte: Canal Antofágica.</p>
+                <div class="nota-etica">
+                    <strong>Nota Ética e Cultural:</strong> Este vídeo é referenciado no Espaço Virtual de Leitura (EVL) por seu excepcional valor educativo e cultural, abordando com maestria a complexidade de Mário de Andrade. Todos os créditos pertencem ao canal <strong>Antofágica</strong>.
+                    <br><br>🛒 <a href="https://www.amazon.com.br/gp/product/6586490472/" target="_blank" style="color: var(--accent); font-weight: bold; text-decoration: underline;">Adquirir a edição especial da obra (Amazon)</a>
+                </div>
+            </section>
+            
+            <section style="margin-top: 40px; border-left: 5px solid var(--primary); padding-left: 20px;">
+                <h2 style="margin-top: 0; background-color: var(--primary); color: white; padding: 2px 10px; display: inline-block;">Do ponto de vista da...</h2>
+                <p style="margin-top: 20px;">Para uma formação <strong>integral</strong> e crítica, explore como as Ciências Humanas iluminam a obra de Mário de Andrade:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <a href="macunaima-lingua.html" style="text-decoration: none; color: inherit;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                            <strong style="color: var(--accent); display: block; margin-bottom: 12px; font-size: 1.1em;">🗣️ Língua Portuguesa: A Fala Impura</strong>
+                            <p style="font-size: 0.95em; margin: 0; line-height: 1.5;">Como Mário de Andrade legitimou o brasileiro falado contra o academicismo europeu, elevando o dialeto popular ao status de arte.</p>
+                        </div>
+                    </a>
+                    <a href="macunaima-sociologia.html" style="text-decoration: none; color: inherit;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                            <strong style="color: var(--accent); display: block; margin-bottom: 12px; font-size: 1.1em;">🤝 Sociologia: O Herói Híbrido</strong>
+                            <p style="font-size: 0.95em; margin: 0; line-height: 1.5;">Macunaíma como um mosaico étnico, refletindo as tensões e a formação do multiculturalismo no Brasil.</p>
+                        </div>
+                    </a>
+                    <a href="macunaima-geografia.html" style="text-decoration: none; color: inherit;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                            <strong style="color: var(--accent); display: block; margin-bottom: 12px; font-size: 1.1em;">🌍 Geografia: O Mapa das Viagens Etnográficas</strong>
+                            <p style="font-size: 0.95em; margin: 0; line-height: 1.5;">O deslocamento do herói do extremo norte até a metrópole, rompendo arquipélagos regionais para construir a nação.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+            
+            <div class="grid-acoes">
+                <a href="macunaima-autor.html" class="btn-acao"><span>✍️</span><strong>O Autor</strong></a>
+                <a href="macunaima-movimento.html" class="btn-acao"><span>🏛️</span><strong>Modernismo</strong></a>
+                <a href="macunaima.html" class="btn-acao" style="background: rgba(108, 92, 231, 0.3);"><span>📖</span><strong>Trechos da obra (prévia)</strong></a>
+                <a href="macunaima-glossario.html" class="btn-acao"><span>🔍</span><strong>Glossário</strong></a>
+                <a href="professor-macunaima.html" class="btn-acao"><span>🎓</span><strong>Espaço do Professor</strong></a>
+                <a href="https://www.unifal-mg.edu.br/extensao/wp-content/uploads/sites/96/2024/04/Macunaima.pdf" target="_blank" class="btn-acao"><span>⬇️</span><strong>Obra Completa</strong></a>
+            </div>
+        </article>
+    </main>
+    <footer class="secao-referencias">
+        <h4 style="color: var(--accent); text-transform: uppercase; margin-bottom: 25px;">Referências </h4>
+        <div class="ref-item">ANDRADE, Mário de. <strong>Macunaíma</strong>: o herói sem nenhum caráter. Organizadores: Ana Heloíse Pereira Vicentini et al. Alfenas-MG: Editora Unifal-MG, 2024. E-book. Disponível em:https://www.unifal-mg.edu.br/extensao/wp-content/uploads/sites/96/2024/04/Macunaima.pdf.  Acesso em:23 jul. 2026. </div>
+        <div class="ref-item">ANTOFÁGICA. <strong>Macunaíma: o grande clássico do MODERNISMO brasileiro</strong>. YouTube, 30 set. 2021. Disponível em: https://www.youtube.com/watch?v=zkiq1VGIlog. Acesso em: 23 jul. 2026.</div>
+        <div class="ref-item">SILVA, Rogéria da; MENDES, Heloisa Mara. Análise do discurso de Mário de Andrade acerca da legitimação de uma identidade linguística nacional. <strong>Domínios de Lingu@gem</strong>, 2017. Disponível em: https://seer.ufu.br/index.php/dominiosdelinguagem/article/view/37285. Acesso em: 23 jul. 2026.</div>
+        <div class="ref-item">VITTE, Antônio Carlos; COUTINHO, Giuliano. O pensamento geográfico na obra Macunaíma: “o herói sem nenhum caráter”. <strong>Mercator</strong>, Fortaleza, v. 8, n. 17, p. 33-54, set./dez. 2009. Disponível em: http://www.mercator.ufc.br/mercator/article/view/269. Acesso em: 23 jul. 2026.</div>
+    </footer>
+</body>
+</html>

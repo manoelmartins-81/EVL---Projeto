@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de Excertos: O Enfermeiro - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7; --accent: #ffeaa7; --bg-body: #1a1a1a;
+            --bg-card: rgba(255, 255, 255, 0.08); --text-color: #ffffff;
+            --font-reader: 'Merriweather', serif;
+        }
+        body.sepia { --bg-body: #f4ecd8; --bg-card: rgba(255, 255, 255, 0.6); --text-color: #433422; --primary: #8c7ae6; }
+        body.dark { --bg-body: #0f0f0f; --bg-card: rgba(20, 20, 20, 0.8); --text-color: #e0e0e0; }
+
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('estante-livros4.jpg') no-repeat center center fixed;
+            background-size: cover; color: var(--text-color); transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.85em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        .controles-visualizacao { margin: 20px 0; display: flex; gap: 10px; }
+        .btn-theme { padding: 8px 15px; border-radius: 10px; border: 1px solid var(--primary); background: var(--bg-card); color: var(--text-color); cursor: pointer; font-size: 0.8em; transition: 0.3s; }
+        .btn-theme:hover { background: var(--primary); color: white; }
+
+        main { max-width: 850px; width: 92%; margin-bottom: 120px; }
+        .card-leitura { 
+            background: var(--bg-card); backdrop-filter: blur(15px); padding: 50px; 
+            border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 500px;
+        }
+
+        .pagina { display: none; animation: fadeIn 0.5s; font-family: var(--font-reader); line-height: 1.8; font-size: 1.2em; text-align: justify; }
+        .pagina.ativa { display: block; }
+        .pagina h2 { font-family: 'Inter', sans-serif; color: var(--accent); text-transform: uppercase; font-size: 0.9em; letter-spacing: 2px; margin-bottom: 30px; border-left: 4px solid var(--primary); padding-left: 15px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .progresso-footer { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .bar-container { width: 100%; max-width: 600px; height: 8px; background: #333; border-radius: 10px; overflow: hidden; }
+        #bar-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+        .controles-paginacao { display: flex; gap: 30px; }
+        .btn-page { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-page:hover:not(:disabled) { transform: scale(1.05); background: #5649c0; }
+        .btn-page:disabled { opacity: 0.3; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="o-enfermeiro-contexto.html" class="btn-nav">Sair da Leitura</a></nav>
+    </header>
+
+    <div class="controles-visualizacao">
+        <button class="btn-theme" onclick="setTheme('default')">☀ Padrão</button>
+        <button class="btn-theme" onclick="setTheme('sepia')">📜 Sépia</button>
+        <button class="btn-theme" onclick="setTheme('dark')">🌙 Noturno</button>
+    </div>
+
+    <main>
+        <article class="card-leitura">
+            <!-- Trecho 1: O "Documento Humano" e a Arruda -->
+            <div class="pagina ativa" id="p1">
+                <h2>O "Documento Humano" e a Arruda</h2>
+                <p>"Adeus, meu caro senhor, leia isto e queira-me bem; perdoe-me o que lhe parecer mau, e não maltrate muito a arruda, se lhe não cheira a rosas. Pediu-me um documento humano, ei-lo aqui. Não me peça também o império do Grão-Mogol, nem a fotografia dos Macabeus; peça, porém, os meus sapatos de defunto e não os dou a ninguém mais."</p>
+                <p>"Já sabe que foi em 1860. No ano anterior, ali pelo mês de agosto, tendo eu quarenta e dois anos, fiz-me teólogo — quero dizer, copiava os estudos de teologia de um padre de Niterói, antigo companheiro de colégio, que assim me dava, delicadamente, casa, cama e mesa."</p>
+                <p>"Naquele mês de agosto de 1859, recebeu ele uma carta de um vigário de certa vila do interior, perguntando se conhecia pessoa entendida, discreta e paciente, que quisesse ir servir de enfermeiro ao Coronel Felisberto, mediante um bom ordenado. O padre falou-me, aceitei com ambas as mãos, estava já enfarado de copiar citações latinas e fórmulas eclesiásticas."</p>
+            </div>
+
+            <!-- Trecho 2: O Coronel e a Lógica do Capricho -->
+            <div class="pagina" id="p2">
+                <h2>O Coronel e a Lógica do Capricho</h2>
+                <p>"Chegando à vila, tive más notícias do coronel. Era homem insuportável, estúrdio, exigente, ninguém o aturava, nem os próprios amigos. Gastava mais enfermeiros que remédios. A dous deles quebrou a cara. Respondi que não tinha medo de gente sã, menos ainda de doentes."</p>
+                <p>"Achei-o na varanda da casa estirado numa cadeira, bufando muito. Não me recebeu mal. Começou por não dizer nada; pôs em mim dous olhos de gato que observa; depois, uma espécie de riso maligno iluminou-lhe as feições, que eram duras."</p>
+                <p>"Em seguida, perguntou-me pelo nome: disse-lho e ele fez um gesto de espanto. Colombo? Não, senhor: Procópio José Gomes Valongo. Valongo? achou que não era nome de gente, e propôs chamar-me tão-somente Procópio, ao que respondi que estaria pelo que fosse de seu agrado."</p>
+            </div>
+
+            <!-- Trecho 3: O Estopim e o Crime -->
+            <div class="pagina" id="p3">
+                <h2>O Estopim e o Crime</h2>
+                <p>"Vai ver o que aconteceu. Na noite de vinte e quatro de agosto, o coronel teve um acesso de raiva, atropelou-me, disse-me muito nome cru, ameaçou-me de um tiro, e acabou atirando-me um prato de mingau, que achou frio; o prato foi cair na parede, onde se fez em pedaços. — Hás de pagá-lo, ladrão! bradou ele."</p>
+                <p>"Acordei aos gritos do coronel, e levantei-me estremunhado. Ele, que parecia delirar, continuou nos mesmos gritos, e acabou por lançar mão da moringa e arremessá-la contra mim. Não tive tempo de desviar-me; a moringa bateu-me na face esquerda, e tal foi a dor que não vi mais nada."</p>
+                <p>"Atirei-me ao doente, pus-lhe as mãos ao pescoço, lutamos, e esganei-o. Quando percebi que o doente expirava, recuei aterrado, e dei um grito; mas ninguém me ouviu. Voltei à cama, agitei-o para chamá-lo à vida, era tarde; arrebentara o aneurisma, e o coronel morreu."</p>
+            </div>
+
+            <!-- Trecho 4: O Medo e a Dissimulação -->
+            <div class="pagina" id="p4">
+                <h2>O Medo e a Dissimulação</h2>
+                <p>"Achei-me com um crime às costas e vi a punição certa. Aqui o temor complicou o remorso. Senti que os cabelos me ficavam de pé. Fui até a cama; vi o cadáver, com os olhos arregalados e a boca aberta, como deixando passar a eterna palavra dos séculos: 'Caim, que fizeste de teu irmão?'."</p>
+                <p>"Vi no pescoço o sinal das minhas unhas; abotoei alto a camisa e cheguei ao queixo a ponta do lençol. Em seguida, chamei um escravo, disse-lhe que o coronel amanhecera morto; mandei recado ao vigário e ao médico."</p>
+                <p>"Eu mesmo amortalhei o cadáver, com o auxílio de um preto velho e míope. Não saí da sala mortuária; tinha medo de que descobrissem alguma cousa. Queria ver no rosto dos outros se desconfiavam; mas não ousava fitar ninguém."</p>
+            </div>
+
+            <!-- Trecho 5: A Ironia da Sorte (A Herança) -->
+            <div class="pagina" id="p5">
+                <h2>A Ironia da Sorte (A Herança)</h2>
+                <p>"Sete dias depois de chegar ao Rio de Janeiro, recebi a carta do vigário, dizendo-me que fora achado o testamento do coronel, e que eu era o herdeiro universal. Imagine o meu pasmo. Pareceu-me que lia mal, fui a meu irmão, fui aos amigos; todos leram a mesma cousa. Estava escrito; era eu o herdeiro universal do coronel."</p>
+                <p>"Cogitei em recusar a herança. Parecia-me odioso receber um vintém do tal espólio; era pior do que fazer-me esbirro alugado. Pensei nisso três dias, e esbarrava sempre na consideração de que a recusa podia fazer desconfiar alguma cousa."</p>
+                <p>"No fim dos três dias, assentei num meio-termo; receberia a herança e dá-la-ia toda, aos bocados e às escondidas. Não era só escrúpulo; era também o modo de resgatar o crime por um ato de virtude; pareceu-me que ficava assim de contas saldas."</p>
+            </div>
+
+            <!-- Trecho 6: A "Tênia Moral" e o Desfecho -->
+            <div class="pagina" id="p6">
+                <h2>A "Tênia Moral" e o Desfecho</h2>
+                <p>"E o prazer íntimo, calado, insidioso, crescia dentro de mim, espécie de tênia moral, que por mais que a arrancasse aos pedaços, recompunha-se logo e ia ficando. Entrando na posse da herança, converti-a em títulos e dinheiro. Eram então passados muitos meses, e a idéia de distribuí-la toda em esmolas não me dominou como da primeira vez."</p>
+                <p>"Os anos foram andando, a memória tornou-se cinzenta e desmaiada. Penso às vezes no coronel, mas sem os terrores dos primeiros dias. Todos os médicos a quem contei as moléstias dele foram acordes em que a morte era certa. Pode ser que eu, involuntariamente, exagerasse a descrição que então lhes fiz; mas a verdade é que ele devia morrer."</p>
+                <p>"Adeus, meu caro senhor. Se achar que esses apontamentos valem alguma cousa, pague-me também com um túmulo de mármore, ao qual dará por epitáfio esta emenda que faço aqui ao divino sermão da montanha: 'Bem-aventurados os que possuem, porque eles serão consolados'."</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="progresso-footer">
+        <div class="bar-container"><div id="bar-fill"></div></div>
+        <span id="label-progresso" style="font-size: 0.9em; color: var(--accent); font-weight: bold;">Página 1 de 6</span>
+        <div class="controles-paginacao">
+            <button class="btn-page" id="btnPrev" onclick="mudarPagina(-1)" disabled>Anterior</button>
+            <button class="btn-page" id="btnNext" onclick="mudarPagina(1)">Próxima</button>
+        </div>
+    </footer>
+
+    <script>
+        let paginaAtual = 1;
+        const totalPaginas = 6;
+
+        function mudarPagina(direcao) {
+            document.getElementById(`p${paginaAtual}`).classList.remove('ativa');
+            paginaAtual += direcao;
+            document.getElementById(`p${paginaAtual}`).classList.add('ativa');
+
+            document.getElementById('btnPrev').disabled = (paginaAtual === 1);
+            document.getElementById('btnNext').disabled = (paginaAtual === totalPaginas);
+
+            const progresso = ((paginaAtual - 1) / (totalPaginas - 1)) * 100;
+            document.getElementById('bar-fill').style.width = progresso + "%";
+            document.getElementById('label-progresso').innerText = `Página ${paginaAtual} de ${totalPaginas}`;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setTheme(theme) {
+            document.body.className = '';
+            if(theme !== 'default') document.body.classList.add(theme);
+        }
+    </script>
+</body>
+</html>

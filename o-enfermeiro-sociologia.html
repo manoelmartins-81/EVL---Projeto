@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Enfermeiro: do ponto de vista da Sociologia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --info: #3498db;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-disciplina {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+
+        .tooltip { position: relative; display: inline-block; border-bottom: 1.5px dashed var(--accent); cursor: help; color: var(--accent); }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 280px; background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px); color: #fff; text-align: justify;
+            border-radius: 15px; padding: 15px; position: absolute; z-index: 100;
+            bottom: 125%; left: 50%; margin-left: -140px; opacity: 0;
+            transition: opacity 0.3s; border: 1px solid var(--primary);
+            font-size: 0.85em; line-height: 1.4; font-weight: normal;
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .slide-container { background: rgba(0,0,0,0.25); border-radius: 25px; padding: 40px; margin: 40px 0; position: relative; min-height: 250px; border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; }
+        .slide { display: none; flex: 1; text-align: center; animation: slideIn 0.4s ease-out; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide h3 { color: var(--accent); font-size: 1.5em; margin-bottom: 10px; text-transform: uppercase; }
+        .slide-nav { padding: 15px; display: flex; justify-content: center; gap: 10px; background: rgba(0,0,0,0.1); }
+        .dot { height: 8px; width: 60px; background-color: rgba(255,255,255,0.2); border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .dot.active { background-color: var(--primary); }
+
+        .atlas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .atlas-item { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; border-top: 4px solid var(--primary); transition: 0.3s; }
+        .atlas-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+        .icon-metafora { font-size: 2em; display: block; margin-bottom: 10px; }
+
+        .nota-aprofundamento {
+            background: rgba(108, 92, 231, 0.2);
+            padding: 20px; border-radius: 15px; border-left: 5px solid var(--accent);
+            margin-top: 30px; font-size: 0.95em; text-align: center;
+        }
+        .nota-aprofundamento a { color: var(--accent); font-weight: bold; text-decoration: underline; transition: 0.3s; }
+        .nota-aprofundamento a:hover { color: white; }
+
+        .linha-separadora { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px; }
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 15px; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+
+        @media (max-width: 768px) { .atlas-grid { grid-template-columns: 1fr; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="o-enfermeiro-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>O Enfermeiro: do ponto de vista da Sociologia...</h1>
+
+            <section>
+                <h2>Poder e Dependência no Brasil Oitocentista</h2>
+                <p>
+                    A Sociologia encontra em <em>O Enfermeiro</em> um retrato contundente das estruturas de dominação que moldaram o Brasil. Através da relação entre Procópio e o Coronel Felisberto, Machado de Assis expõe a transição de uma elite agrária que tentava manter seu poder absoluto em meio ao avanço da urbanização. O conto revela como a 
+                    <span class="tooltip"><strong>Violência Simbólica</strong>
+                        <span class="tooltiptext">
+                            <strong>Violência Simbólica (Bourdieu):</strong> Modo como as relações de poder são incorporadas pelos indivíduos, sendo aceitas como "naturais" tanto por dominantes quanto por dominados.
+                        </span>
+                    </span> 
+                    perpassa o imaginário social, transformando o capricho senhorial em lei e a submissão do dependente em uma estratégia de sobrevivência e ascensão.
+                </p>
+
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>🤝 A Lógica do Favor</h3>
+                        <p>Procópio não é um funcionário formal, mas um dependente inserido na estrutura de trocas pessoais que caracteriza a sociedade brasileira do XIX. Sua posição depende inteiramente do agrado do patrão.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🏛️ O Coronelismo</h3>
+                        <p>Felisberto representa o poder privado que se sobrepõe às instituições públicas, onde o prestígio e a posse de terras autorizam a violência contra os subordinados.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🎭 A Ordem do Capricho</h3>
+                        <p>A relação é regida por instabilidades. O Coronel "gasta mais enfermeiros que remédios", evidenciando que o subordinado é visto como um objeto descartável à disposição do senhor.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>⚖️ Ascensão e Exclusão</h3>
+                        <p>O desfecho do conto, com a herança consolidando Procópio no topo da pirâmide, mostra que o progresso individual, muitas vezes, apenas reitera a ordem social excludente.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="atlas-container">
+                <h3 style="color: var(--accent); text-align: center; text-transform: uppercase;">📊 Atlas Sociológico: Estruturas de Dominação</h3>
+                
+                <div class="atlas-grid">
+                    <div class="atlas-item" style="border-top-color: var(--success);">
+                        <span class="icon-metafora">🟢</span>
+                        <strong style="color: var(--accent);">Paternalismo</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A falsa proteção oferecida pelo senhor que exige, em troca, a anulação da vontade e da identidade do dependente.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--info);">
+                        <span class="icon-metafora">🔵</span>
+                        <strong style="color: var(--accent);">Coronelismo</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">O exercício discricionário do poder pessoal sobre a vida alheia, tratando seres humanos como propriedades materiais.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--warning);">
+                        <span class="icon-metafora">🟡</span>
+                        <strong style="color: var(--accent);">Estratificação</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A hierarquia rígida que força o indivíduo a navegar entre a humilhação extrema e a ruptura violenta em busca de seu "lugar ao sol".</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--danger);">
+                        <span class="icon-metafora">🔴</span>
+                        <strong style="color: var(--accent);">Violência Estrutural</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A violência não como um acidente, mas como a base sobre a qual se sustentam os conflitos sociais e econômicos da época.</p>
+                    </div>
+                </div>
+
+                <div class="nota-aprofundamento">
+                    Caro leitor, clique se desejar aprofundar seus conhecimentos acerca do <a href="https://pt.wikipedia.org/wiki/Coronelismo" target="_blank">Coronelismo no Brasil</a>.
+                </div>
+            </section>
+
+            <hr class="linha-separadora">
+            <footer class="secao-referencias">
+                <h4>REFERÊNCIAS</h4>
+                <div class="ref-item">ASSIS, Machado de. <strong>O Enfermeiro</strong>. In: Várias Histórias. Rio de Janeiro: Laemmert, 1896. Disponível em: https://dominiopublico.mec.gov.br/download/texto/ua000219.pdf. Acesso em: 27 jul. 2026.</div>
+
+                <div class="ref-item">CORONELISMO. In: <strong>WIKIPÉDIA</strong>, a enciclopédia livre. Flórida: Wikimedia Foundation, 2026. Disponível em: https://pt.wikipedia.org/wiki/Coronelismo. Acesso em: 27 jul. 2026.</div>
+
+                <div class="ref-item">FAORO, Raymundo. <strong>Machado de Assis</strong>: a pirâmide e o trapézio. São Paulo: Companhia Editora Nacional, 1974.</div>
+
+                <div class="ref-item">SCHWARZ, Roberto. <strong>Ao vencedor as batatas</strong>. São Paulo: Duas cidades, 1977.</div>
+
+                <div class="ref-item">SILVA, Eliane da Conceição. <strong>Estudos da violência</strong>: uma análise sociológica dos contos de Machado de Assis. 2008. 195 f. Dissertação (Mestrado em Sociologia) – UNESP, Araraquara, 2008. Disponível em: https://repositorio.unesp.br/server/api/core/bitstreams/14f1efbc-29ad-49e7-b533-7e1842a9de0d/content. Acesso em: 27 jul. 2026.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            dots[slideIndex].classList.remove('active');
+            slideIndex = n;
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

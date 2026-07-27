@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macunaíma: do ponto de vista da Geografia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        
+        header { 
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between; 
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3); 
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0; 
+        }
+        .btn-nav-topo { 
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; 
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; 
+            transition: 0.3s; margin-left: 10px; 
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        
+        .card-disciplina { 
+            background: var(--bg-glass); backdrop-filter: blur(15px); 
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+        }
+        
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+        
+        .mapa-container { 
+            width: 100%; margin: 30px 0; border-radius: 20px; overflow: hidden; 
+            border: 2px solid rgba(255, 255, 255, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .mapa-container img { width: 100%; display: block; }
+        .legenda-mapa { font-size: 0.85em; text-align: center; color: #dfe6e9; font-style: italic; margin-top: 10px; }
+
+        .linha-separadora { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px; }
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 15px; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="macunaima-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>Macunaíma: do ponto de vista da Geografia...</h1>
+            
+            <section>
+                <h2>O Mapa da "Brasilidade"</h2>
+                <p>Mário de Andrade não escreveu <em>Macunaíma</em> trancado em um escritório. Entre 1927 e 1929, ele se tornou o <strong>"Turista Aprendiz"</strong>, viajando pelo Rio Amazonas até o Peru e percorrendo o Nordeste brasileiro para registrar músicas, lendas e o falar do povo. O mapa abaixo mostra o itinerário dessas viagens etnográficas, que serviram de alicerce para a criação da obra:</p>
+                
+                <div class="mapa-container">
+                    <img src="viagem_etnografica_macunaima.jpg" alt="Mapa das viagens de Mário de Andrade">
+                    <p class="legenda-mapa">Itinerário das viagens de pesquisa de Mário de Andrade pelo Brasil Profundo.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Rompendo com os "Arquipélagos Regionais"</h2>
+                <p>Na década de 1920, o Brasil era visto como um conjunto de <strong>"arquipélagos regionais"</strong> — porções de terra isoladas que quase não se comunicavam. Através das andanças de Macunaíma, o autor promove uma <strong>integração simbólica do território</strong>, conectando o "mato virgem" do Norte ao progresso técnico do Sudeste.</p>
+            </section>
+
+            <section>
+                <h2>Território, Mito e Identidade</h2>
+                <p>Para a Geografia, o território é um espaço moldado pela cultura. Em <em>Macunaíma</em>, o Brasil assume sua face real: um <strong>mosaico híbrido</strong> onde a natureza tropical e as tradições indígenas, negras e luso-brasileiras se fundem. Ao acompanhar a jornada do herói, o <strong>leitor</strong> percebe que a identidade nacional é um processo em constante construção.</p>
+            </section>
+
+            <hr class="linha-separadora">
+            
+            <footer class="secao-referencias">
+                <h4>Referências</h4>
+                
+                <div class="ref-item">
+                    ANDRADE, Mário de. <strong>Macunaíma</strong>: o herói sem nenhum caráter. Organizadores: Ana Heloíse Pereira Vicentini et al. Alfenas-MG: Editora Unifal-MG, 2024. Disponível em: https://www.unifal-mg.edu.br/extensao/wp-content/uploads/sites/96/2024/04/Macunaima.pdf. Acesso em: 22 jul. 2026.
+                </div>
+
+                <div class="ref-item">
+                    BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 22 jul. 2026.
+                </div>
+
+                <div class="ref-item">
+                    TORELLY, Luiz Philippe Peres. O turista aprendiz e o patrimônio cultural. In: ANDRADE, Mário de. <strong>O turista aprendiz</strong>. Brasília: Iphan, 2015. p. 11-15. Disponível em: https://www.academia.edu/123612379/O_turista_aprendiz_M%C3%A1rio_de_Andrade_IPHAN. Acesso em: 22 jul. 2026.
+                </div>
+
+                <div class="ref-item">
+                    VITTE, Antônio Carlos; COUTINHO, Giuliano. O pensamento geográfico na obra Macunaíma: “o herói sem nenhum caráter”. <strong>Mercator</strong>, Fortaleza, v. 8, n. 17, p. 33-54, 2009. Disponível em: http://www.mercator.ufc.br/mercator/article/view/269. Acesso em: 22 jul. 2026.
+                </div>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macunaíma: do ponto de vista da Língua Portuguesa... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --info: #3498db;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        
+        header { 
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between; 
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3); 
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0; 
+        }
+        .btn-nav-topo { 
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; 
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; 
+            transition: 0.3s; margin-left: 10px; 
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-disciplina { 
+            background: var(--bg-glass); backdrop-filter: blur(15px); 
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+        }
+        
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+        
+        /* SLIDES */
+        .slide-container {
+            position: relative; width: 100%; min-height: 250px; 
+            background: rgba(0, 0, 0, 0.25); border-radius: 25px; 
+            overflow: hidden; border: 1.5px solid rgba(255,255,255,0.15); margin: 35px 0;
+            display: flex; flex-direction: column;
+        }
+        .slide {
+            display: none; flex: 1; padding: 30px; text-align: center;
+            flex-direction: column; justify-content: center; align-items: center;
+            animation: slideIn 0.4s ease-out;
+        }
+        .slide.active { display: flex; }
+        .slide h3 { color: var(--accent); font-size: 1.4em; margin-bottom: 10px; text-transform: uppercase; }
+        
+        .slide-nav { padding: 10px; display: flex; justify-content: center; gap: 8px; background: rgba(0,0,0,0.1); }
+        .dot { height: 8px; width: 40px; background-color: rgba(255,255,255,0.2); border-radius: 5px; cursor: pointer; }
+        .dot.active { background-color: var(--primary); }
+
+        /* ATLAS DA DIVERSIDADE - LAYOUT 2x2 SOLICITADO */
+        .atlas-container {
+            background: rgba(0,0,0,0.3); border-radius: 30px; padding: 40px;
+            margin: 40px 0; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .atlas-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* DUAS COLUNAS FIXAS */
+            gap: 25px; 
+            margin-top: 30px; 
+        }
+        .atlas-item { 
+            background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; 
+            border-top: 4px solid var(--primary);
+        }
+        .tag-norma { font-size: 0.7em; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 5px; text-transform: uppercase; }
+        .bg-prescrita { background: var(--danger); color: white; }
+        .bg-brasileira { background: var(--success); color: white; }
+        .frase-exemplo { font-style: italic; font-size: 0.95em; color: #dfe6e9; display: block; margin-top: 8px; }
+
+        .box-formal {
+            background: rgba(52, 152, 219, 0.15); border: 2px solid var(--info);
+            padding: 25px; border-radius: 20px; margin: 30px 0;
+        }
+
+        .linha-separadora { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px; }
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+
+        /* RESPONSIVIDADE PARA CELULAR */
+        @media (max-width: 768px) {
+            .atlas-grid { grid-template-columns: 1fr; }
+        }
+        
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="macunaima-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>Macunaíma: do ponto de vista da Língua Portuguesa...</h1>
+            
+            <section>
+                <h2>A Invenção de uma Língua Nacional</h2>
+                <p>Mário de Andrade utilizou a rapsódia <em>Macunaíma</em> para legitimar a identidade linguística brasileira. Ele defendia que o domínio consciente do idioma é uma ferramenta de poder e que a língua deve refletir a sensibilidade do nosso povo, rompendo com o academicismo europeu.</p>
+                
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>🌱 Organismo Vivo</h3>
+                        <p>A língua é decidida pelos falantes em suas interações diárias, mudando para acompanhar a sociedade.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>⚖️ Adequação Situacional</h3>
+                        <p>Falar "certo" ou "errado" depende do contexto. O segredo é saber adequar o traje linguístico ao momento.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🎓 A Norma Culta Importa</h3>
+                        <p>Dominar o padrão culto é o requisito para o exercício da cidadania no trabalho e na vida acadêmica.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🗣️ Poliglota do Idioma</h3>
+                        <p>O bom falante transita entre a norma culta e as variedades populares com inteligibilidade.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🚫 Preconceito Social</h3>
+                        <p>Criticar o modo de falar de alguém é, quase sempre, discriminar sua origem social ou sua raça.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                        <span class="dot" onclick="currentSlide(4)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="box-formal">
+                <strong style="color: var(--info); font-size: 1.2em;">⚠️ Atenção, Leitor:</strong>
+                <p style="margin-top: 10px; font-size: 1em;">A valorização da diversidade <strong>não anula</strong> a necessidade da norma culta. Em situações formais (como exames ou entrevistas), a norma-padrão é indispensável para sua credibilidade.</p>
+            </div>
+
+            <section class="atlas-container">
+                <h3 style="color: var(--accent); text-align: center; margin-top: 0; text-transform: uppercase;">📊 Atlas da Diversidade: As Faces da Língua</h3>
+                
+                <div class="atlas-grid">
+                    <!-- VARIAÇÃO GEOGRÁFICA (DIATÓPICA) -->
+                    <div class="atlas-item" style="border-top-color: var(--success);">
+                        <strong style="color: var(--accent);">🌍 Geográfica (Diatópica)</strong>
+                        <p style="font-size: 0.8em; margin: 10px 0;">Diferentes nomes para o mesmo objeto conforme a região.</p>
+                        <span class="frase-exemplo"><span class="tag-norma bg-brasileira">SP</span> Mandioca</span>
+                        <span class="frase-exemplo"><span class="tag-norma bg-brasileira">NE</span> Macaxeira</span>
+                    </div>
+
+                    <!-- VARIAÇÃO HISTÓRICA (DIACRÔNICA) -->
+                    <div class="atlas-item" style="border-top-color: var(--info);">
+                        <strong style="color: var(--accent);">⏳ Histórica (Diacrônica)</strong>
+                        <p style="font-size: 0.8em; margin: 10px 0;">A evolução das palavras através do tempo.</p>
+                        <span class="frase-exemplo"><span class="tag-norma bg-prescrita">Séc. XIX</span> Vossa Mercê</span>
+                        <span class="frase-exemplo"><span class="tag-norma bg-brasileira">Atual</span> Você / Cê</span>
+                    </div>
+
+                    <!-- VARIAÇÃO SOCIAL (DIASTRÁTICA) -->
+                    <div class="atlas-item" style="border-top-color: #f1c40f;">
+                        <strong style="color: var(--accent);">🕶️ Social (Diastrática)</strong>
+                        <p style="font-size: 0.8em; margin: 10px 0;">Neologismos e gírias que marcam o grupo social.</p>
+                        <span class="frase-exemplo"><span class="tag-norma bg-prescrita">Padrão</span> Abotoadura</span>
+                        <span class="frase-exemplo"><span class="tag-norma bg-success">Herói</span> Puíto (Neologismo)</span>
+                    </div>
+
+                    <!-- VARIAÇÃO SITUACIONAL (DIAFÁSICA) -->
+                    <div class="atlas-item" style="border-top-color: var(--danger);">
+                        <strong style="color: var(--accent);">🎭 Situacional (Diafásica)</strong>
+                        <p style="font-size: 0.8em; margin: 10px 0;">A escolha da variante adequada ao ambiente.</p>
+                        <span class="frase-exemplo"><span class="tag-norma bg-prescrita">Formal</span> "Dê-me um cigarro."</span>
+                        <span class="frase-exemplo"><span class="tag-norma bg-success">Informal</span> "Me dá um cigarro."</span>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="linha-separadora">
+            <footer class="secao-referencias">
+                <h4>REFERÊNCIAS</h4>
+                <div class="ref-item">BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 22 jul. 2026.</div>
+                <div class="ref-item">MUSEU DA LÍNGUA PORTUGUESA. <strong>Aula 3: Preconceito linguístico</strong>. Professor Eduardo Calbucci. YouTube, 2021. Disponível em: https://www.youtube.com/watch?v=R9KbeuG9O1E. Acesso em: 22 jul. 2026.</div>
+                <div class="ref-item">SILVA, Rogéria da; MENDES, Heloisa Mara. Análise do discurso de Mário de Andrade acerca da legitimação de uma identidade linguística nacional. <strong>Domínios de Lingu@gem</strong>, v. 11, n. 3, 2017. Disponível em: https://seer.ufu.br/index.php/dominiosdelinguagem/article/view/37285. Acesso em: 22 jul. 2026.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active'); dots[slideIndex].classList.remove('active');
+            slideIndex = n; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

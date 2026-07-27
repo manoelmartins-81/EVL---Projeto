@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Enfermeiro: Dilemas e Realidades - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+        main { max-width: 1000px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-contexto {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+        
+        .video-fake-player {
+            position: relative; width: 100%; aspect-ratio: 16 / 9;
+            background: #000 url('https://img.youtube.com/vi/SmkUZu-XAbM/maxresdefault.jpg') no-repeat center center;
+            background-size: cover; border-radius: 20px; overflow: hidden; cursor: pointer;
+            margin: 30px 0 10px; border: 2px solid var(--accent); display: block;
+        }
+        .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.2);
+        }
+        .play-button {
+            width: 80px; height: 80px; background: var(--video-btn); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-size: 30px; box-shadow: 0 0 30px rgba(231, 76, 60, 0.5);
+        }
+
+        .grid-interdisciplinar { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card-link-disciplina {
+            background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: white;
+            transition: 0.3s; display: block;
+        }
+        .card-link-disciplina:hover {
+            background: rgba(108, 92, 231, 0.15); border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .grid-acoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+        .btn-acao {
+            background: rgba(255,255,255,0.08); padding: 25px; border-radius: 25px;
+            text-align: center; text-decoration: none; color: white; transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column;
+            align-items: center; gap: 10px;
+        }
+        .btn-acao:hover { background: var(--primary); border-color: var(--accent); transform: translateY(-5px); }
+        .btn-acao strong { font-size: 1.1em; color: var(--accent); }
+        .btn-acao span { font-size: 2.5em; }
+
+        .secao-referencias {
+            margin-top: 50px; padding: 40px; background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px; font-size: 0.85em; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .ref-item { margin-bottom: 15px; color: #dfe6e9; text-align: justify; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="etica-vida-social.html" class="btn-nav-topo">Voltar ao Eixo</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-contexto">
+            <h1>O Enfermeiro</h1>
+
+            <section>
+                <p>No final do século XIX, o Brasil atravessava uma fase de transição profunda. Enquanto a <strong>República</strong> batia à porta, as velhas estruturas do <strong>patriarcalismo rural</strong> ainda ditavam o ritmo das relações sociais. A elite agrária, representada por figuras como o Coronel Felisberto, exercia um poder quase absoluto sobre seus dependentes, fundamentado na posse de terras e no controle da vida alheia. Esse cenário de <strong>coronelismo</strong> criava um ambiente onde a vontade senhorial e o capricho eram a lei, forçando os indivíduos a navegarem entre a submissão e o interesse.</p>
+
+                <p>É nesse contexto que surge o <strong>Realismo</strong> de Machado de Assis. Rompendo com as idealizações românticas, o autor utiliza a ironia para revelar as camadas de egoísmo e as contradições da alma humana. Em <em>O Enfermeiro</em> (1896), somos apresentados a Procópio, um homem que, imerso na lógica do <strong>favor</strong>, vê-se diante do desafio de lidar com a violência de um patrão despótico. A obra não busca apenas contar um crime, mas analisar como a estrutura social brasileira molda o caráter e justifica as ações mais sórdidas em nome da sobrevivência.</p>
+            </section>
+
+            <section>
+                <h2>Análise e Reflexão</h2>
+                <p>Para compreender as nuances de <em>O Enfermeiro</em>, acompanhe a análise do canal <strong>Trollendo</strong>, que ajuda a identificar como Procópio constrói suas justificativas morais diante do crime e da fortuna recebida.</p>
+
+                <a href="https://www.youtube.com/watch?v=SmkUZu-XAbM" target="_blank" style="text-decoration:none;">
+                    <div class="video-fake-player">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                </a>
+                <p style="font-size: 0.85em; text-align: center; color: #dfe6e9; font-style: italic;">Fonte: Canal Trollendo.</p>
+            </section>
+
+            <section style="margin-top: 40px; border-left: 5px solid var(--primary); padding-left: 20px;">
+                <h2 style="margin-top: 0; background-color: var(--primary); color: white; padding: 2px 10px; display: inline-block;">Do ponto de vista da...</h2>
+                <p style="margin-top: 20px;">Para uma formação <strong>integral</strong>, clique nos quadros abaixo e explore como as Ciências Humanas iluminam a obra:</p>
+
+                <div class="grid-interdisciplinar">
+                    <a href="o-enfermeiro-filosofia.html" class="card-link-disciplina">
+                        <strong style="color: var(--accent); display: block; margin-bottom: 12px; font-size: 1.1em;">⚖️ Filosofia: Moral vs. Ética</strong>
+                        <p style="font-size: 0.95em; margin: 0; line-height: 1.5;">Explore o conflito entre o foro íntimo de Procópio (moral) e as regras de convivência social (ética).</p>
+                    </a>
+                    
+                    <a href="o-enfermeiro-sociologia.html" class="card-link-disciplina">
+                        <strong style="color: var(--accent); display: block; margin-bottom: 12px; font-size: 1.1em;">🤝 Sociologia: O Coronelismo</strong>
+                        <p style="font-size: 0.95em; margin: 0; line-height: 1.5;">Entenda a análise do coronelismo e das relações de dependência pessoal no Brasil do século XIX.</p>
+                    </a>
+                </div>
+            </section>
+
+            <div class="grid-acoes">
+                <a href="machado-autor.html" class="btn-acao"><span>✍️</span><strong>O Autor</strong></a>
+                <a href="realismo-movimento.html" class="btn-acao"><span>🏛️</span><strong>Realismo</strong></a>
+                <a href="o-enfermeiro-excertos.html" class="btn-acao" style="background: rgba(108, 92, 231, 0.3);"><span>📖</span><strong>Trechos da Obra</strong></a>
+                <a href="o-enfermeiro-glossario.html" class="btn-acao"><span>🔍</span><strong>Glossário</strong></a>
+                
+                <!-- LINK HABILITADO PARA A PÁGINA DO PROFESSOR -->
+                <a href="professor-enfermeiro.html" class="btn-acao"><span>👨‍🏫</span><strong>Espaço do Professor</strong></a>
+                
+                <a href="https://dominiopublico.mec.gov.br/download/texto/ua000219.pdf" target="_blank" class="btn-acao"><span>⬇️</span><strong>Obra Completa</strong></a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="secao-referencias">
+        <h4 style="color: var(--accent); text-transform: uppercase; margin-bottom: 25px;">📚 Referências</h4>
+        <div class="ref-item">ASSIS, Machado de. <strong>O Enfermeiro</strong>. In: Várias Histórias. Rio de Janeiro: Laemmert, 1896.</div>
+        <div class="ref-item">TROLLENDO. <strong>O ENFERMEIRO - Machado de Assis</strong>. YouTube, 2019.</div>
+        <div class="ref-item">SILVA, Eliane da Conceição. <strong>Estudos da violência</strong>: uma análise sociológica dos contos de Machado de Assis. UNESP, 2008.</div>
+    </footer>
+</body>
+</html>

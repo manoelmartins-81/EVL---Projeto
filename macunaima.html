@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de Excertos: Macunaíma - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7; --accent: #ffeaa7; --bg-body: #1a1a1a;
+            --bg-card: rgba(255, 255, 255, 0.08); --text-color: #ffffff;
+            --font-reader: 'Merriweather', serif; --glossary-bg: #ffeaa7; --glossary-text: #2d3436;
+        }
+        body.sepia { --bg-body: #f4ecd8; --bg-card: rgba(255, 255, 255, 0.6); --text-color: #433422; --primary: #8c7ae6; }
+        body.dark { --bg-body: #0f0f0f; --bg-card: rgba(20, 20, 20, 0.8); --text-color: #e0e0e0; }
+
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('estante-livros4.jpg') no-repeat center center fixed;
+            background-size: cover; color: var(--text-color); transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.85em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        .controles-visualizacao { margin: 20px 0; display: flex; gap: 10px; }
+        .btn-theme { padding: 8px 15px; border-radius: 10px; border: 1px solid var(--primary); background: var(--bg-card); color: var(--text-color); cursor: pointer; font-size: 0.8em; }
+        
+        main { max-width: 850px; width: 92%; margin-bottom: 120px; }
+        .card-leitura { background: var(--bg-card); backdrop-filter: blur(15px); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 550px; }
+        
+        .pagina { display: none; animation: fadeIn 0.5s; }
+        .pagina.ativa { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .texto-obra { font-family: var(--font-reader); font-size: 1.22em; line-height: 2; text-align: justify; }
+        h2 { font-family: 'Inter', sans-serif; color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 30px; font-size: 1.4em; }
+
+        .termo { border-bottom: 2px dashed var(--primary); cursor: help; position: relative; font-weight: bold; }
+        .termo:hover::after { content: attr(data-def); position: absolute; bottom: 120%; left: 0; background: var(--glossary-bg); color: var(--glossary-text); padding: 10px; border-radius: 10px; font-size: 0.75em; width: 220px; z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: 'Inter', sans-serif; font-weight: normal; }
+
+        .progresso-footer { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .bar-container { width: 100%; max-width: 600px; height: 8px; background: #333; border-radius: 10px; overflow: hidden; }
+        #bar-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+        .controles-paginacao { display: flex; gap: 30px; }
+        .btn-page { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-page:hover:not(:disabled) { transform: scale(1.05); background: #5649c0; }
+        .btn-page:disabled { opacity: 0.3; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="ursula - contexto.html" class="btn-nav">Sair da Leitura</a></nav>
+    </header>
+
+    <div class="controles-visualizacao">
+        <button class="btn-theme" onclick="setTheme('default')">☀ Padrão</button>
+        <button class="btn-theme" onclick="setTheme('sepia')">📜 Sépia</button>
+        <button class="btn-theme" onclick="setTheme('dark')">🌙 Noturno</button>
+    </div>
+
+    <main>
+        <article class="card-leitura texto-obra">
+            
+            <!-- Trecho 1: O Nascimento e o "Mantra" do Ócio (Capítulo I) -->
+            <div class="pagina ativa" id="p1">
+                <h2>O Nascimento e o "Mantra" do Ócio (Capítulo I)</h2>
+                <p>No fundo do mato virgem nasceu Macunaíma, herói de nossa gente. Era preto retinto e filho do medo da noite. Houve um momento em que o silêncio foi tão grande escutando o murmurejo do Uraricoera, que a índia tapanhumas pariu uma criança feia. Essa criança é que chamaram de Macunaíma.  Já na meninice fez coisas de sarapantar. De primeiro passou mais de seis anos não falando. Si o incitavam a falar exclamava: — Ai! Que preguiça!... e não dizia mais nada. Ficava no canto da maloca, trepado no jirau de paxiúba, espiando o trabalho dos outros e principalmente os dois manos que tinha, Maanape já velhinho e Jiguê na força do homem.  O divertimento dele era decepar cabeça de saúva. Vivia deitado mas si enxergava uma saúva andava de um pulo e esmagava a dita com a unha do dedão. As mulheres riram de tanta inteligência. O piá não respondia. Quando era de-noite e que o herói brincava na rede, si uma cunhã se aproximava pra fazer carinho, Macunaíma botava a mão nas partes e gritava: — Olha o bicho! a cunhã fugia com medo.
+</p>
+            </div>
+
+            <!-- Trecho 2: O Romance com Ci e o Muiraquitã (Capítulo III) -->
+            <div class="pagina" id="p2">
+                <h2>Trecho 2: O Romance com Ci e o Muiraquitã (Capítulo III)</h2>
+                <p>Era Ci, Mãe do Mato. Logo viu
+pelo peito destro seco dela, que a moça fazia parte dessa
+tribo de mulheres sozinhas parando lá nas praias da lagoa
+Espelho da Lua, coada pelo Nhamundá. A cunhã era linda
+com o corpo chupado pelos vícios, colorido com jenipapo.
+O herói se atirou por cima dela pra brincar. Ci não
+queria. Fez lança de flecha tridente enquanto Macunaíma
+puxava da pajeú. Foi um pega tremendo e por debaixo da
+copada reboavam os berros dos briguentos diminuindo
+de medo os corpos dos passarinhos. O herói apanhava.
+Recebera já um murro de fazer sangue no nariz e um lapo
+fundo de txara no rabo. A icamiaba não tinha nem um
+arranhãozinho e cada gesto que fazia era mais sangue
+no corpo do herói soltando berros formidandos que
+diminuíam de medo os corpos dos passarinhos. Afinal
+se vendo nas amarelas porque não podia mesmo com a
+icamiaba, o herói deitou fugindo chamando pelos manos:
+– Me acudam que sinão eu mato! me acudam que
+sinão eu mato!
+Os manos vieram e agarraram Ci. Maanape
+trançou os braços dela por detrás enquanto Jiguê com a
+murucu lhe dava uma porrada no coco. E a icamiaba caiu
+sem auxílio nas samambaias da serrapilheira. Quando ficou
+bem imóvel, Macunaíma se aproximou e brincou com a
+Mãe do Mato. Vieram então muitas jandaias, muitas ararasvermelhas
+tuins coricas periquitos, muitos papagaios
+saudar Macunaíma, o novo Imperador do Mato-Virgem.
+E os três manos seguiram com a companheira nova.   Terminada a função a companheira de Macunaíma,
+toda enfeitada ainda, tirou do colar uma muiraquitã
+famosa, deu-a pro companheiro e subiu pro céu por um
+cipó. É lá que Ci vive agora nos trinques passeando, liberta
+das formigas, toda enfeitada ainda, toda enfeitada de luz,
+virada numa estrela. É a Beta do Centauro.
+No outro dia quando Macunaíma foi visitar o
+túmulo do filho viu que nascera do corpo uma plantinha.
+Trataram dela com muito cuidado e foi o guaraná. Com
+as frutinhas piladas dessa planta é que a gente cura muita
+doença e se refresca durante os calorões de Vei, a Sol.
+</p>
+            </div>
+
+            <!-- Trecho 3: A Gênese da Miscigenação (Capítulo V) -->
+            <div class="pagina" id="p3">
+                <h2>Trecho 3: A Gênese da Miscigenação (Capítulo V)</h2>
+                <p>Uma feita a Sol cobrira os três manos duma
+escaminha de suor e Macunaíma se lembrou de tomar
+banho. Porém no rio era impossível por causa das piranhas
+tão vorazes que de quando em quando, na luta pra pegar
+um naco de irmã espedaçada, pulavam aos cachos pra fora
+d’água metro e mais. Então Macunaíma enxergou numa
+lapa bem no meio do rio uma cova cheia d’água. E a cova
+era que nem a marca dum pé gigante. Abicaram. O herói
+depois de muitos gritos por causa do frio da água entrou
+na cova e se lavou inteirinho. Mas a água era encantada
+porque aquele buraco na lapa era marca do pezão do
+Sumé, do tempo em que andava pregando o evangelho de
+Jesus pra indiada brasileira. Quando o herói saiu do banho
+estava branco loiro e de olhos azuizinhos, água lavara o
+pretume dele. E ninguém não seria capaz mais de indicar
+nele um filho da tribo retinta dos Tapanhumas.
+Nem bem Jiguê percebeu o milagre, se atirou na
+marca do pezão do Sumé. Porém a água já estava muito suja
+da negrura do herói e por mais que Jiguê esfregasse feito
+maluco atirando água pra todos os lados só conseguiu ficar
+da cor do bronze novo. Macunaíma teve dó e consolou:
+– Olhe, mano Jiguê, branco você ficou não, porém
+pretume foi-se e antes fanhoso que sem nariz.
+Maanape então é que foi se lavar, mas Jiguê
+esborrifara toda a água encantada pra fora da cova. Tinha
+só um bocado lá no fundo e Maanape conseguiu molhar
+só a palma dos pés e das mãos. Por isso ficou negro bem
+filho da tribo dos Tapanhumas. Só que as palmas das mãos
+e dos pés dele são vermelhas por terem se limpado na água
+santa. Macunaíma teve dó e consolou:
+– Não se avexe, mano Maanape, não se avexe não,
+mais sofreu nosso tio Judas!
+E estava lindíssimo na Sol da lapa os três manos
+um loiro um vermelho outro negro, de pé bem erguidos
+e nus. Todos os seres do mato espiavam assombrados. O
+jacareúna o jacaretinga, o jacaré-açu o jacaré-ururau de
+papo amarelo, todos esses jacarés botaram os olhos de
+rochedo pra fora d’água.
+</p>
+            </div>
+
+            <!-- Trecho 4: O Choque com a "Máquina" e o Empate (Capítulo V) -->
+            <div class="pagina" id="p4">
+                <h2>Trecho 4: O Choque com a "Máquina" e o Empate (Capítulo V)</h2>
+                <p>A inteligência do herói estava muito perturbada.
+Acordou com os berros da bicharia lá em baixo nas ruas,
+disparando entre as malocas temíveis. E aquele diacho de
+sagui-açu que o carregara pro alto do tapiri tamanho em
+que dormira... Que mundo de bichos! que despropósito
+de papões roncando, mauaris juruparis sacis e boitatás
+nos atalhos nas socavas nas cordas dos morros furados
+por grotões donde gentama saía muito branquinha
+branquíssima, de certo a filharada da mandioca!... A
+inteligência do herói estava muito perturbada. As cunhãs
+rindo tinham ensinado pra ele que o sagui-açu não era
+saguim não, chamava elevador e era uma máquina. Demanhãzinha
+ensinaram que todos aqueles piados berros
+cuquiadas sopros roncos esturros não eram nada disso
+não, eram mas cláxons campainhas apitos buzinas e tudo
+era máquina. As onças-pardas não eram onças pardas,
+se chamavam fordes hupmobiles chevrolés dodges
+mármons e eram máquinas. Os tamanduás os boitatás
+as inajás de curuatás de fumo, em vez eram caminhões
+bondes autobondes anúncios-luminosos relógios faróis
+rádios motocicletas telefones gorjetas postes chaminés...
+Eram máquinas e tudo na cidade era só máquina! O herói
+aprendendo calado. De vez em quando estremecia. Voltava
+a ficar imóvel escutando assuntando maquinando numa
+cisma assombrada. Tomou-o um respeito cheio de inveja
+por essa deusa de deveras forçuda, Tupã famanado que os
+filhos da mandioca chamavam de Máquina, mais cantadeira
+que a Mãed’Água, em bulhas de sarapantar.
+Então resolveu ir brincar com a Máquina pra ser
+também imperador dos filhos da mandioca. Mas as três
+cunhãs deram muitas risadas e falaram que isso de deuses
+era uma gorda mentira antiga, que não tinha deus não e
+que com a máquina ninguém não brinca porque ela mata.
+A máquina não era deus não, nem possuía os distintivos
+femininos de que o herói gostava tanto. Era feita pelos
+homens. Se mexia com eletricidade com fogo com água
+com vento com fumo, os homens aproveitando as forças
+da natureza. Porém jacaré acreditou? nem o herói! Se
+levantou na cama e com um gesto, esse sim! bem guaçu
+de desdém, tó! batendo o antebraço esquerdo dentro do
+outro dobrado, mexeu com energia a munheca direita pras
+três cunhãs e partiu. Nesse instante, falam, ele inventou o
+gesto famanado de ofensa: a pacova.
+
+
+</p>
+            </div>
+
+            <!-- Trecho 5: O Gigante Piaimã e o Jogo do Truco (Capítulo V) -->
+            <div class="pagina" id="p5">
+                <h2>Trecho 5: O Gigante Piaimã e o Jogo do Truco (Capítulo V)</h2>
+                <p>Venceslau Pietro Pietra morava num tejupar
+maravilhoso rodeado de mato no fim da rua Maranhão
+olhando pra noruega do Pacaembu. Macunaíma falou pra
+Maanape que ia dar uma chegadinha até lá por amor de
+conhecer Venceslau Pietro Pietra. Maanape fez um discurso
+mostrando as inconveniências de ir lá porque a regatão
+andava com o calcanhar pra frente e si Deus o assinalou
+alguma lhe achou. De certo um mauari malevo... Quem
+sabe si o gigante Piaimã comedor de gente!... Macunaíma
+não quis saber.
+– Pois vou assim mesmo. Onde me conhecem
+honras me dão, onde não me conhecem me darão ou não!
+Então Maanape acompanhou o mano.
+Por detrás do tejupar do regatão vivia a árvore
+Dzalaúra-Iegue que dá todas as frutas, cajus cajás cajásmangas
+mangas abacaxis abacates jaboticabas graviolas
+sapotis pupunhas pitangas guajiru cheirando sovaco
+de preta, todas essas frutas e é mui alta. Os dois manos
+estavam com fome. Fizeram um zaiacúti com folhagem
+cortada pelas saúvas, esconderijo no galho mais baixo da
+árvore pra flecharem a caça devorando as frutas. Maanape
+falou pra Macunaíma:
+– Olha, si algum pássaro cantar não secunda não,
+mano, sinão adeus minhas encomendas!
+O herói mexeu a cabeça que sim. Maanape atirava
+com a sarabatana e Macunaíma recolhia por detrás do
+zaiacúti a caça caindo. Caça caía com estrondo e Macunaíma
+aparava os macucos macacos micos monos mutuns jacus
+jaós tucanos, todas essas caças. Porém o estrondo tirou
+Venceslau Pietro Pietra do farniente e ele veio saber o que
+era aquilo. E Venceslau Pietro Pietra era o gigante Piaimã
+comedor de gente. Chegou na porta da casa e cantou feito
+pássaro:
+– Ogoró! ogoró! ogoró!
+Parecendo muito longe. Macunaíma secundou
+logo:
+– Ogoró! ogoró! ogoró!
+Maanape sabia do perigo e murmurou:
+– Esconde, mano!
+O herói escondeu por detrás do zaiacúti entre a
+caça morta e as formigas. Então gigante veio.
+Então Maanape ficou com muito medo e jogou,
+truque! o herói no chão. Foi assim que Maanape com
+Piaimã inventaram o jogo sublime do truco.
+Piaimã sossegou.
+– Este mesmo.
+Agarrou o defunto por uma perna e foi puxando.
+Entrou na casa. Maanape desceu da árvore desesperado.
+Quando ia pra seguir atrás do defunto mano topou com
+a formiguinha sarará chamada Cambgique. A sarará
+perguntou:
+– O que você faz por aqui, parceiro!
+– Vou atrás do gigante que matou meu mano.
+– Vou também.
+Então Cambgique sugou todo sangue do herói,
+esparramado no chão e nos ramos e sugando sempre as
+gotas do caminho foi mostrando o rasto pra Maanape.
+
+</p>
+            </div>
+
+            <!-- Trecho 6: A Sátira do Bilinguismo Nacional (Capítulo IX) -->
+            <div class="pagina" id="p6">
+                <h2>Trecho 6: A Sátira do Bilinguismo Nacional (Capítulo IX)</h2>
+                <p>De outras e muitas grandezas vos poderíamos
+ilustrar, senhoras Amazonas, não fora perlongar demasiado
+esta epístola; todavia, com afirmar-vos que esta é, por sem
+dúvida, a mais bela cidade terráquea, muito hemos feito
+em favor destes homens de prol. Mas cair-nos-íam as faces,
+si ocultáramos no silêncio, uma curiosidade original deste
+povo. Ora sabereis que a sua riqueza de expressão intelectual
+é tão prodigiosa, que falam numa língua e escrevem
+noutra. Assim chegado a estas plagas hospitalares, nos
+demos ao trabalho de bem nos inteirarmos da etnologia
+da terra, e dentre muita surpresa e assombro que se nos
+deparou, por certo não foi das menores tal originalidade
+linguística. Nas conversas utilizam-se os paulistanos dum
+linguajar bárbaro e multifário, crasso de feição e impuro na
+vernaculidade, mas que não deixa de ter o seu sabor e força
+nas apóstrofes, e também nas vozes do brincar. Destas e
+daquelas nos inteiràmos, solícito; e nos será grata empresa
+vô-las ensinarmos aí chegado. Mas si de tal desprezível
+língua se utilizam na conversação os naturais desta terra,
+logo que tomam da pena, se despojam de tanta asperidade,
+e surge o Homem Latino, de Lineu, exprimindo-se numa
+outra linguagem, mui próxima da vergiliana, no dizer dum
+panegirista, meigo idioma, que, com imperescível galhardia,
+se intitula: língua de Camões! De tal originalidade e riqueza
+vos há-de ser grato ter sciência, e mais ainda vos espantareis
+com saberdes, que á grande e quasi total maioria, nem
+essas duas línguas bastam, senão que se enriquecem do
+mais lídimo italiano, por mais musical e gracioso, e que
+por todos os recantos da urbs é versado. De tudo nos
+inteiràmos satisfatoriamente, graças aos deuses; e muitas
+horas hemos ganho, discreteando sobre o z do termo
+Brazil e a questão do pronome “se”. Outrossim, hemos
+adquirido muitos livros bilíngues, chamados “burros”, e o
+dicionário Pequeno Larousse; e já estamos em condições
+de citarmos no original latino muitas frases célebres dos
+filósofos e os testículos da Bíblia.
+Enfim, senhoras Amazonas, heis de saber ainda
+que a estes progressos e luzida civilização, hão elevado
+esta grande cidade os seus maiores, também chamados
+de políticos. Com este apelativo se designa uma raça
+refinadíssima de doutores, tão desconhecidos de vós,
+que os diríeis monstros.
+</p>
+            </div>
+
+            <!-- Trecho 7: A Metamorfose na Ursa Maior (Capítulo XVII) -->
+            <div class="pagina" id="p7">
+                <h2>Trecho 7: A Metamorfose na Ursa Maior (Capítulo XVII)</h2>
+                <p>Então Macunaíma foi bater na casa de Caiuanogue,
+a estrela da manhã. Caiuanogue apareceu na janelinha pra
+ver quem era e confundida pelo negrume da noite e a
+capenguice do herói, perguntou:
+– Quê é que quer, saci?
+Mas logo pôs reparo que era Macunaíma o herói e
+nem esperou resposta se lembrando que ele cheirava muito
+fedido.
+– Vá tomar banho! falou fechando a janelinha.
+Macunaíma tornou a enfezar e gritou:
+– Vem pra rua, cafajeste!
+Caiuanogue raspou um susto enorme e ficou
+tremendo espiando pelo buraco da fechadura. Por isso que
+a bonita da estrelinha é tão pecurrucha e tremelica tanto.
+Então Macunaíma foi bater na casa de Pauí-
+Pódole, o Pai do Mutum. Pauí-Pódole gostava muito dele
+porque Macunaíma o defendera daquele mulato da maior
+mulataria na festa do Cruzeiro. Mas exclamou:
+– Ah, herói, tarde piaste! Era uma honra grande
+pra mim receber no meu mosqueiro um descendente de
+jabuti, raça primeira de todas... No princípio era só o Jabuti
+Grande que existia na vida... Foi ele que no silêncio da
+noite tirou da barriga um indivíduo e sua cunhã. Estes
+foram os primeiros fulanos vivos e as primeiras gentes
+da vossa tribo... Depois, que os outros vieram. Chegaste
+tarde, herói! Já somos em doze e com você a gente ficava
+treze na mesa. Sinto muito mas chorar não posso!
+– Que pena, sinh’Helena! que o herói exclamou.
+Então Pauí-Pódole teve dó de Macunaíma. Fez uma
+feitiçaria. Agarrou três pauzinhos jogou pro alto fez em
+encruzilhada e virou Macunaíma com todo o estenderete
+dele, galo galinha gaiola revólver relógio, numa constelação
+nova. É a constelação da Ursa Maior.
+Dizem que um professor naturalmente alemão
+andou falando por aí por causa da perna só da Ursa
+Maior que ela é o saci... Não é não! Saci inda para neste
+mundo espalhando fogueira e trançando crina de bagual...
+A Ursa Maior é Macunaíma. É mesmo o herói capenga
+que de tanto penar na terra sem saúde e com muita saúva,
+se aborreceu de tudo, foi-se embora e banza solitário no
+campo vasto do céu.
+</p>
+            </div>
+
+            <!-- O Epílogo e a "Fala Impura"  -->
+            <div class="pagina" id="p8">
+                <h2>O Epílogo e a "Fala Impura" </h2>
+                <p>Acabou-se a história e morreu a vitória.
+Não havia mais ninguém lá. Dera tangolomângolo
+na tribo Tapanhumas e os filhos dela se acabaram de um em
+um. Não havia mais ninguém lá. Aqueles lugares aqueles
+campos furos puxadouros arrastadouros meios-barrancos,
+aqueles matos misteriosos, tudo era a solidão do deserto.
+Um silêncio imenso dormia a beira-rio do Uraricoera.
+Nenhum conhecido sobre a terra não sabia nem
+falar na fala da tribo nem contar aqueles casos tão pançudos.
+Quem que podia saber do herói? Agora os manos virados
+na sombra leprosa eram a segunda cabeça do Pai do Urubu
+e Macunaíma era a constelação da Ursa Maior. Ninguém
+jamais não podia saber tanta história bonita e a fala da
+tribo acabada. Um silêncio imenso dormia à beira-rio do
+Uraricoera.
+Uma feita um homem foi lá. Era madrugadinha e
+Vei mandara as filhas visar o passe das estrelas. O deserto
+tamanho matava os peixes e os passarinhos de pavor e a
+própria natureza desmaiara e caíra num gesto largado por
+aí. A mudez era tão imensa que espichava o tamanhão dos
+paus no espaço. De repente no peito doendo do homem
+caiu uma voz da ramaria:
+– Currr-pac, papac! currr-pac, papac!...
+O homem ficou frio de susto feito piá. Então veio
+brisando um guanumbi e boleboliu no beiço do homem:
+– Bilo, bilo, bilo, lá... teteia!
+E subiu apressado pras árvores. O homem
+seguindo o voo do guanumbi, olhou pra cima.
+– Puxa rama, boi! o beija-flor se riu. E escafedeu.
+Então o homem descobriu na ramaria um papagaio
+verde de bico dourado espiando pra ele. Falou:
+– Dá o pé, papagaio.
+O papagaio veio pousar na cabeça do homem e
+os dois se acompanheiraram. Então o pássaro principiou
+falando numa fala mansa, muito nova, muito! que era canto
+e que era caxiri com mel-de-pau, que era boa e possuía a
+traição das frutas desconhecidas do mato.
+A tribo se acabara, a família virara sombras, a
+maloca ruíra minada pelas saúvas e Macunaíma subira pro
+céu, porém ficara o aruaí do séquito daqueles tempos de
+dantes em que o herói fora o grande Macunaíma imperador.
+E só o papagaio no silêncio do Uraricoera preservava do
+esquecimento os casos e a fala desaparecida. Só o papagaio
+conservava no silêncio as frases e feitos do herói.
+Tudo ele contou pro homem e depois abriu asa
+rumo de Lisboa. E o homem sou eu, minha gente, e eu
+fiquei pra vos contar a história. Por isso que vim aqui.
+Me acocorei em riba destas folhas, catei meus carrapatos,
+ponteei na violinha e em toque rasgado botei a boca no
+mundo cantando na fala impura as frases e os casos de
+Macunaíma, herói de nossa gente.
+Tem mais não.
+
+</p>
+           
+
+        </article>
+    </main>
+
+    <footer class="progresso-footer">
+        <div class="bar-container"><div id="bar-fill"></div></div>
+        <span id="label-progresso" style="font-size: 0.9em; color: var(--accent); font-weight: bold;">Página 1 de 11</span>
+        <div class="controles-paginacao">
+            <button class="btn-page" id="btnPrev" onclick="mudarPagina(-1)" disabled>Anterior</button>
+            <button class="btn-page" id="btnNext" onclick="mudarPagina(1)">Próxima</button>
+        </div>
+    </footer>
+
+    <script>
+        let paginaAtual = 1;
+        const totalPaginas = 8; // ATUALIZADO PARA 8 PÁGINAS
+
+        function mudarPagina(direcao) {
+            document.getElementById(`p${paginaAtual}`).classList.remove('ativa');
+            paginaAtual += direcao;
+            document.getElementById(`p${paginaAtual}`).classList.add('ativa');
+
+            document.getElementById('btnPrev').disabled = (paginaAtual === 1);
+            document.getElementById('btnNext').disabled = (paginaAtual === totalPaginas);
+
+            const progresso = ((paginaAtual - 1) / (totalPaginas - 1)) * 100;
+            document.getElementById('bar-fill').style.width = progresso + "%";
+            document.getElementById('label-progresso').innerText = `Página ${paginaAtual} de ${totalPaginas}`;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setTheme(theme) {
+            document.body.className = '';
+            if(theme !== 'default') document.body.classList.add(theme);
+        }
+    </script>
+</body>
+</html>

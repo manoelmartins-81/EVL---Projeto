@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor EVL: Úrsula - Cap. I</title>
+    <style>
+        :root {
+            --bg: #fdf6e3; --text: #2c3e50; --accent: #e74c3c;
+            --bar-bg: #e2e8f0; --bar-fill: #e74c3c; --glossary: #fff9db;
+        }
+        /* TEMA NOTURNO */
+        .tema-noturno {
+            --bg: #1a1a1a; --text: #e0e0e0; --accent: #ff7675;
+            --bar-bg: #334155; --bar-fill: #ff7675; --glossary: #2d3436;
+        }
+
+        body {
+            font-family: 'Georgia', serif; background-color: var(--bg);
+            color: var(--text); margin: 0; padding: 0; transition: 0.3s;
+            display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+        }
+
+        header {
+            padding: 10px 30px; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 1px solid rgba(0,0,0,0.1);
+            background: var(--bg); z-index: 100;
+        }
+
+        .controles button {
+            padding: 6px 15px; border-radius: 20px; cursor: pointer;
+            border: 1.5px solid var(--text); background: transparent; 
+            color: var(--text); font-size: 0.85em; margin-left: 5px;
+        }
+
+        .livro-container {
+            flex: 1; display: flex; flex-direction: column; align-items: center;
+            padding: 20px 40px; box-sizing: border-box; overflow-y: auto;
+        }
+
+        .pagina {
+            max-width: 1000px; width: 95%;
+            line-height: 1.8; font-size: 1.25em;
+            text-align: justify; display: none;
+            animation: fadeIn 0.4s;
+        }
+        .pagina.ativa { display: block; }
+
+        /* GLOSSÁRIO INTERATIVO */
+        .termo { 
+            color: var(--accent); text-decoration: underline dotted; 
+            cursor: help; font-weight: bold; position: relative; 
+            display: inline-block; 
+        }
+        .termo:hover::after {
+            content: attr(data-def); position: absolute; bottom: 130%; 
+            left: 50%; transform: translateX(-50%);
+            background: var(--glossary); color: var(--text); 
+            padding: 12px; border-radius: 8px; border: 1px solid var(--accent);
+            font-size: 0.75em; width: 250px; z-index: 1000; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: sans-serif; 
+            font-weight: normal;
+        }
+
+        /* FOOTER COM PROGRESSO */
+        .progresso-footer {
+            padding: 15px 30px; background: var(--bg); 
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; 
+            gap: 8px; z-index: 100;
+        }
+        .bar-container { 
+            width: 100%; max-width: 850px; height: 8px; 
+            background: var(--bar-bg); border-radius: 4px; overflow: hidden; 
+        }
+        #bar-fill { height: 100%; width: 0%; background: var(--bar-fill); transition: 0.5s; }
+        .texto-progresso { font-family: sans-serif; font-size: 0.9em; font-weight: bold; color: var(--text); }
+
+        .btn-nav { 
+            padding: 10px 50px; background: var(--accent); color: white; 
+            border: none; border-radius: 25px; cursor: pointer; font-weight: bold; 
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="multiculturalismo.html" style="text-decoration:none; color:var(--text); font-weight:bold;">✕ Sair da Leitura</a>
+        <div class="controles">
+            <button onclick="mudarTema('sepia')">Modo Sépia</button>
+            <button onclick="mudarTema('noturno')">Modo Noturno</button>
+        </div>
+    </header>
+
+    <main class="livro-container">
+        <!-- PÁGINA 1 -->
+        <div class="pagina ativa" id="p1">
+            <h2 style="text-align:center;">I - Duas Almas Generosas</h2>
+            <p>
+                São vastos e belos os nossos campos; porque inundados pelas torrentes do inverno semelham o oceano em bonançosa calma – branco lençol de espuma... [excertos da obra].
+                Criado em meio à <span class="termo" data-def="Opulência: Grande riqueza, luxo.">opulência</span>, mas com o coração voltado para a liberdade, sentia-se um estrangeiro em sua própria pátria.
+            </p>
+        </div>
+
+        <!-- PÁGINA 2 -->
+        <div class="pagina" id="p2">
+            <p>
+                Vós não conheceis a <span class="termo" data-def="Estultícia: Tolice, falta de juízo.">estultícia</span> de uma sociedade que teimava em escravizar o seu semelhante... [continuidade do texto].
+            </p>
+        </div>
+    </main>
+
+    <footer class="progresso-footer">
+        <div class="bar-container"><div id="bar-fill"></div></div>
+        <span id="label-progresso" class="texto-progresso">Você concluiu 0% da leitura</span>
+        <div style="display:flex; gap:25px;">
+            <button class="btn-nav" onclick="mudarPagina(-1)">Anterior</button>
+            <button class="btn-nav" onclick="mudarPagina(1)">Próxima</button>
+        </div>
+    </footer>
+
+    <script>
+        let pagAtual = 1;
+        const totalPags = 2;
+
+        function mudarPagina(dir) {
+            let nova = pagAtual + dir;
+            if (nova >= 1 && nova <= totalPags) {
+                document.getElementById('p' + pagAtual).classList.remove('ativa');
+                document.getElementById('p' + nova).classList.add('ativa');
+                pagAtual = nova;
+                atualizarProgresso();
+                document.querySelector('.livro-container').scrollTop = 0;
+            }
+        }
+
+        function atualizarProgresso() {
+            let perc = Math.round((pagAtual / totalPags) * 100);
+            document.getElementById('bar-fill').style.width = perc + '%';
+            document.getElementById('label-progresso').innerText = `Você concluiu ${perc}% da leitura deste capítulo`;
+        }
+
+        function mudarTema(t) {
+            if (t === 'noturno') document.body.classList.add('tema-noturno');
+            else document.body.classList.remove('tema-noturno');
+        }
+
+        atualizarProgresso();
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um Apólogo: do ponto de vista da Filosofia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --info: #3498db;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-disciplina {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; margin-bottom: 20px; }
+
+        .tooltip { position: relative; display: inline-block; border-bottom: 1px dashed var(--accent); color: var(--accent); cursor: help; }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 280px; background-color: #2d3436; color: #fff;
+            text-align: center; border-radius: 10px; padding: 15px; position: absolute;
+            z-index: 1; bottom: 125%; left: 50%; margin-left: -140px; opacity: 0;
+            transition: opacity 0.3s; font-size: 0.85em; font-weight: normal; line-height: 1.4;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .slide-container { position: relative; background: rgba(0,0,0,0.3); padding: 30px; border-radius: 20px; margin: 30px 0; min-height: 200px; }
+        .slide { display: none; animation: slideIn 0.5s ease; }
+        .slide.active { display: block; }
+        .slide h3 { color: var(--accent); margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .slide-nav { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .dot { height: 12px; width: 12px; background: rgba(255,255,255,0.3); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--primary); transform: scale(1.2); }
+
+        .video-fake-player {
+            position: relative; width: 100%; background-color: #000; border-radius: 20px;
+            overflow: hidden; cursor: pointer; margin: 25px 0; aspect-ratio: 16 / 9;
+            border: 2px solid var(--accent); display: block;
+        }
+        .video-fake-player img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.3s; }
+        .video-fake-player:hover img { opacity: 0.5; transform: scale(1.01); }
+        .play-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); }
+        .play-button { width: 70px; height: 70px; background: var(--video-btn); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; box-shadow: 0 0 20px rgba(231, 76, 60, 0.4); }
+
+        .atlas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .atlas-item { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 20px; border-top: 4px solid var(--primary); transition: 0.3s; }
+        .atlas-item:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+        .icon-metafora { font-size: 2em; display: block; margin-bottom: 10px; }
+
+        .nota-aprofundamento {
+            background: rgba(108, 92, 231, 0.2);
+            padding: 25px; border-radius: 20px; border: 1px dashed var(--accent);
+            margin-top: 30px; font-size: 1.05em; text-align: center;
+        }
+        .nota-aprofundamento strong { color: var(--accent); display: block; margin-bottom: 15px; font-size: 1.15em; }
+        
+        /* CORREÇÃO DE ALINHAMENTO DA CHAMADA DO VÍDEO */
+        .chamada-video-header { 
+            display: block; 
+            text-align: center; 
+            width: 100%; 
+            margin-bottom: 15px; 
+            font-weight: 500;
+        }
+        
+        .linha-separadora { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px; }
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 15px; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+
+        @media (max-width: 768px) { .atlas-grid { grid-template-columns: 1fr; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a onclick="history.back()" class="btn-nav-topo" style="cursor:pointer;">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>Um Apólogo: do ponto de vista da Filosofia...</h1>
+
+            <section>
+                <h2>A Ética do Reconhecimento e o Vício da Vaidade</h2>
+                <p>
+                    A Filosofia em <em>Um Apólogo</em> investiga a natureza dos valores humanos através do embate entre a Agulha e a Linha. Enquanto a ética interroga os fundamentos de nossas ações com vistas ao bem comum, Machado de Assis nos mostra como a vaidade pode corromper a civilidade, transformando a cooperação em uma disputa estéril por prestígio e superioridade moral.
+                </p>
+
+                <p>
+                    A obra machadiana é caracterizada por transformar situações cotidianas em reflexões profundas sobre a condição humana. No apólogo, a 
+                    <span class="tooltip"><strong>vaidade</strong>
+                        <span class="tooltiptext">
+                            <strong>Vaidade:</strong> Para Machado, é o motor que mascara a realidade e sustenta as hierarquias sociais através do orgulho pessoal.
+                        </span>
+                    </span> 
+                    funciona como uma lente que distorce a realidade, sustentando uma hierarquia baseada no orgulho individual. Diferente da busca aristotélica pela excelência voltada ao bem coletivo, os personagens utilizam suas habilidades apenas para diminuir o outro, revelando como o desejo de distinção social pode sufocar as virtudes.
+                </p>
+
+                <p>
+                    O desfecho do conto traz uma reflexão sobre a crise da civilidade em um mundo dominado pelo egoísmo. O conselho do Alfinete — para que a agulha deixe de abrir caminhos para os outros — representa a escolha pela indiferença e pelo isolamento. Essa postura indica uma quebra no pacto social de respeito mútuo, sugerindo que, quando a vaidade e a ingratidão prevalecem, a convivência humana dá lugar a um estado de barbárie e desilusão ética.
+                </p>
+
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>🧠 O Conflito de Egos</h3>
+                        <p>A discussão não é sobre quem trabalha, mas sobre quem "vale alguma coisa neste mundo". Machado ironiza a necessidade humana de distinção social e mérito individual sobre o coletivo.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>⚖️ Ética das Virtudes</h3>
+                        <p>Aristóteles defende a busca pela mediania e o equilíbrio. A Agulha e a Linha, porém, agem nos extremos, movidas pelo orgulho e pelo desejo de superioridade.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>📍 A Defesa da Indiferença</h3>
+                        <p>O Alfinete prega a ética do isolamento: "onde me espetam, fico". É a resposta amarga de quem desistiu de colaborar, adotando a imobilidade como proteção contra a ingratidão.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>👤 Civilidade vs. Barbárie</h3>
+                        <p>Para Gabriel Cohn, a civilidade é a atenção ao outro. O conto termina na barbárie da indiferença, onde cada objeto se recolhe ao seu egoísmo, rompendo o pacto social.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="atlas-container">
+                <h3 style="color: var(--accent); text-align: center; text-transform: uppercase;">📊 Atlas Ético: Pilares da Conduta</h3>
+                
+                <div class="atlas-grid">
+                    <div class="atlas-item" style="border-top-color: var(--success);">
+                        <span class="icon-metafora">🎭</span>
+                        <strong style="color: var(--accent);">Vaidade</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">O motor que mascara a insignificância e sustenta as pretensões de superioridade perante a sociedade.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--info);">
+                        <span class="icon-metafora">🛠️</span>
+                        <strong style="color: var(--accent);">Utilidade</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A tensão entre o esforço técnico de "abrir caminho" e a fruição final do trabalho, pondo em xeque o valor de quem produz.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--warning);">
+                        <span class="icon-metafora">🍂</span>
+                        <strong style="color: var(--accent);">Melancolia</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A desilusão do "professor de melancolia" ao perceber que serviu de degrau para "linhas ordinárias".</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--danger);">
+                        <span class="icon-metafora">🔗</span>
+                        <strong style="color: var(--accent);">Assujeitamento</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Quando os dominados incorporam a lógica do opressor, disputando reconhecimento dentro de uma estrutura que os descarta.</p>
+                    </div>
+                </div>
+
+                <div class="nota-aprofundamento">
+                    <strong>🎬 Mergulho Filosófico</strong>
+                    <span class="chamada-video-header">Assista a esta análise do canal <strong>Razão e Reflexão</strong></span>
+                    
+                    <a href="https://www.youtube.com/watch?v=jTWt9Y7uY-E" target="_blank" style="text-decoration:none;">
+                        <div class="video-fake-player">
+                            <img src="https://img.youtube.com/vi/jTWt9Y7uY-E/0.jpg" alt="Filosofia em Machado de Assis">
+                            <div class="play-overlay"><div class="play-button">▶</div></div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <hr class="linha-separadora">
+
+            <footer class="secao-referencias">
+                <h4>REFERÊNCIAS</h4>
+                <div class="ref-item">ASSIS, Machado de. <strong>Um Apólogo</strong>. In: Várias Histórias. Rio de Janeiro: Laemmert, 1896. Disponível em: https://dominiopublico.mec.gov.br/download/texto/bv000269.pdf. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">COHN, Gabriel. <strong>Civilização, cidadania e civilidade</strong>. In: SADER, Emir (Org.). O mundo depois da queda. Rio de Janeiro: Paz e Terra, 1995. Disponível em: https://bibliotecavirtual.clacso.org.ar/. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">RAZÃO E REFLEXÃO. <strong>FILOSOFIA nas Obras de MACHADO DE ASSIS</strong>. YouTube, 2022. Disponível em: https://www.youtube.com/watch?v=jTWt9Y7uY-E. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">REALE, Miguel. <strong>A filosofia na obra de Machado de Assis</strong>. Revista Brasileira de Filosofia, v. 31, n. 121, 1981. Disponível em: https://www.academia.org.br/abl/media/prosa44a.pdf. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">SANTOS, Antônio Carlos dos. <strong>Variações conceituais entre a ética e a moral</strong>. Filosofia Unisinos, v. 22, n. 2, 2021. Disponível em: https://www.scielo.br/j/fun/. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">SILVA, Eliane da Conceição. <strong>Estudos da violência</strong>: uma análise sociológica dos contos de Machado de Assis. UNESP, 2008. Disponível em: https://repositorio.unesp.br/. Acesso em: 27 jul. 2026.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            dots[slideIndex].classList.remove('active');
+            slideIndex = n;
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

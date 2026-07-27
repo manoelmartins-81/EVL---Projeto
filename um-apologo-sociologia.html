@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um Apólogo: do ponto de vista da Sociologia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --info: #3498db;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-disciplina {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; margin-bottom: 20px; }
+
+        .tooltip { position: relative; display: inline-block; border-bottom: 1px dashed var(--accent); color: var(--accent); cursor: help; }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 280px; background-color: #2d3436; color: #fff;
+            text-align: center; border-radius: 10px; padding: 15px; position: absolute;
+            z-index: 1; bottom: 125%; left: 50%; margin-left: -140px; opacity: 0;
+            transition: opacity 0.3s; font-size: 0.85em; font-weight: normal; line-height: 1.4;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .slide-container { position: relative; background: rgba(0,0,0,0.3); padding: 30px; border-radius: 20px; margin: 30px 0; min-height: 200px; }
+        .slide { display: none; animation: slideIn 0.5s ease; }
+        .slide.active { display: block; }
+        .slide h3 { color: var(--accent); margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .slide-nav { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .dot { height: 12px; width: 12px; background: rgba(255,255,255,0.3); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--primary); transform: scale(1.2); }
+
+        .atlas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .atlas-item { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 20px; border-top: 4px solid var(--primary); transition: 0.3s; }
+        .atlas-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+        .icon-metafora { font-size: 2em; display: block; margin-bottom: 10px; }
+
+        .nota-aprofundamento {
+            background: rgba(108, 92, 231, 0.2);
+            padding: 20px; border-radius: 15px; border-left: 5px solid var(--accent);
+            margin-top: 30px; font-size: 0.95em; text-align: center;
+        }
+        .nota-aprofundamento a { color: var(--accent); font-weight: bold; text-decoration: underline; transition: 0.3s; }
+        
+        .linha-separadora { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px; }
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 15px; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+
+        @media (max-width: 768px) { .atlas-grid { grid-template-columns: 1fr; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="um-apologo-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>Um Apólogo: do ponto de vista da Sociologia...</h1>
+
+            <section>
+                <h2>Escravidão e Luta de Classes em Metáfora</h2>
+                
+                <p>
+                    A Sociologia nos mostra que <em>Um Apólogo</em> vai muito além de uma simples disputa entre objetos. Na verdade, Machado de Assis utiliza a Agulha e a Linha como ferramentas para analisar a estrutura social do Brasil Imperial. Por meio desse embate, o autor descreve o que os sociólogos chamam de <strong>luta de classes</strong>, revelando como as relações de produção e o trabalho manual eram vistos em uma sociedade marcada pela desigualdade e pela busca por prestígio.
+                    <span class="tooltip"><strong>(Materialismo Histórico)</strong>
+                        <span class="tooltiptext">
+                            <strong>Materialismo Histórico (Marx):</strong> Teoria que explica as mudanças sociais a partir das relações de produção e da luta de classes.
+                        </span>
+                    </span> 
+                </p>
+
+                <p>
+                    O contexto histórico do conto, escrito na década de 1880, é fundamental para entender essa dinâmica. O Brasil vivia os momentos finais da monarquia e da escravidão oficial, um período em que a divisão do trabalho era extremamente rígida. Enquanto a elite — representada pela Baronesa — aproveitava o luxo e as decisões políticas nos bailes da corte, os produtores reais daquela elegância permaneciam na sombra. A costureira, frequentemente uma mulher escravizada ou de origem humilde, e a própria agulha personificam o trabalhador que executa o esforço essencial, mas é descartado ou esquecido assim que sua função termina.
+                </p>
+
+                <p>
+                    Por fim, a obra destaca como o sistema social consegue fragmentar a consciência de quem trabalha. Em vez de perceberem que fazem parte do mesmo grupo, a Agulha e a Linha competem entre si para ver quem tem mais importância diante da "ama". Esse comportamento revela o fenômeno do <strong>assujeitamento</strong>: quando o indivíduo incorpora os valores de quem o domina e passa a disputar migalhas de reconhecimento. Assim, a vaidade pessoal acaba servindo como uma distração que impede a percepção da própria exploração, naturalizando as hierarquias sociais da época.
+                </p>
+
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>🧵 A Classe Fragmentada</h3>
+                        <p>Agulha e Linha pertencem à mesma classe proletária, mas em vez de união, há disputa por prestígio. Machado critica como a ideologia dominante gera competição interna, debilitando a consciência de classe.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>👑 O Espelho da Corte</h3>
+                        <p>A menção aos "batedores do Imperador" localiza a obra no Segundo Reinado. A hierarquia é tão rígida que a Baronesa exige a modista "ao pé de si", marcando a superioridade da elite sobre quem produz.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>📦 O Descarte do Operário</h3>
+                        <p>A agulha "abre o caminho" e executa o esforço essencial, mas é descartada na caixa, enquanto a linha usufrui do baile. Isso reflete a exploração onde o trabalhador cria a riqueza, mas dela é excluído.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🧠 O "Bom Sujeito" Discursivo</h3>
+                        <p>Os objetos aceitam seu assujeitamento à lógica dominante, orgulhando-se de servir à "ama". Reproduzem o discurso de que sua única função é obedecer, sem questionar a própria invisibilidade.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="atlas-container">
+                <h3 style="color: var(--accent); text-align: center; text-transform: uppercase;">📊 Atlas Sociológico: Pilares de Um Apólogo</h3>
+                
+                <div class="atlas-grid">
+                    <div class="atlas-item" style="border-top-color: var(--success);">
+                        <span class="icon-metafora">⛓️</span>
+                        <strong style="color: var(--accent);">Contexto Escravocrata</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A referência ao "balaio das mucamas" revela que a costureira era provavelmente uma mulher negra escravizada, reduzida a propriedade material da classe dominante.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--info);">
+                        <span class="icon-metafora">📉</span>
+                        <strong style="color: var(--accent);">Invisibilidade Laboral</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A agulha personifica o trabalhador cujo esforço é "obscuro e ínfimo", servindo apenas de degrau para o brilho alheio no cenário social.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--warning);">
+                        <span class="icon-metafora">🎭</span>
+                        <strong style="color: var(--accent);">Alienação Ideológica</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A naturalização das funções sociais impede que os personagens percebam o conflito que os circunda, aceitando a exploração como algo "natural".</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--danger);">
+                        <span class="icon-metafora">📍</span>
+                        <strong style="color: var(--accent);">Resistência Pela Indiferença</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">O conselho do Alfinete representa a civilidade rompida e a adoção da indiferença como defesa em um mundo marcado pela barbárie social.</p>
+                    </div>
+                </div>
+
+                <div class="nota-aprofundamento">
+                    Caro leitor, para aprofundar esta análise discursiva, acesse o artigo <a href="https://doi.org/10.1590/1983-682120241716" target="_blank">Escravidão e Luta de Classes em Um Apólogo</a>.
+                </div>
+            </section>
+
+            <hr class="linha-separadora">
+
+            <footer class="secao-referencias">
+                <h4>REFERÊNCIAS</h4>
+                <div class="ref-item">ASSIS, Machado de. <strong>Um Apólogo</strong>. In: Várias Histórias. Rio de Janeiro: Laemmert, 1896. Disponível em: https://dominiopublico.mec.gov.br/download/texto/bv000269.pdf. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">QUEIROZ, Anésio Marreiros. <strong>Escravidão e luta de classes em “Um Apólogo”</strong>: uma análise discursiva. Machado de Assis em Linha, v. 17, 2024. Disponível em: https://doi.org/10.1590/1983-682120241716. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">SILVA, Eliane da Conceição. <strong>Estudos da violência</strong>: uma análise sociológica dos contos de Machado de Assis. UNESP, Araraquara, 2008. Disponível em: https://repositorio.unesp.br/. Acesso em: 27 jul. 2026.</div>
+                <div class="ref-item">COHN, Gabriel. <strong>Civilização, cidadania e civilidade</strong>. In: SADER, Emir (Org.). O mundo depois da queda. Rio de Janeiro: Paz e Terra, 1995. Disponível em: https://bibliotecavirtual.clacso.org.ar/. Acesso em: 27 jul. 2026.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            dots[slideIndex].classList.remove('active');
+            slideIndex = n;
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

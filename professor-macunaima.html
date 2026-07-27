@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço do Professor: Macunaíma - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .secao-card { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        h1 { color: var(--accent); text-transform: uppercase; text-align: center; margin-bottom: 5px; }
+        .subtitulo { color: white; text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 30px; opacity: 0.9; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: var(--accent); font-size: 1.1em; margin-top: 25px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.05em; }
+        .grid-conceitos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .box-conceito { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; border-left: 5px solid var(--primary); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(0,0,0,0.2); border-radius: 15px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9em; vertical-align: top; }
+        th { background: var(--primary); color: white; text-transform: uppercase; font-size: 0.8em; }
+        .badge-bncc { background: var(--accent); color: #2d3436; padding: 2px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8em; display: block; text-align: center; }
+        .box-apoio { background: rgba(108, 92, 231, 0.1); padding: 25px; border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="macunaima-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="secao-card">
+            <h1>Espaço do Professor</h1>
+            <div class="subtitulo">Um Guia Sugestivo de Mediação Pedagógica - Macunaíma</div>
+
+            <!-- TEXTO RESTAURADO CONFORME SOLICITADO -->
+            <p>
+                Este espaço visa trazer ao professor uma proposta pedagógica que sirva de guia para a abordagem em sala de aula, porém, a título de sugestão. Tentamos reunir um material que pode e deve ser trabalhado pelo docente conforme a sua visão e o conhecimento que detém sobre seus alunos, sem estar preso a uma didática pré-estabelecida. Nosso objetivo é apenas contribuir.
+            </p>
+            <p>
+                A visão deste produto educacional é que ele ofereça ao aluno subsídios para aprender em seu tempo e ritmo próprios. Para isso, ele foi construído em níveis que vão se tornando mais complexos à medida que são avançados. Procuramos triangular conceitos de <strong>multiletramentos, politecnia e omnilateralidade</strong> ao interconectar os differentes conteúdos ao redor da rapsódia de Mário de Andrade.
+            </p>
+
+            <h2>1. Fundamentação Teórica</h2>
+            <div class="grid-conceitos">
+                <div class="box-conceito">
+                    ⚙ <strong>Politecnia:</strong> Articulação da estética literária modernista com os fundamentos geográficos do território nacional e as tensões sociológicas da urbanização.
+                </div>
+                <div class="box-conceito">
+                    🌐 <strong>Omnilateralidade:</strong> Formação integral que une a dimensão cultural à científica para compreender o Brasil como totalidade.
+                </div>
+            </div>
+
+            <h2>2. Alinhamento com a BNCC (Ensino Médio)</h2>
+            <p>Abaixo, transcrevemos integralmente as habilidades que sustentam a arquitetura pedagógica desta proposta:</p>
+
+            <table>
+                <thead>
+                    <tr><th style="width: 120px;">Área / Código</th><th>Habilidade</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge-bncc">EM13LP48</span></td>
+                        <td>Identificar assimilações, rupturas e permanências no processo de constituição da literatura brasileira e ao longo de sua trajetória, por meio da leitura e análise de obras fundamentais do cânone ocidental, em especial da literatura portuguesa, para perceber a historicidade de matrizes e procedimentos estéticos.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13LP52</span></td>
+                        <td>Analisar obras significativas das literaturas brasileiras e de outros países e povos, em especial a portuguesa, a indígena, a africana e a latino-americana, com base em ferramentas da crítica literária (estrutura da composição, estilo, aspectos discursivos) ou outros critérios relacionados a diferentes matrizes culturais, considerando o contexto de produção (visões de mundo, diálogos com outros textos, inserções em movimentos estéticos e culturais etc.) e o modo como dialogam com o presente.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS201</span></td>
+                        <td>Analisar e caracterizar as dinâmicas das populações, das mercadorias e do capital nos diversos continentes, com destaque para a mobilidade e a fixação de pessoas, grupos humanos e povos, em função de eventos naturais, políticos, econômicos, sociais, religiosos e culturais, de modo a compreender e posicionar-se criticamente em relação a esses processos e às possíveis relações entre eles.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS601</span></td>
+                        <td>Identificar e analisar as demandas e os protagonismos políticos, sociais e culturais dos povos indígenas e das populações afrodescendentes (incluindo as quilombolas) no Brasil contemporâneo considerando a história das Américas e o contexto de exclusão e inclusão precária desses grupos na ordem social e econômica atual, promovendo ações para a redução das desigualdades étnico-raciais no país.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. Sugestão de Abordagem: Do Passado ao Presente</h2>
+            <p>
+                Sugerimos que a mediação utilize o conceito de <strong>"fala impura"</strong> para contextualizar a obra. O objetivo é que o aluno identifique que o preconceito linguístico ainda é uma barreira social e uma ferramenta de resistência cultural.
+            </p>
+
+            <!-- SEÇÃO DE APOIO DOCENTE REMOVIDA CONFORME SOLICITADO -->
+
+            <div class="box-apoio">
+                <h3 style="margin-top: 0;">📍 Debate Contemporâneo: A Segurança dos Povos Originários</h3>
+                <p style="font-size: 0.95em;">
+                    Contrariando a imagem do herói que vive no ócio mítico, os povos indígenas atuais enfrentam desafios severos de sobrevivência. Assista ao vídeo do Senado sobre a proposta de uma <strong>Política Nacional de Segurança Indígena</strong> e discuta com os alunos: como o Estado atua hoje para proteger as raízes da nossa identidade?
+                </p>
+                <a href="https://www.youtube.com/watch?v=Eq0pfTny--U" target="_blank" style="color: var(--accent); font-weight: bold;">Acesse aqui o vídeo informativo.</a>
+            </div>
+
+            <h2>4. Propostas de Atividades Pedagógicas</h2>
+            <ul style="line-height: 1.8;">
+                <li><strong>Atividade 1: Identidade e Hibridismo:</strong> A partir do capítulo V, debater: "O que significa ser um herói de várias cores em um país multicultural?".</li>
+                <li><strong>Atividade 2: Mapa das Andanças:</strong> Traçar o percurso de Macunaíma identificando as regiões e o que o herói "devora" culturalmente (Antropofagia).</li>
+            </ul>
+        </article>
+    </main>
+
+    <!-- REFERÊNCIAS PADRONIZADAS ABNT COM LINKS E ACESSOS -->
+    <footer style="width: 90%; max-width: 1100px; margin-bottom: 40px; font-size: 0.85em; opacity: 0.8; text-align: left;">
+        <strong>Referências </strong><br><br>
+        
+        ANDRADE, Mário de. <strong>Macunaíma</strong>: o herói sem nenhum caráter. Organizadores: Ana Heloíse Pereira Vicentini et al. Alfenas-MG: Editora Unifal-MG, 2024. Disponível em: https://www.unifal-mg.edu.br/extensao/wp-content/uploads/sites/96/2024/04/Macunaima.pdf. Acesso em: 23 jul. 2026. <br><br>
+        
+        BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>: Ensino Médio. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 23 jul. 2026. <br><br>
+        
+        CONCEIÇÃO, David da; PEREIRA, Wagner Marques. Uma releitura do romance Macunaíma. <strong>Revista Encontros</strong>, Rio de Janeiro, v. 14, n. 27, p. 7-20, 2016. Disponível em: https://portalespiral.cp2.g12.br/index.php/encontros/article/view/1129. Acesso em: 23 jul. 2026. <br><br>
+        
+        SILVA, Rogéria da; MENDES, Heloisa Mara. Análise do discurso de Mário de Andrade acerca da legitimação de uma identidade linguística nacional. <strong>Domínios de Lingu@gem</strong>, Uberlândia, v. 11, n. 3, p. 908–928, 2017. Disponível em: https://seer.ufu.br/index.php/dominiosdelinguagem/article/view/37285. Acesso em: 23 jul. 2026. <br><br>
+        
+        TV SENADO. <strong>Comissão debate política de segurança para povos indígenas</strong>. YouTube, 2023. Disponível em: https://www.youtube.com/watch?v=Eq0pfTny--U. Acesso em: 23 jul. 2026.<br><br>
+        
+        VITTE, Antônio Carlos; COUTINHO, Giuliano. O pensamento geográfico na obra Macunaíma: “o herói sem nenhum caráter”. <strong>Mercator</strong>, Fortaleza, v. 8, n. 17, p. 33-54, set./dez. 2009. Disponível em: http://www.mercator.ufc.br/mercator/article/view/269. Acesso em: 23 jul. 2026. 
+    </footer>
+</body>
+</html>

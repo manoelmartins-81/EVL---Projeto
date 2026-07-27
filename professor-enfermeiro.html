@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço do Professor: O Enfermeiro - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .secao-card { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        h1 { color: var(--accent); text-transform: uppercase; text-align: center; margin-bottom: 5px; }
+        .subtitulo { color: white; text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 30px; opacity: 0.9; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: var(--accent); font-size: 1.1em; margin-top: 25px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.05em; }
+        .grid-conceitos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .box-conceito { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; border-left: 5px solid var(--primary); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(0,0,0,0.2); border-radius: 15px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9em; vertical-align: top; }
+        th { background: var(--primary); color: white; text-transform: uppercase; font-size: 0.8em; }
+        .badge-bncc { background: var(--accent); color: #2d3436; padding: 2px 8px; border-radius: 5px; font-weight: bold; font-size: 0.85em; display: block; text-align: center; }
+        .box-apoio { background: rgba(108, 92, 231, 0.1); padding: 25px; border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="o-enfermeiro-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+    <main>
+        <article class="secao-card">
+            <h1>Espaço do Professor</h1>
+            <div class="subtitulo">Um Guia Sugestivo de Mediação Pedagógica - O Enfermeiro</div>
+
+            <p>
+                Este espaço visa trazer ao professor uma proposta pedagógica que sirva de guia para a abordagem em sala de aula, porém, a título de sugestão. Tentamos reunir um material que pode e deve ser trabalhado pelo docente conforme a sua visão e o conhecimento que detém sobre seus alunos, sem estar preso a uma didática pré-estabelecida. Nosso objetivo é apenas contribuir.
+            </p>
+            <p>
+                A visão deste produto educacional é que ele ofereça ao aluno subsídios para aprender em seu tempo e ritmo próprios. Para isso, ele foi construído em níveis que vão se tornando mais complexos à medida que são avançados. Procuramos triangular conceitos de <strong>multiletramentos, politecnia e omnilateralidade</strong> ao interconectar os diferentes conteúdos ao redor da ironia e do realismo de Machado de Assis.
+            </p>
+
+            <h2>1. Fundamentação Teórica</h2>
+            <div class="grid-conceitos">
+                <div class="box-conceito">
+                    ⚙️ <strong>Politecnia:</strong> Articulação da estética realista machadiana com os fundamentos da Ética e da Sociologia, analisando o coronelismo e as relações de dependência.
+                </div>
+                <div class="box-conceito">
+                    🌐 <strong>Omnilateralidade:</strong> Formação humana integral que utiliza o "documento humano" literário para discutir responsabilidade social versus indiferença.
+                </div>
+            </div>
+
+            <h2>2. Alinhamento com a BNCC (Ensino Médio)</h2>
+            <p>Abaixo, transcrevemos integralmente as habilidades que sustentam a arquitetura pedagógica desta proposta:</p>
+            <table>
+                <thead>
+                    <tr><th style="width: 130px;">Área / Código</th><th>Habilidade</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge-bncc">EM13LP49</span></td>
+                        <td>Perceber as peculiaridades estruturais e estilísticas de diferentes gêneros literários (a apreensão pessoal do cotidiano nas crônicas, a manifestação livre e subjetiva do eu lírico diante do mundo nos poemas, a múltipla perspectiva da vida humana e social dos romances, a dimensão política e social de textos da literatura marginal e da periferia etc.) para experimentar os diferentes ângulos de apreensão do indivíduo e do mundo pela literatura.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13LP52</span></td>
+                        <td>Analisar obras significativas das literaturas brasileiras e de outros países e povos, em especial a portuguesa, a indígena, a africana e a latino-americana, com base em ferramentas da crítica literária (estrutura da composição, estilo, aspectos discursivos) ou outros critérios relacionados a diferentes matrizes culturais, considerando o contexto de produção (visões de mundo, diálogos com outros textos, inserções em movimentos estéticos e culturais etc.) e o modo como dialogam com o presente.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS602</span></td>
+                        <td>Identificar e caracterizar a presença do paternalismo, do autoritarismo e do populismo na política, na sociedade e nas culturas brasileira e latino-americana, em períodos ditatoriais e democráticos, relacionando-os com as formas de organização e de articulação das sociedades em defesa da autonomia, da liberdade, do diálogo e da promoção da democracia, da cidadania e dos direitos humanos na sociedade atual.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS401</span></td>
+                        <td>Identificar e analisar as relações entre sujeitos, grupos, classes sociais e sociedades com culturas distintas diante das transformações técnicas, tecnológicas e informacionais e das novas formas de trabalho ao longo do tempo, em diferentes espaços (urbanos e rurais) e contextos.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS501</span></td>
+                        <td>Analisar os fundamentos da ética em diferentes culturas, tempos e espaços, identificando processos que contribuem para a formação de sujeitos éticos que valorizem a liberdade, a cooperação, a autonomia, o empreendedorismo, a convivência democrática e a solidariedade.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS503</span></td>
+                        <td>Identificar diversas formas de violência (física, simbólica, psicológica etc.), suas principais vítimas, suas causas sociais, psicológicas e afetivas, seus significados e usos políticos, sociais e culturais, discutindo e avaliando mecanismos para combatê-las, com base em argumentos éticos.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. Sugestão de Abordagem: Do Passado ao Presente</h2>
+            <p>
+                Sugerimos que a mediação utilize o conceito machadiano de <strong>"tênia moral"</strong> para contextualizar a obra. O objetivo é que o aluno perceba como a justificativa individual pode silenciar a ética social e como as estruturas de poder do século XIX ainda ecoam na atualidade.
+            </p>
+
+            <div class="box-apoio">
+                📍 <h3 style="margin-top: 0;">Debate Contemporâneo: A Civilidade contra a Barbárie</h3>
+                <p style="font-size: 0.95em;">
+                    Segundo Gabriel Cohn, a civilidade exige atenção ao outro e responsabilidade. No conto, a relação de Procópio com o Coronel é marcada pela indiferença, o que Cohn define como um componente central da barbárie social. Discuta com os alunos: como a indiferença afeta as relações éticas no mundo digital hoje?
+                </p>
+                <a href="https://bibliotecavirtual.clacso.org.ar/ar/libros/secret/filopolconbr/Cohn.pdf" target="_blank" style="color: var(--accent); font-weight: bold;">Acesse aqui o ensaio de Gabriel Cohn.</a>
+            </div>
+
+            <h2>4. Propostas de Atividades Pedagógicas</h2>
+            <ul style="line-height: 1.8;">
+                <li><strong>Atividade 1: Tribunal da Consciência:</strong> Simular um júri para Procópio, onde a acusação foca na Ética (dever social) e a defesa na Moral (justificativas do foro íntimo).</li>
+                <li><strong>Atividade 2: Mapa do Coronelismo:</strong> Identificar traços do mandonismo local de Felisberto e pesquisar como a "lógica do favor" ainda aparece em relações de trabalho modernas.</li>
+            </ul>
+        </article>
+    </main>
+
+    <footer style="width: 90%; max-width: 1100px; margin-bottom: 40px; font-size: 0.85em; opacity: 0.8; text-align: left;">
+        <strong>Referências</strong><br><br>
+        ASSIS, Machado de. <strong>O Enfermeiro</strong>. In: Várias Histórias. Rio de Janeiro: Laemmert, 1896. Disponível em: https://dominiopublico.mec.gov.br/download/texto/ua000219.pdf. Acesso em: 27 jul. 2026.<br><br>
+        BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>: Ensino Médio. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 27 jul. 2026.<br><br>
+        COHN, Gabriel. <strong>Civilização, cidadania e civilidade</strong>. In: SADER, Emir (Org.). O mundo depois da queda. Rio de Janeiro: Paz e Terra, 1995. Disponível em: https://bibliotecavirtual.clacso.org.ar/. Acesso em: 27 jul. 2026.<br><br>
+        SILVA, Eliane da Conceição. <strong>Estudos da violência</strong>: uma análise sociológica dos contos de Machado de Assis. UNESP, Araraquara, 2008. Disponível em: https://repositorio.unesp.br/server/api/core/bitstreams/14f1efbc-29ad-49e7-b533-7e1842a9de0d/content. Acesso em: 27 jul. 2026.
+    </footer>
+</body>
+</html>

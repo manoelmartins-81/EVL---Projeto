@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor: Um Apólogo - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7; --accent: #ffeaa7; --bg-body: #1a1a1a;
+            --bg-card: rgba(255, 255, 255, 0.08); --text-color: #ffffff;
+            --font-reader: 'Merriweather', serif;
+        }
+        body.sepia { --bg-body: #f4ecd8; --bg-card: rgba(255, 255, 255, 0.6); --text-color: #433422; --primary: #8c7ae6; }
+        body.dark { --bg-body: #0f0f0f; --bg-card: rgba(20, 20, 20, 0.8); --text-color: #e0e0e0; }
+
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('estante-livros4.jpg') no-repeat center center fixed;
+            background-size: cover; color: var(--text-color); transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.85em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        .controles-visualizacao { margin: 20px 0; display: flex; gap: 10px; }
+        .btn-theme { padding: 8px 15px; border-radius: 10px; border: 1px solid var(--primary); background: var(--bg-card); color: var(--text-color); cursor: pointer; font-size: 0.8em; }
+
+        main { max-width: 850px; width: 92%; margin-bottom: 120px; }
+        .card-leitura { background: var(--bg-card); backdrop-filter: blur(15px); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 450px; }
+        
+        .texto-obra { font-family: var(--font-reader); font-size: 1.25em; line-height: 1.8; text-align: justify; }
+        .pagina { display: none; animation: fadeIn 0.5s; }
+        .pagina.ativa { display: block; }
+        h2 { color: var(--accent); font-family: 'Inter', sans-serif; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; border-bottom: 1px solid var(--primary); padding-bottom: 10px; }
+
+        .progresso-footer { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .bar-container { width: 100%; max-width: 600px; height: 8px; background: #333; border-radius: 10px; overflow: hidden; }
+        #bar-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+        .controles-paginacao { display: flex; gap: 30px; }
+        .btn-page { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-page:hover:not(:disabled) { transform: scale(1.05); background: #5649c0; }
+        .btn-page:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="um-apologo-contexto.html" class="btn-nav">Sair da Leitura</a></nav>
+    </header>
+
+    <div class="controles-visualizacao">
+        <button class="btn-theme" onclick="setTheme('default')">☀ Padrão</button>
+        <button class="btn-theme" onclick="setTheme('sepia')">📜 Sépia</button>
+        <button class="btn-theme" onclick="setTheme('dark')">🌙 Noturno</button>
+    </div>
+
+    <main>
+        <article class="card-leitura texto-obra">
+            <!-- TELA 1 -->
+            <div class="pagina ativa" id="p1">
+                <h2>Um Apólogo - Parte I</h2>
+                <p>ERA UMA VEZ uma agulha, que disse a um novelo de linha: — Por que está você com esse ar, toda cheia de si, toda enrolada, para fingir que vale alguma coisa neste mundo? — Deixe-me, senhora. — Que a deixe? Que a deixe, por quê? Porque lhe digo que está com um ar insuportável? Repito que sim, e falarei sempre que me der na cabeça. — Que cabeça, senhora? A senhora não é alfinete, é agulha. Agulha não tem cabeça. Que lhe importa o meu ar? Cada qual tem o ar que Deus lhe deu. Importe-se com a sua vida e deixe a dos outros. — Mas você é orgulhosa. — Decerto que sou. — Mas por quê? — É boa! Porque coso. Então os vestidos e enfeites de nossa ama, quem é que os cose, senão eu? — Você? Esta agora é melhor. Você é que os cose? Você ignora que quem os cose sou eu, e muito eu? — Você fura o pano, nada mais; eu é que coso, prendo um pedaço ao outro, dou feição aos babados... — Sim, mas que vale isso? Eu é que furo o pano, vou adiante, puxando por você, que vem atrás, obedecendo ao que eu faço e mando... — Também os batedores vão adiante do imperador. — Você é imperador? — Não digo isso. Mas a verdade é que você faz um papel subalterno, indo adiante; vai só mostrando o caminho, vai fazendo o trabalho obscuro e ínfimo. Eu é que prendo, ligo, ajunto...</p>
+            </div>
+
+            <!-- TELA 2 -->
+            <div class="pagina" id="p2">
+                <h2>Um Apólogo - Parte II</h2>
+                <p>Estavam nisto, quando a costureira chegou à casa da baronesa. Não sei se disse que isto se passava em casa de uma baronesa, que tinha a modista ao pé de si, para não andar atrás dela. Chegou a costureira, pegou do pano, pegou da agulha, pegou da linha, enfiou a linha na agulha, e entrou a coser. Uma e outra iam andando orgulhosas, pelo pano adiante, que era a melhor das sedas, entre os dedos da costureira, ágeis como os galgos de Diana — para dar a isto uma cor poética. E dizia a agulha: — Então, senhora linha, ainda teima no que dizia há pouco? Não repara que esta distinta costureira só se importa comigo; eu é que vou aqui entre os dedos dela, unidinha a eles, furando abaixo e acima. A linha não respondia nada; ia andando. Buraco aberto pela agulha era logo enchido por ela, silenciosa e ativa como quem sabe o que faz, e não está para ouvir palavras loucas. A agulha vendo que ela não lhe dava resposta, calou-se também, e foi andando. E era tudo silêncio na saleta de costura; não se ouvia mais que o plic-plic plic-plic da agulha no pano. Caindo o sol, a costureira dobrou a costura, para o dia seguinte; continuou ainda nesse e no outro, até que no quarto acabou a obra, e ficou esperando o baile.</p>
+            </div>
+
+            <!-- TELA 3 -->
+            <div class="pagina" id="p3">
+                <h2>Um Apólogo - Parte III</h2>
+                <p>Veio a noite do baile, e a baronesa vestiu-se. A costureira, que a ajudou a vestir-se, levava a agulha espetada no corpinho, para dar algum ponto necessário. E quando compunha o vestido da bela dama, e puxava a um lado ou outro, arregaçava daqui ou dali, alisando, abotoando, acolchetando, a linha, para mofar da agulha, perguntou-lhe: — Ora agora, diga-me quem é que vai ao baile, no corpo da baronesa, fazendo parte do vestido e da elegância? Quem é que vai dançar com ministros e diplomatas, enquanto você volta para a caixinha da costureira, antes de ir para o balaio das mucamas? Vamos, diga lá.</p>
+            </div>
+
+            <!-- TELA 4 -->
+            <div class="pagina" id="p4">
+                <h2>Um Apólogo - Epílogo</h2>
+                <p>Parece que a agulha não disse nada; mas um alfinete, de cabeça grande e não menor experiência, murmurou à pobre agulha: — Anda, aprende, tola. Cansas-te em abrir caminho para ela e ela é que vai gozar da vida, enquanto aí ficas na caixinha de costura. Faze como eu, que não abro caminho para ninguém. Onde me espetam, fico. Contei esta história a um professor de melancolia, que me disse, abanando a cabeça: — Também eu tenho servido de agulha a muita linha ordinária!</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="progresso-footer">
+        <div class="bar-container"><div id="bar-fill"></div></div>
+        <span id="label-progresso" style="font-size: 0.9em; color: var(--accent); font-weight: bold;">Página 1 de 4</span>
+        <div class="controles-paginacao">
+            <button class="btn-page" id="btnPrev" onclick="mudarPagina(-1)" disabled>Anterior</button>
+            <button class="btn-page" id="btnNext" onclick="mudarPagina(1)">Próxima</button>
+        </div>
+    </footer>
+
+    <script>
+        let paginaAtual = 1;
+        const totalPaginas = 4;
+
+        function mudarPagina(direcao) {
+            document.getElementById(`p${paginaAtual}`).classList.remove('ativa');
+            paginaAtual += direcao;
+            document.getElementById(`p${paginaAtual}`).classList.add('ativa');
+
+            document.getElementById('btnPrev').disabled = (paginaAtual === 1);
+            document.getElementById('btnNext').disabled = (paginaAtual === totalPaginas);
+
+            const progresso = ((paginaAtual - 1) / (totalPaginas - 1)) * 100;
+            document.getElementById('bar-fill').style.width = progresso + "%";
+            document.getElementById('label-progresso').innerText = `Página ${paginaAtual} de ${totalPaginas}`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setTheme(theme) {
+            document.body.className = '';
+            if(theme !== 'default') document.body.classList.add(theme);
+        }
+    </script>
+</body>
+</html>

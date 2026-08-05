@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço do Professor: Vidas Secas - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .secao-card { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        
+        h1 { color: var(--accent); text-transform: uppercase; text-align: center; margin-bottom: 5px; }
+        .subtitulo { color: white; text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 30px; opacity: 0.9; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: var(--accent); font-size: 1.1em; margin-top: 25px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.05em; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(0,0,0,0.2); border-radius: 15px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9em; vertical-align: top; }
+        th { background: var(--primary); color: white; text-transform: uppercase; font-size: 0.8em; }
+        .badge-bncc { background: var(--accent); color: #2d3436; padding: 2px 8px; border-radius: 5px; font-weight: bold; font-size: 0.85em; display: block; text-align: center; }
+        .box-apoio { background: rgba(108, 92, 231, 0.1); padding: 25px; border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; }
+        
+        .secao-referencias-final { width: 100%; margin-top: 50px; padding: 40px; background: rgba(0, 0, 0, 0.3); border-radius: 20px; font-size: 0.85em; border-top: 1px solid rgba(255,255,255,0.1); }
+        .ref-item { margin-bottom: 15px; color: #dfe6e9; text-align: justify; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="vidas-secas-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav" style="margin-left:10px;">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="secao-card">
+            <h1>Espaço do Professor</h1>
+            <div class="subtitulo">Um Guia Sugestivo de Mediação Pedagógica - Vidas Secas</div>
+
+            <section>
+                <p>
+                    Este espaço visa trazer ao professor uma proposta pedagógica que sirva de guia para a abordagem em sala de aula, porém, a título de sugestão. Tentamos reunir um material que pode e deve ser trabalhado pelo docente conforme a sua visão e o conhecimento que detém sobre seus alunos, sem estar preso a uma didática pré-estabelecida. Nosso objetivo é apenas contribuir. 
+                </p>
+                <p>
+                    A visão deste produto educacional é que ele ofereça ao aluno subsídios para aprender em seu tempo e ritmo próprios. Para isso, ele foi construído em níveis que vão se tornando mais complexos à medida que são avançados. Procuramos triangular conceitos de multiletramentos, politecnia e omnilateralidade ao interconectar os diferentes conteúdos ao redor do regionalismo crítico e da estética da secura de Graciliano Ramos. 
+                </p>
+            </section>
+
+            <h2>2. Alinhamento com a BNCC (Ensino Médio)</h2>
+            <p>Abaixo, transcrevemos integralmente as habilidades que sustentam a arquitetura pedagógica desta proposta:</p>
+            <table>
+                <thead>
+                    <tr><th style="width: 130px;">Área / Código</th><th>Habilidade</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge-bncc">EM13LP49</span></td>
+                        <td>Perceber as peculiaridades estruturais e estilísticas de diferentes gêneros literários (a apreensão pessoal do cotidiano nas crônicas, a manifestação livre e subjetiva do eu lírico diante do mundo nos poemas, a múltipla perspectiva da vida humana e social dos romances, a dimensão política e social de textos da literatura marginal e da periferia etc.) para experimentar os diferentes ângulos de apreensão do indivíduo e do mundo pela literatura.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS302</span></td>
+                        <td>Analisar e avaliar criticamente os impactos econômicos e socioambientais de cadeias produtivas ligadas à exploração de recursos naturais e às atividades agropecuárias em diferentes ambientes e escalas de análise, considerando o modo de vida das populações locais - entre elas as indígenas, quilombolas e demais comunidades tradicionais -, suas práticas agroextrativistas e o compromisso com a sustentabilidade.</td>
+                    </tr>
+		    <tr>
+                        <td><span class="badge-bncc">EM13CHS103</span></td>
+                        <td>Elaborar hipóteses, selecionar evidências e compor argumentos relativos a processos políticos, econômicos, sociais, ambientais, culturais e epistemológicos, com base na sistematização de dados e informações de diversas naturezas (expressões artísticas, textos filosóficos e sociológicos, documentos históricos e geográficos, gráficos, mapas, tabelas, tradições orais, entre outros).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS201</span></td>
+                        <td>Analisar e caracterizar as dinâmicas das populações, das mercadorias e do capital nos diversos continentes, com destaque para a mobilidade e a fixação de pessoas, grupos humanos e povos, em função de eventos naturais, políticos, econômicos, sociais, religiosos e culturais, de modo a compreender e posicionar-se criticamente em relação a esses processos e às possíveis relações entre eles.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-bncc">EM13CHS602</span></td>
+                        <td>Identificar e caracterizar a presença do paternalismo, do autoritarismo e do populismo na política, na sociedade e nas culturas brasileira e latino-americana, em períodos ditatoriais e democráticos, relacionando-os com as formas de organização e de articulação das sociedades em defesa da autonomia, da liberdade, do diálogo e da promoção da democracia, da cidadania e dos direitos humanos na sociedade atual.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. Sugestão de Abordagem: Do Passado ao Presente</h2>
+            <p>
+                Sugerimos que a mediação pedagógica utilize o conceito de <strong>estética da secura</strong> para contextualizar a obra. O objetivo é que o aluno perceba como a aridez do meio físico se projeta na linguagem e na psicologia das personagens.
+            </p>
+            <div class="box-apoio">
+                📍 <h3 style="margin-top: 0;">Debate Contemporâneo: Refugiados Ambientais</h3>
+                <p style="font-size: 0.95em;">
+                    Utilize o capítulo "Mudança" para discutir o conceito de migração forçada. Questione os alunos: o fenômeno do retirante em <em>Vidas Secas</em> pode ser comparado aos fluxos migratórios contemporâneos causados por desastres climáticos?
+                </p>
+                <p style="margin-top: 15px;">
+                    <a href="https://www.acnur.org/br/o-que-fazemos/temas-especificos/mudancas-climaticas-e-deslocamento" target="_blank" style="color: var(--accent); font-weight: bold;">Acesse os dados do ACNUR sobre Mudanças Climáticas e Deslocamento.</a>
+                </p>
+                <p>
+                    <a href="https://asabrasil.org.br/" target="_blank" style="color: var(--accent); font-weight: bold;">Explore o portal da ASA Brasil para conteúdos sobre convivência com o Semiárido.</a>
+                </p>
+            </div>
+
+            <h2>4. Propostas de Atividades Pedagógicas</h2>
+            <ul style="line-height: 1.8;">
+                <li><strong> Mural Digital:</strong> Proponha a produção de um mural digital (Padlet) onde os alunos devem relacionar trechos específicos da obra com imagens reais do bioma Caatinga, analisando como o impacto do meio ambiente molda a formação da identidade sertaneja. </li>
+            </ul>
+        </article>
+
+        <footer class="secao-referencias-final">
+            <h4 style="color: var(--accent); text-transform: uppercase; margin-bottom: 25px;">Referências Bibliográficas</h4>
+            
+            <div class="ref-item">ACNUR. <strong>Mudanças climáticas e deslocamento</strong>. Disponível em: https://www.acnur.org/br/o-que-fazemos/temas-especificos/mudancas-climaticas-e-deslocamento. Acesso em: 05 ago. 2026.</div>
+
+            <div class="ref-item">ARTICULAÇÃO SEMIÁRIDO BRASILEIRO (ASA). <strong>Convivência com o Semiárido</strong>. Disponível em: https://asabrasil.org.br/. Acesso em: 05 ago. 2026. </div>
+
+            <div class="ref-item">BOTOSO, Altamir. <strong>Opressores e oprimidos</strong>: uma leitura do romance Vidas secas, de Graciliano Ramos. Revista de Letras da Universidade Católica de Brasília, v. 6, n. 1-2, 2013. Disponível em: https://portalrevistas.ucb.br/index.php/rl/article/download/3807/3386/21887. Acesso em: 05 ago. 2026. </div>
+
+            <div class="ref-item">BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>: Ensino Médio. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 05 ago. 2026. </div>
+
+            <div class="ref-item">CHAGAS, Gabriel. <strong>Vidas Secas e O Avesso da Pele</strong>: interfaces entre linguagem e poder. Santa Barbara Portuguese Studies, v. 12, 2022. Disponível em: https://sbps.spanport.ucsb.edu/sites/default/files/sitefiles/volume/Vol_12/Gabriel%20Chagas.pdf. Acesso em: 05 ago. 2026. </div>
+
+            <div class="ref-item">GOMES, L. C. A. et al. <strong>A Busca da Felicidade na Obra Vidas Secas</strong>: Território Simbólico, Identidade e Cultura. Revista Tópicos, v. 4, n. 34, 2026. Disponível em: https://revistatopicos.com.br/generate/pdf_zenodo/pub_781549504.pdf. Acesso em: 05 ago. 2026. </div>
+
+            <div class="ref-item">IHU UNISINOS. <strong>O ainda desconhecido Semiárido brasileiro</strong>. 2019. Disponível em: https://ihu.unisinos.br/categorias/592171-o-ainda-desconhecido-semiarido-brasileiro. Acesso em: 05 ago. 2026. </div>
+
+            <div class="ref-item">RAMOS, Graciliano. <strong>Vidas Secas</strong>. Rio de Janeiro: José Olympio, 1938. Disponível em: https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/255/2025/04/vidas-secas.pdf. Acesso em: 05 ago. 2026.</div>
+
+            <div class="ref-item">SARMENTO, Elisângela C. D. <strong>As Ecologias do Sertão e do (a) Sertanejo (a)</strong>... Tese (Doutorado) – UNEB, Juazeiro, 2023. Disponível em: https://ppgecoh.uneb.br/wp-content/uploads/2023/03/ELISANGELA-CAMPOS-DAMASCENO-SARMENTO.pdf. Acesso em: 05 ago. 2026. </div>
+
+            <div class="ref-item">SOUSA, Joacileide Bezerra de. <strong>Geografia e literatura</strong>: um posicionamento a partir da obra “Vidas Secas”. UFCG, 2013. Disponível em: https://dspace.sti.ufcg.edu.br/bitstream/riufcg/10390/3/JOACILEIDE%20BEZERRA%20DE%20SOUSA%20-%20TCC%20LICENCIATURA%20EM%20GEOGRAFIA%202013.pdf. Acesso em: 05 ago. 2026. </div>
+        </footer>
+    </main>
+</body>
+</html>

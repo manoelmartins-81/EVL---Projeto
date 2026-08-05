@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisagens e Identidades - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 20px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-secao { height: 40px; }
+        .btn-nav {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 10px 20px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s;
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 90%; margin: 40px 0; }
+        
+        .card-apresentacao {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); margin-bottom: 30px;
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 20px; }
+        .texto-amigavel { font-size: 1.1em; line-height: 1.8; text-align: justify; opacity: 0.95; margin-bottom: 20px; }
+
+        /* VÍDEO CENTRALIZADO */
+        .video-wrapper { max-width: 800px; margin: 30px auto; text-align: center; }
+        .video-item { text-decoration: none; color: white; transition: 0.3s; display: block; }
+        .video-container {
+            position: relative; width: 100%; aspect-ratio: 16/9;
+            background: #000; border-radius: 20px; overflow: hidden;
+            border: 3px solid var(--accent); transition: 0.3s;
+        }
+        .video-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center; font-size: 3.5em;
+        }
+        .video-item:hover .video-container { transform: scale(1.01); box-shadow: 0 0 30px rgba(255, 234, 167, 0.3); }
+        .video-caption { text-align: center; font-size: 1em; margin-top: 15px; font-weight: bold; display: block; }
+        .video-source { display: block; font-size: 0.8em; opacity: 0.8; font-weight: normal; margin-top: 5px; color: var(--accent); }
+
+        .conducao-leitura {
+            background: rgba(255, 255, 255, 0.05); padding: 30px;
+            border-radius: 25px; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 30px;
+        }
+        .conducao-leitura p { font-size: 1.05em; line-height: 1.7; text-align: justify; margin-bottom: 20px; color: #f1f2f6; }
+
+        .obra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card-obra {
+            background: var(--bg-glass); backdrop-filter: blur(10px); padding: 30px;
+            border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
+            text-decoration: none; color: white; display: flex; flex-direction: column;
+            justify-content: space-between; transition: 0.3s;
+        }
+        .card-obra:hover { transform: translateY(-10px); background: rgba(108, 92, 231, 0.2); border-color: var(--accent); }
+        .card-obra h3 { margin: 0 0 10px 0; color: var(--accent); font-size: 1.5em; }
+        .autor-nome { font-weight: bold; font-size: 0.9em; color: #dfe6e9; margin-bottom: 15px; display: block; }
+        .card-obra p { font-size: 0.95em; line-height: 1.6; margin: 0; opacity: 0.9; text-align: justify; }
+        .btn-explorar {
+            margin-top: 25px; padding: 12px; text-align: center;
+            background: rgba(255, 255, 255, 0.1); color: white; font-weight: 800;
+            border-radius: 12px; text-transform: uppercase; font-size: 0.85em; transition: 0.3s;
+        }
+        .card-obra:hover .btn-explorar { background: var(--accent); color: #2c3e50; }
+
+        .secao-referencias {
+            max-width: 1100px; width: 90%; margin: 50px auto 30px; padding: 30px;
+            background: rgba(0, 0, 0, 0.2); border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px; font-size: 0.85em; line-height: 1.6; color: #dfe6e9;
+        }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-top: 0; }
+        .ref-item { margin-bottom: 15px; text-align: justify; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" class="logo-secao">
+        <nav>
+            <a href="index.html" class="btn-nav">Voltar para a Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="card-apresentacao">
+            <h1>Paisagens e Identidades</h1>
+            <p class="texto-amigavel">
+                O Eixo "Paisagens e Identidades" convida você a refletir sobre a profunda conexão entre o lugar onde vivemos e quem nos tornamos. Inspirado no tema transversal <strong>Meio Ambiente</strong>, este espaço analisa como a natureza e o ambiente urbano não são apenas cenários, mas forças poderosas que influenciam o comportamento humano, a saúde e as relações sociais. Ao explorarmos as características do Naturalismo e do Modernismo, percebemos que o clima, o solo e a moradia são peças fundamentais na construção da identidade brasileira.
+            </p>
+
+            <p class="texto-amigavel">
+                Nesta perspectiva, a literatura atua como um registro das transformações do espaço e do impacto dessas mudanças nas pessoas. Em um país vasto como o Brasil, a paisagem — seja ela o sertão ou o aglomerado das grandes cidades — molda o modo de vida de cada um. Através das obras selecionadas, discutiremos como a degradação ambiental e a precariedade das habitações não são problemas novos, mas feridas históricas que os autores denunciam com clareza.
+            </p>
+
+            <div class="video-wrapper">
+                <h2 style="font-size: 1.1em; margin-bottom: 20px; text-align:center;">🌿 O Meio Ambiente em Pauta</h2>
+                <a href="https://www.youtube.com/watch?v=MoeOHBaIWpM" target="_blank" class="video-item">
+                    <div class="video-container">
+                        <img src="https://img.youtube.com/vi/MoeOHBaIWpM/0.jpg" alt="Meio Ambiente - CNN">
+                        <div class="play-overlay">🎬</div>
+                    </div>
+                    <span class="video-caption">
+                        Entenda o Meio Ambiente e sua Preservação
+                        <span class="video-source">Conteúdo Externo | Fonte: CNN Brasil</span>
+                    </span>
+                </a>
+            </div>
+
+            <div class="conducao-leitura">
+                <p>
+                    Em <strong>O Cortiço (1890)</strong>, Aluísio Azevedo mostra como o lugar onde as pessoas vivem pode transformar o comportamento delas. A história se passa em uma habitação coletiva no Rio de Janeiro, que funciona quase como um personagem vivo. O autor descreve como a falta de higiene, a superlotação e a exploração dos donos do cortiço acabam despertando os instintos mais básicos dos moradores, fazendo com que muitos percam seus valores para tentar sobreviver naquele ambiente difícil.
+                </p>
+                <p>
+                    Já em <strong>Vidas Secas (1938)</strong>, Graciliano Ramos nos leva para o sertão nordestino. Através da história de Fabiano e sua família, vemos como a seca extrema molda a vida de quem não tem para onde ir. A falta de água e de comida é tão severa que os personagens quase perdem a capacidade de se comunicar, tornando-se tão "secos" quanto a terra ao redor. Para eles, fugir e recomeçar em outro lugar é o único jeito de enfrentar uma natureza que parece não dar chances de sobrevivência.
+                </p>
+            </div>
+        </section>
+
+        <section class="obra-grid">
+            <a href="cortico-contexto.html" class="card-obra">
+                <div>
+                    <h3>O Cortiço</h3>
+                    <span class="autor-nome">Aluísio Azevedo</span>
+                    <p>Mergulhe na obra-prima do Naturalismo brasileiro e descubra como o ambiente do cortiço atua como um personagem vivo que influencia a vida e os desejos de seus moradores.</p>
+                </div>
+                <div class="btn-explorar">Explorar Contexto</div>
+            </a>
+
+            <a href="vidas-secas-contexto.html" class="card-obra">
+                <div>
+                    <h3>Vidas Secas</h3>
+                    <span class="autor-nome">Graciliano Ramos</span>
+                    <p>Explore a luta de uma família de retirantes contra a seca e entenda como a paisagem do sertão atinge profundamente a identidade de um povo em movimento.</p>
+                </div>
+                <div class="btn-explorar">Explorar Contexto</div>
+            </a>
+        </section>
+    </main>
+
+    <footer class="secao-referencias">
+        <h4>Referências</h4>
+        <div class="ref-item">AZEVEDO, Aluísio. <strong>O Cortiço</strong>. Brasília: Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/bitstreams/de177383-d58e-45f4-a1af-e09529d033d2/download. Acesso em: 28 jul. 2026.</div>
+        
+        <div class="ref-item">BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>: Ensino Médio. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf. Acesso em: 28 jul. 2026.</div>
+        
+        <div class="ref-item">CANDIDO, Antonio. <strong>De cortiço a cortiço</strong>. Novos Estudos CEBRAP, n. 30, jul. 1991. Disponível em: http://paginapessoal.utfpr.edu.br/mhlima/De%20cortico%20a%20cortico%20-%20Antonio%20Candido.pdf/view. Acesso em: 28 jul. 2026.</div>
+        
+        <div class="ref-item">CNN BRASIL. <strong>Meio Ambiente: o que é, importância e como preservar</strong>. YouTube, 2023. Disponível em: https://www.youtube.com/watch?v=MoeOHBaIWpM. Acesso em: 28 jul. 2026.</div>
+
+        <div class="ref-item">SILVA, Monalisa Rodrigues Oliveira da. <strong>Abordagem do tema transversal meio ambiente, em uma escola do ensino fundamental, através de jogos educativos</strong>. Revista Eletrônica do Mestrado em Educação Ambiental, v. 10, n. 37, 2011. Disponível em: http://www.revistaea.org/artigo.php?idartigo=1110. Acesso em: 28 jul. 2026.</div>
+    </footer>
+</body>
+</html>

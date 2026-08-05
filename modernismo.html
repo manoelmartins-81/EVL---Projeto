@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimento Literário: Modernismo - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .secao-card { 
+            background: var(--bg-glass); backdrop-filter: blur(15px); padding: 40px; 
+            border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 20px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-bottom: 20px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; }
+
+        .video-fake-player {
+            position: relative; width: 100%; background-color: #000; border-radius: 20px;
+            overflow: hidden; cursor: pointer; margin: 30px 0 10px; aspect-ratio: 16 / 9;
+            border: 2px solid var(--accent); display: block;
+        }
+        .video-fake-player img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .play-button {
+            width: 80px; height: 80px; background: var(--video-btn); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-size: 30px;
+        }
+
+        .img-timeline { width: 100%; border-radius: 15px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.2); }
+
+        .secao-referencias {
+            margin-top: 50px; padding: 30px; background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255,255,255,0.2); border-radius: 20px; font-size: 0.85em;
+            width: 100%; box-sizing: border-box; margin-bottom: 40px;
+        }
+        .ref-item { margin-bottom: 15px; color: #dfe6e9; text-align: justify; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="vidas-secas-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="secao-card">
+            <h1>O Modernismo e a Revolução Estética</h1>
+            <p>
+                No início do século XX, o Modernismo surgiu como um movimento de ruptura profunda com o passado acadêmico. Influenciados pelas vanguardas europeias, artistas brasileiros sentiram a necessidade de criar uma arte que expressasse a realidade de um país em rápida transformação urbana e industrial. O movimento buscava chocar a burguesia e destruir as amarras de estilos tradicionais, valorizando a liberdade de criação e a sinceridade artística.
+            </p>
+            <p>
+                O grande diferencial do Modernismo no Brasil foi o seu caráter nacionalista e crítico. O projeto central era "realizar o Brasil", descobrindo o que nos tornava únicos como nação. Isso envolveu a valorização da linguagem coloquial, do verso livre na poesia e o resgate de nossas raízes miscigenadas para construir uma síntese cultural original e independente.
+            </p>
+            <p>
+                A Semana de Arte Moderna de 1922, realizada em São Paulo, foi o marco inaugural que oficializou esse desejo de renovação, unindo intelectuais e artistas sob o ideal de uma arte genuinamente brasileira, livre de filtros estrangeiros servis.
+            </p>
+            <p>
+                Com o amadurecimento do movimento, a Segunda Fase (1930-1945), também chamada de Fase de Consolidação ou Geração de 30, direcionou esse espírito crítico para as questões sociais e regionais. É nesse cenário que surge Vidas Secas (1938), de Graciliano Ramos. Rompendo com as idealizações do passado, a obra utiliza uma "estética da secura" — marcada por uma linguagem concisa e objetiva — para denunciar a miséria, a exploração latifundiária e a desumanização do homem no sertão nordestino.
+            </p>
+        </article>
+
+        <section class="secao-card">
+            <h2>As Escolas Literárias no Tempo</h2>
+            <p>Entenda como o Modernismo se posiciona na história da nossa literatura através da explicação da Professora Aline, do Canal Português On-line:</p>
+            
+            <a href="https://www.youtube.com/watch?v=MrioXPJ4mCw" target="_blank" style="text-decoration:none;">
+                <div class="video-fake-player">
+                    <img src="https://img.youtube.com/vi/MrioXPJ4mCw/maxresdefault.jpg" alt="Capa do Vídeo Profa. Aline">
+                    <div class="play-overlay"><div class="play-button">▶</div></div>
+                </div>
+            </a>
+            <p style="text-align: center; font-size: 0.85em; opacity: 0.8;">Fonte: Canal Português On-line l Profa. Aline.</p>
+        </section>
+
+        <section class="secao-card">
+            <h2>Mergulho no Modernismo</h2>
+            <p>O Modernismo brasileiro desenvolveu-se em três etapas fundamentais para a nossa identidade literária:</p>
+            
+            <h3 style="color: var(--accent);">1ª Fase: A Fase Heroica (1922-1930)</h3>
+            <img src="modernismo- linha do tempo- 1fase.png" alt="1ª Fase do Modernismo" class="img-timeline">
+            <p style="font-size: 0.95em;">Momento de radicalismo e ruptura com os velhos padrões acadêmicos, buscando uma língua brasileira original.</p>
+
+            <h3 style="color: var(--accent); margin-top: 40px;">2ª Fase: Consolidação e Regionalismo (1930-1945)</h3>
+            <img src="modernismo- linha do tempo- 2fase.png" alt="2ª Fase do Modernismo" class="img-timeline">
+            <p style="font-size: 0.95em;">Fase de amadurecimento e engajamento sociopolítico, onde se destacam os grandes romances regionalistas que denunciam a realidade brasileira.</p>
+
+            <h3 style="color: var(--accent); margin-top: 40px;">3ª Fase: A Geração de 45 (1945-1960)</h3>
+            <img src="modernismo- linha do tempo- 3fase.png" alt="3ª Fase do Modernismo" class="img-timeline">
+            <p style="font-size: 0.95em;">Marcada pelo retorno a um maior rigor formal e pela pesquisa linguística profunda, explorando novos contextos universais e existenciais.</p>
+
+            <p style="margin-top:40px; font-style: italic; background: rgba(108, 92, 231, 0.1); padding: 25px; border-radius: 20px; border-left: 5px solid var(--primary);">
+                <strong>A Estética da Secura:</strong> Em Vidas Secas, Graciliano Ramos atua como um "artesão das palavras", eliminando adjetivos e floreios para que a linguagem espelhe a própria aridez da caatinga. O autor utiliza o discurso indireto livre para dar voz ao emudecimento dos personagens, transformando a carência verbal em uma poderosa ferramenta de denúncia social e psicológica.
+            </p>
+        </section>
+    </main>
+
+    <footer class="secao-referencias">
+        <h4 style="color: var(--accent); text-transform: uppercase; margin-bottom: 20px;">Referências Bibliográficas</h4>
+        
+        <div class="ref-item">RAMOS, Graciliano. <strong>Vidas Secas</strong>. Rio de Janeiro: José Olympio, 1938. Disponível em: https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/255/2025/04/vidas-secas.pdf. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">RIBEIRO, Aline. <strong>Linha do Tempo das Escolas Literárias (Explicação Fácil!)</strong>. YouTube, 2021. Disponível em: https://www.youtube.com/watch?v=MrioXPJ4mCw. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">SOUZA, Warley. <strong>Escolas literárias</strong>. Brasil Escola, [s.d.]. Disponível em: https://brasilescola.uol.com.br/literatura/escolas-literarias.htm. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">SOUZA, Warley. <strong>Vidas secas</strong>: análise da obra de Graciliano Ramos. Brasil Escola, [s.d.]. Disponível em: https://brasilescola.uol.com.br/literatura/vidas-secas.htm. Acesso em: 02 ago. 2026.</div>
+    </footer>
+</body>
+</html>

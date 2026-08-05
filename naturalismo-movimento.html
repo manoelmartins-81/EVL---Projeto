@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimento Literário: Naturalismo - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        
+        .secao-card {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 20px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.05em; opacity: 0.95; }
+
+        /* TOOLTIP */
+        .tooltip { position: relative; display: inline-block; border-bottom: 1.5px dashed var(--accent); color: var(--accent); cursor: help; font-weight: 700; }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 280px; background-color: #2d3436; color: #fff;
+            text-align: center; border-radius: 12px; padding: 15px; position: absolute;
+            z-index: 100; bottom: 125%; left: 50%; margin-left: -140px; opacity: 0;
+            transition: opacity 0.3s; font-size: 0.85em; font-weight: 400; line-height: 1.4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--primary);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .video-fake-player {
+            position: relative; width: 100%; background-color: #000; border-radius: 20px;
+            overflow: hidden; cursor: pointer; margin: 30px 0; aspect-ratio: 16 / 9;
+            border: 2px solid var(--accent); display: block;
+        }
+        .video-fake-player img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.2); transition: 0.3s;
+        }
+        .play-button {
+            width: 80px; height: 80px; background: var(--video-btn); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-size: 30px; box-shadow: 0 0 30px rgba(231, 76, 60, 0.5);
+        }
+        .video-fake-player:hover .play-overlay { background: rgba(0,0,0,0.1); transform: scale(1.01); }
+
+        .img-timeline { width: 100%; border-radius: 15px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.2); }
+
+        .grid-autores { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
+        .card-autor-mov {
+            background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1); text-align: center;
+        }
+        .card-autor-mov strong { color: var(--accent); display: block; margin-bottom: 10px; font-size: 1.2em; }
+
+        .secao-referencias {
+            margin-top: 50px; padding: 30px; background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255,255,255,0.2); border-radius: 20px; font-size: 0.85em;
+            width: 92%; max-width: 950px; margin-bottom: 40px;
+        }
+        .ref-item { margin-bottom: 12px; color: #dfe6e9; text-align: justify; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="cortico-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="secao-card">
+            <h1>O Movimento Naturalista</h1>
+            <p>O <strong>Naturalismo</strong> foi um movimento artístico e cultural que surgiu na França, em meados do século XIX, como um desdobramento radical do Realismo. Enquanto os realistas focavam na análise psicológica e nos costumes da burguesia, os naturalistas adotaram uma postura de cientistas sociais, utilizando o romance como um "laboratório" para dissecar as patologias da sociedade e o comportamento humano em seus estados mais brutos.</p>
+
+            <p>Influenciados pelo 
+            <span class="tooltip">Positivismo
+                <span class="tooltiptext">Doutrina de Auguste Comte que defende a ciência e a razão como as únicas vias para o progresso e o conhecimento verdadeiro.</span>
+            </span> e pelas teorias da evolução de Charles Darwin, os escritores desta escola viam o ser humano como um animal sujeito às leis biológicas. No Naturalismo, o indivíduo perde o seu "livre-arbítrio" para o 
+            <span class="tooltip">Determinismo
+                <span class="tooltiptext">Conceito de Hippolyte Taine que afirma que o homem é produto de três forças: o meio social, a raça (hereditariedade) e o momento histórico.</span>
+            </span>, tornando-se um reflexo direto do ambiente onde vive e de sua herança genética.</p>
+
+            <p>A arte naturalista é marcada pela denúncia social, expondo temas considerados "escandalosos" na época, como a miséria extrema, o vício, a violência e as desigualdades. Através da 
+            <span class="tooltip">Zoomorfização
+                <span class="tooltiptext">Recurso que descreve personagens através de comportamentos, instintos e características animais.</span>
+            </span>, o autor revela o lado instintivo do homem, mostrando que, sob a pressão de um meio hostil, a civilidade muitas vezes dá lugar aos impulsos básicos de sobrevivência.</p>
+        </article>
+
+        <section class="secao-card">
+            <h2>O Naturalismo no Tempo</h2>
+            <p>Para dominar os conceitos que definem esta estética, recomendamos o vídeo da professora Aline, do canal <strong>Português On-line</strong>. É uma explicação didática e completa que ajudará você a diferenciar o "homem biológico" do Naturalismo do "homem psicológico" do Realismo.</p>
+
+            <a href="https://www.youtube.com/watch?v=ERDwRWCzdFo" target="_blank" style="text-decoration:none;">
+                <div class="video-fake-player">
+                    <img src="https://img.youtube.com/vi/ERDwRWCzdFo/maxresdefault.jpg" alt="Naturalismo - Português On-line">
+                    <div class="play-overlay"><div class="play-button">▶</div></div>
+                </div>
+            </a>
+            <p style="text-align: center; font-size: 0.85em; opacity: 0.8;">Conteúdo Externo | Fonte: Canal Português On-line l Profa. Aline</p>
+        </section>
+
+        <section class="secao-card">
+            <h2>Linha do Tempo do Naturalismo Brasileiro</h2>
+            <p>Veja como o movimento se posiciona cronologicamente em relação às obras literárias, marcando a transição para uma visão científica da arte no final do século XIX:</p>
+            <img src="naturalismo - linha do tempo.png" alt="Linha do Tempo do Naturalismo" class="img-timeline">
+        </section>
+
+        <section class="secao-card">
+            <h2>Principais Autores no Brasil</h2>
+            <p>No Brasil, o Naturalismo ganhou cores locais, focando em problemas nacionais como o racismo, a herança da escravidão e a precariedade urbana.</p>
+            
+            <div class="grid-autores">
+                <div class="card-autor-mov">
+                    <strong>Aluísio Azevedo</strong>
+                    <p style="font-size: 0.9em; margin: 0;">Inaugurou o movimento com <em>O Mulato</em> e atingiu o ápice com <em>O Cortiço</em>, sua obra-prima.</p>
+                </div>
+                <div class="card-autor-mov">
+                    <strong>Raul Pompeia</strong>
+                    <p style="font-size: 0.9em; margin: 0;">Autor de <em>O Ateneu</em>, livro que mistura o Naturalismo com descrições psicológicas densas.</p>
+                </div>
+                <div class="card-autor-mov">
+                    <strong>Adolfo Caminha</strong>
+                    <p style="font-size: 0.9em; margin: 0;">Conhecido por <em>A Normalista</em> e <em>Bom-Crioulo</em>, obras que chocaram a sociedade da época.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="secao-referencias">
+        <h4 style="color: var(--accent); text-transform: uppercase;">Referências</h4>
+        <div class="ref-item">AZEVEDO, Aluísio. O Cortiço. Brasília: Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/bitstreams/de177383-d58e-45f4-a1af-e09529d033d2/download. Acesso em: 01 ago. 2026. </div>
+        <div class="ref-item">BRANDINO, Luiza. <strong>Naturalismo</strong>. Brasil Escola, [s.d.]. Disponível em: https://brasilescola.uol.com.br/literatura/o-naturalismo.htm. Acesso em: 01 ago. 2026. </div>
+        <div class="ref-item">DIANA, Daniela. <strong>Naturalismo</strong>. Toda Matéria, [s.d.]. Disponível em: https://www.todamateria.com.br/naturalismo-movimento-naturalista/. Acesso em: 01 ago. 2026. </div>
+        <div class="ref-item">ELIAS, Kauane. <strong>Naturalismo</strong>: o que é, características, obras e autores. Estratégia Vestibulares, 2022. Disponível em: https://vestibulares.estrategia.com/portal/materias/literatura/naturalismo/. Acesso em: 01 ago. 2026. </div>
+        <div class="ref-item">PORTUGUÊS ON-LINE. <strong>Naturalismo - Escola Literária</strong>. YouTube, [s.d.]. Disponível em: https://www.youtube.com/watch?v=ERDwRWCzdFo. Acesso em: 01 ago. 2026. </div>
+        
+    </footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário: Vidas Secas - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; margin-left: 10px; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+        
+        main { max-width: 1000px; width: 95%; margin: 40px 0; }
+        .card-glossario { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 45px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        
+        h1 { color: var(--accent); text-transform: uppercase; margin-bottom: 25px; font-size: 2.2em; text-align: center; }
+        
+        /* TEXTO DE INSTRUÇÃO AJUSTADO PARA ALINHAMENTO JUSTIFICADO */
+        .instrucoes { 
+            line-height: 1.8; 
+            text-align: justify; 
+            font-size: 1.05em; 
+            margin-bottom: 30px; 
+            opacity: 0.95; 
+            padding: 0 10px; 
+        }
+
+        .busca-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 45px; }
+        .input-group { width: 100%; max-width: 700px; display: flex; gap: 10px; }
+        #inputBusca { flex: 1; padding: 16px 25px; border-radius: 40px; border: 2px solid var(--accent); background: rgba(255,255,255,0.1); color: white; font-size: 1em; outline: none; transition: 0.3s; }
+        #inputBusca:focus { background: rgba(255,255,255,0.2); box-shadow: 0 0 15px rgba(255, 234, 167, 0.3); }
+        .btn-dicionario { background: var(--primary); color: white; border: 1.5px solid white; padding: 0 25px; border-radius: 40px; cursor: pointer; font-weight: bold; font-size: 0.9em; transition: 0.3s; text-transform: uppercase; }
+        .btn-dicionario:hover { background: white; color: var(--primary); transform: scale(1.05); }
+
+        .glossario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .item-termo { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; border-left: 5px solid var(--primary); transition: 0.3s; }
+        .item-termo:hover { background: rgba(108, 92, 231, 0.2); transform: translateX(5px); }
+        .item-termo strong { color: var(--accent); display: block; margin-bottom: 8px; font-size: 1.1em; text-transform: lowercase; font-variant: small-caps; }
+        .item-termo p { margin: 0; font-size: 0.95em; line-height: 1.5; opacity: 0.9; }
+
+        .referencias-secao { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .referencias-secao h3 { color: var(--accent); text-transform: uppercase; font-size: 1.1em; margin-bottom: 15px; }
+        .ref-item { font-size: 0.85em; line-height: 1.6; opacity: 0.7; text-align: left; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="vidas-secas-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-glossario">
+            <h1>Glossário: Vidas Secas</h1>
+            <p class="instrucoes">
+                Para Graciliano Ramos, a palavra deve ser precisa como a terra. Abaixo, destacamos termos fundamentais para compreender a aridez do sertão e a alma dos retirantes. Caso encontre outra palavra desconhecida durante a leitura, utilize o campo de busca e clique no botão <strong>"Dicionário Online"</strong> para consultar o significado em tempo real no portal Michaelis.
+            </p>
+
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="inputBusca" placeholder="Busque um termo regional ou bioma..." onkeyup="filtrarGlossario()">
+                    <button class="btn-dicionario" onclick="pesquisarMichaelis()">Dicionário Online</button>
+                </div>
+            </div>
+
+            <div class="glossario-grid" id="listaGlossario">
+                <div class="item-termo"><strong>Juazeiro</strong><p>Árvore símbolo de resistência no sertão, que permanece verde mesmo em períodos de seca extrema.</p></div>
+                <div class="item-termo"><strong>Caatinga</strong><p>Bioma exclusivamente brasileiro; significa "mata branca" em tupi, devido ao aspecto das plantas no período seco.</p></div>
+                <div class="item-termo"><strong>Xique-xique</strong><p>Cacto rasteiro e muito espinhoso, comum na paisagem descrita na obra.</p></div>
+                <div class="item-termo"><strong>Mandacaru</strong><p>Cacto de grande porte que armazena água e serve como alimento para o gado em épocas de crise.</p></div>
+                <div class="item-termo"><strong>Macambira</strong><p>Planta da família das bromélias, com espinhos laterais, usada como recurso para alimentar animais.</p></div>
+                <div class="item-termo"><strong>Barreiro</strong><p>Pequeno reservatório ou poço onde se acumula a água da chuva para o consumo dos animais.</p></div>
+                <div class="item-termo"><strong>Preá</strong><p>Pequeno roedor silvestre; no livro, é a caça que muitas vezes adia a morte da família por fome.</p></div>
+                <div class="item-termo"><strong>Retirante</strong><p>O sertanejo que abandona sua morada e bens para fugir da miséria e da falta de chuva.</p></div>
+                <div class="item-termo"><strong>Maniçoba</strong><p>Região ou vegetação associada ao cultivo da mandioca brava ou de espécies similares típicas do sertão.</p></div>
+                <div class="item-termo"><strong>Escanchado</strong><p>Estar montado ou sentado com as pernas abertas, como a criança no colo da mãe.</p></div>
+                <div class="item-termo"><strong>Pederneira</strong><p>Espingarda antiga que utiliza o choque entre pedra e metal para provocar o disparo.</p></div>
+                <div class="item-termo"><strong>Cacimba</strong><p>Poço escavado manualmente em locais úmidos ou leitos de rios secos para encontrar água.</p></div>
+                <div class="item-termo"><strong>Salobra</strong><p>Água que contém alto teor de sal, comum no semiárido e difícil de beber.</p></div>
+                <div class="item-termo"><strong>Arribação</strong><p>Bandos de aves migratórias cujo surgimento no céu prenuncia o agravamento da seca.</p></div>
+                <div class="item-termo"><strong>Cocorote</strong><p>Gesto de dar uma pancada seca na cabeça de alguém com os nós dos dedos.</p></div>
+                <div class="item-termo"><strong>Cangote</strong><p>Gíria nordestina para designar o pescoço ou a nuca.</p></div>
+                <div class="item-termo"><strong>Cama de vara</strong><p>Leito extremamente rústico feito de galhos entrelaçados, símbolo da pobreza extrema.</p></div>
+                <div class="item-termo"><strong>Cuia</strong><p>Utensílio feito da casca seca de frutos (como a cabaça), usado para coletar água.</p></div>
+            </div>
+
+            <section class="referencias-secao">
+                <h3>Referências</h3>
+                <div class="ref-item">RAMOS, Graciliano. <strong>Vidas Secas</strong>. Rio de Janeiro: José Olympio, 1938. Disponível em: https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/255/2025/04/vidas-secas.pdf. Acesso em: 02 ago. 2026.</div>
+                
+                <div class="ref-item">MICHAELIS. <strong>Dicionário Brasileiro da Língua Portuguesa</strong>. São Paulo: Melhoramentos, 2026. Disponível em: https://michaelis.uol.com.br/. Acesso em: 02 ago. 2026.</div>
+            </section>
+        </article>
+    </main>
+
+    <script>
+        function filtrarGlossario() {
+            let input = document.getElementById('inputBusca').value.toLowerCase();
+            let termos = document.getElementsByClassName('item-termo');
+            for (let i = 0; i < termos.length; i++) {
+                let txtTermo = termos[i].textContent || termos[i].innerText;
+                termos[i].style.display = txtTermo.toLowerCase().includes(input) ? "" : "none";
+            }
+        }
+
+        function pesquisarMichaelis() {
+            let termo = document.getElementById('inputBusca').value;
+            if (termo) {
+                window.open("https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro/" + encodeURIComponent(termo), '_blank');
+            } else {
+                alert("Por favor, digite uma palavra para pesquisar no Michaelis.");
+            }
+        }
+    </script>
+</body>
+</html>

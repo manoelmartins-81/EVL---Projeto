@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidas Secas: do ponto de vista da Sociologia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #2c3e50; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav-topo { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; margin-left: 10px; }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+        
+        main { max-width: 1000px; width: 90%; margin: 40px 0; }
+        .card-sociologia { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 45px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; font-size: 1.8em; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: var(--accent); margin-bottom: 15px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; margin-bottom: 20px; }
+
+        /* TOOLTIP */
+        .tooltip { position: relative; border-bottom: 1px dotted var(--accent); cursor: help; color: var(--accent); font-weight: bold; }
+        .tooltip .tooltiptext { visibility: hidden; width: 250px; background-color: #2d3436; color: #fff; text-align: center; border-radius: 10px; padding: 12px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -125px; opacity: 0; transition: opacity 0.3s; font-size: 0.85em; line-height: 1.4; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-weight: normal; }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        /* SLIDES INTERATIVOS (MANUAIS) */
+        .slide-container { background: rgba(0,0,0,0.3); border-radius: 20px; padding: 35px; margin: 35px 0; min-height: 250px; border: 1px solid rgba(255,255,255,0.1); position: relative; }
+        .slide { display: none; animation: slideIn 0.5s; }
+        .slide.active { display: block; }
+        .slide-nav { display: flex; justify-content: center; gap: 12px; margin-top: 25px; }
+        .dot { height: 12px; width: 12px; background: rgba(255,255,255,0.3); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--accent); transform: scale(1.3); }
+
+        .secao-multiletramento { margin: 50px 0; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .podcast-container { width: 100%; text-align: center; background: rgba(0,0,0,0.2); padding: 30px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); }
+        .img-infografico { width: 100%; max-width: 900px; border-radius: 20px; border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.4; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav><a href="vidas-secas-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a><a href="index.html" class="btn-nav-topo">Página Inicial</a></nav>
+    </header>
+
+    <main>
+        <article class="card-sociologia">
+            <h1>Vidas Secas: do ponto de vista da Sociologia...</h1>
+            
+            <section>
+                <p>A obra <em>Vidas Secas</em> funciona como um poderoso documento sociológico sobre as relações de opressão no interior do Brasil. Graciliano Ramos utiliza a saga de Fabiano para denunciar um sistema em que a exploração 
+                    <span class="tooltip">latifundiária
+                        <span class="tooltiptext">Relativo a grandes propriedades de terra concentradas nas mãos de poucos, frequentemente associadas à exploração do trabalho rural.</span>
+                    </span> e a ausência de cidadania animalizam o trabalhador, privando-o do direito básico à voz e à identidade. O Sertão é aqui revelado como um território de 
+                    <span class="tooltip">contenção
+                        <span class="tooltiptext">Espaço que sistematicamente nega condições básicas para o desenvolvimento humano, aprisionando o sujeito na precariedade.</span>
+                    </span>, mantido por uma política que prolonga a precariedade da vida dos vulneráveis, 
+                    <span class="tooltip">cauterizando-lhes
+                        <span class="tooltiptext">Referência ao efeito da seca que "queima" e endurece a sensibilidade e a esperança, assim como faz com a terra estéril.</span>
+                    </span> a esperança.</p>
+
+                <p>Neste cenário, as personagens vivem sob o peso da 
+                    <span class="tooltip">"violência simbólica"
+                        <span class="tooltiptext">Conceito sociológico onde as relações de dominação são incorporadas pelos oprimidos, sendo aceitas como algo natural.</span>
+                    </span>, manifestada principalmente pelo 
+                    <span class="tooltip">desamparo discursivo
+                        <span class="tooltiptext">Vulnerabilidade de quem não domina a norma culta da língua, ficando sem meios para se defender ou questionar injustiças.</span>
+                    </span>. Por não dominarem a norma culta, os retirantes são mantidos em 
+                    <span class="tooltip">lugares marginais
+                        <span class="tooltiptext">Posições de exclusão social e política destinadas àqueles que estão fora dos círculos de poder e cidadania plena.</span>
+                    </span>, submetidos ao discurso do opressor que os animalizam para legitimar a exploração. A falta de linguagem não é apenas silêncio; é uma ferramenta de exclusão que impede Fabiano de questionar as contas injustas do patrão ou o arbítrio autoritário.</p>
+
+                <p>O romance também desvela a dinâmica 
+                    <span class="tooltip">clientelista
+                        <span class="tooltiptext">Relação de dependência mútua e desigual entre quem tem poder e quem não tem, baseada na troca de favores e submissão.</span>
+                    </span> presente no 
+                    <span class="tooltip">latifúndio
+                        <span class="tooltiptext">Grande extensão de terra pertencente a uma única pessoa ou família, base do poder privado no sertão.</span>
+                    </span> brasileiro, onde o trabalhador é um 
+                    <span class="tooltip">"agregado"
+                        <span class="tooltiptext">Trabalhador que vive em terra alheia sob a proteção (e comando) do proprietário, sem direitos formais.</span>
+                    </span> sem direitos, preso a dívidas impagáveis e à vontade imperiosa do proprietário de terras. Essa relação verticalizada reitera a 
+                    <span class="tooltip">subalternidade
+                        <span class="tooltiptext">Condição de inferioridade e exclusão nas estruturas sociais e políticas de poder.</span>
+                    </span> e a 
+                    <span class="tooltip">marginalização social
+                        <span class="tooltiptext">Processo que torna indivíduos ou grupos insignificantes para a sociedade organizada e para o Estado.</span>
+                    </span>, forçando a família a uma fuga cíclica que reflete a impossibilidade de ascensão social dentro das estruturas vigentes na década de 30 e que ainda ecoam na atualidade.</p>
+
+                <p>Contudo, observa-se que a persistência dessa família configura uma resistência contra a desumanização. A busca por uma cama de couro ou pela educação dos filhos não é mero anseio de consumo, mas uma afirmação de humanidade e a reivindicação de bem-estar em um meio que tenta, a todo custo, reduzir o homem à condição de bicho.</p>
+
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>🤝 A Lógica do Favor e o Latifúndio</h3>
+                        <p>Fabiano é um cidadão sem direitos formais, um "agregado" dependente da vontade do patrão. Nesta estrutura, o proprietário exerce um poder privado que se sobrepõe à lei, mantendo o trabalhador em um ciclo de submissão total.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>👮 O Soldado Amarelo: Autoritarismo</h3>
+                        <p>Representa o descompasso de um Estado que, idealmente garantidor de direitos, chega ao sertão de forma opressiva pelo arbítrio de seus representantes. A prisão injusta de Fabiano demonstra como as instituições públicas são desvirtuadas por agentes autoritários para humilhar o trabalhador.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🐕 Animalização vs. Humanização</h3>
+                        <p>O sistema inverte papéis: enquanto a cachorra Baleia demonstra 
+                            <span class="tooltip">senciência
+                                <span class="tooltiptext">Capacidade de seres vivos sentirem sensações e sentimentos (como dor ou alegria) de forma consciente.</span>
+                            </span>, os humanos são nivelados aos animais pela fome e brutalidade do meio.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="secao-multiletramento">
+                <div class="podcast-container">
+                    <h2>Uma análise sociológica do romance</h2>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="Vidas_Secas__A_Opressão.mp3" type="audio/mpeg">
+                        Seu navegador não suporta áudio.
+                    </audio>
+                </div>
+
+               <div class="infografico-container">
+    <img src="Vidas_Secas__Teia_da_Opressão.png" alt="Infográfico Vidas Secas: Teia da Opressão" class="img-infografico">
+    <p style="font-size: 0.85em; margin-top: 10px; font-style: italic; opacity: 0.8;">Fonte: Elaborado pelo NotebookLM (2026) com base nas fontes documentais do projeto.</p>
+</div>
+            </section>
+
+            <footer class="secao-referencias">
+                <h4>Referências Bibliográficas</h4>
+                <div class="ref-item">BOTOSO, Altamir. <strong>Opressores e oprimidos</strong>: uma leitura do romance Vidas secas, de Graciliano Ramos. Revista de Letras da Universidade Católica de Brasília, 2013. Disponível em: https://portalrevistas.ucb.br/index.php/rl/article/download/3807/3386/21887.</div>
+                <div class="ref-item">CHAGAS, Gabriel. <strong>Vidas Secas e O Avesso da Pele</strong>: interfaces entre linguagem e poder. Santa Barbara Portuguese Studies, v. 12, 2022. Disponível em: https://sbps.spanport.ucsb.edu/sites/default/files/sitefiles/volume/Vol_12/Gabriel%20Chagas.pdf.</div>
+                <div class="ref-item">GOMES, L. C. A. et al. <strong>A Busca da Felicidade na Obra Vidas Secas</strong>: Território Simbólico, Identidade e Cultura. Revista Tópicos, v. 4, n. 34, 2026. Disponível em: https://revistatopicos.com.br/generate/pdf_zenodo/pub_781549504.pdf.</div>
+                <div class="ref-item">SARMENTO, Elisângela C. D. <strong>As Ecologias do Sertão e do (a) Sertanejo (a)</strong>: um estudo topofóbico-topofílico do semiárido nordestino... Tese (Doutorado) – UNEB, Juazeiro, 2023. Disponível em: https://ppgecoh.uneb.br/wp-content/uploads/2023/03/ELISANGELA-CAMPOS-DAMASCENO-SARMENTO.pdf.</div>
+                <div class="ref-item">SOUSA, Joacileide Bezerra de. <strong>Geografia e literatura</strong>: um posicionamento a partir da obra “Vidas Secas”. UFCG, 2013. Disponível em: https://dspace.sti.ufcg.edu.br/bitstream/riufcg/10390/3/JOACILEIDE%20BEZERRA%20DE%20SOUSA%20-%20TCC%20LICENCIATURA%20EM%20GEOGRAFIA%202013.pdf.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            dots[slideIndex].classList.remove('active');
+            slideIndex = n;
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

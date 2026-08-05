@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidas Secas: do ponto de vista da Geografia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22; 
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --info: #3498db;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 100; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 90%; margin: 40px 0; }
+        .card-disciplina {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 45px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; font-size: 1.8em; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: var(--accent); margin-bottom: 15px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.05em; opacity: 0.95; margin-bottom: 20px; }
+
+        .tooltip { position: relative; border-bottom: 1px dotted var(--accent); cursor: help; color: var(--accent); }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 220px; background-color: #2d3436; color: #fff;
+            text-align: center; border-radius: 10px; padding: 10px; position: absolute;
+            z-index: 1; bottom: 125%; left: 50%; margin-left: -110px; opacity: 0;
+            transition: opacity 0.3s; font-size: 0.85em; line-height: 1.4; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .slide-container { background: rgba(0,0,0,0.2); border-radius: 20px; padding: 30px; margin: 30px 0; position: relative; min-height: 200px; border: 1px solid rgba(255,255,255,0.1); }
+        .slide { display: none; animation: slideIn 0.5s ease-out; }
+        .slide.active { display: block; }
+        .slide-nav { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .dot { height: 12px; width: 12px; background: rgba(255,255,255,0.3); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--primary); transform: scale(1.3); }
+
+        .atlas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .atlas-item { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; border-top: 4px solid var(--primary); transition: 0.3s; }
+        .atlas-item:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+        .atlas-item img { width: 100%; border-radius: 12px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        .legenda-figura { font-size: 0.8em; color: #dfe6e9; font-style: italic; line-height: 1.4; }
+
+        .video-fake-player {
+            position: relative; width: 100%; max-width: 800px; margin: 20px auto; background-color: #000; 
+            border-radius: 20px; overflow: hidden; cursor: pointer; aspect-ratio: 16 / 9; border: 2px solid var(--primary);
+        }
+        .video-fake-player img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .play-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .play-button { width: 70px; height: 70px; background: var(--video-btn); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; }
+
+        .nota-aprofundamento { background: rgba(230, 126, 34, 0.15); padding: 25px; border-radius: 15px; border-left: 5px solid var(--accent); margin-top: 40px; text-align: center; }
+        .nota-aprofundamento a { color: var(--accent); font-weight: bold; text-decoration: underline; }
+
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; margin-top: 50px; }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 15px; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+
+        @media (max-width: 768px) { .atlas-grid { grid-template-columns: 1fr; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="vidas-secas-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>Vidas Secas: do ponto de vista da Geografia...</h1>
+
+            <section>
+                <h2>O Espaço e a Paisagem como Protagonistas</h2>
+                
+                <p>A Geografia e a Literatura caminham juntas em <em>Vidas Secas</em> para revelar que o espaço geográfico não é apenas um cenário passivo, mas um elemento que molda o comportamento e a identidade humana. Através da narrativa, o leitor é transportado para uma realidade onde a análise da paisagem — composta por planícies avermelhadas, rios secos e terra rachada — permite identificar tanto fenômenos físicos visíveis quanto as estruturas sociais invisíveis que oprimem o sertanejo.</p>
+
+                <p>O centro dessa dinâmica é o 
+                    <span class="tooltip"><strong>Bioma Caatinga</strong>
+                        <span class="tooltiptext">
+                            <strong>Caatinga:</strong> Do tupi "mata branca". Bioma exclusivamente brasileiro com vegetação xerófila adaptada à escassez hídrica.
+                        </span>
+                    </span>, uma formação tipicamente nordestina que Graciliano Ramos descreve com rigor. Mais do que um dado técnico, a caatinga atua como um "personagem carrasco": sua vegetação espinhosa e seu solo abrasador condicionam a luta psicológica de Fabiano e sua família, evidenciando como as condições do meio ambiente podem agravar o embrutecimento e a falta de opções do indivíduo.</p>
+
+                <p>Essa relação entre homem e meio é marcada por uma profunda ambivalência. Em épocas de estiagem prolongada, o sertão desperta sentimentos de horror e repulsa devido à escassez de recursos e à miséria social. No entanto, com a chegada das primeiras chuvas esse cenário é transformado, fazendo o verde brotar e renovando a esperança dos retirantes. Essa face da caatinga nos mostra que a hostilidade do sertão não é um destino biológico permanente, mas um fenômeno que exige projetos de convivência e políticas públicas eficazes.</p>
+
+                <p>Por fim, a migração retratada na obra, através dos capítulos "Mudança" e "Fuga", ilustra fluxos populacionais forçados pela necessidade de sobrevivência. Fabiano e sua família não se movem por escolha, mas empurrados por um sistema que une o rigor do clima semiárido à exploração do trabalho. Entender <em>Vidas Secas</em> pela Geografia é, portanto, compreender as lógicas de poder que utilizam a seca como instrumento de exclusão social.</p>
+
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>🌵 O Clima Semiárido</h3>
+                        <p>Caracterizado pela escassez e irregularidade das chuvas, com altas temperaturas que geram forte evapotranspiração. No livro, o "azul terrível" do céu simboliza a inclemência solar que consome a umidade e a esperança.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🪨 Solos e Hidrografia</h3>
+                        <p>Os solos do semiárido são geralmente rasos e pedregosos. Os rios são intermitentes: secam completamente nos períodos de estiagem, restando apenas lama ou areia escaldante, como visto na travessia da família.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🚶 Fluxos Migratórios</h3>
+                        <p>A migração é um processo de mobilidade espacial forçada pela miséria e pela falta de suporte estatal. As personagens buscam solos menos hostis para garantir o direito básico à existência.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🔁 A Ciclicidade da Seca</h3>
+                        <p>A seca é um fenômeno cíclico. Graciliano descreve como as personagens interpretam os sinais da natureza, como a chegada das arribações, que prenunciam o agravamento da crise e o reinício da fuga.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Atlas Visual do Semiárido</h2>
+                <div class="atlas-grid">
+                    <div class="atlas-item">
+                        <img src="caatinga.jpg" alt="Bioma Caatinga">
+                        <p class="legenda-figura">A diversidade da Caatinga, bioma que alterna entre o cinza da seca e o verde das chuvas. <br>Fonte: IHU Unisinos.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--warning);">
+                        <img src="paisagem-semiarido.webp" alt="Paisagem Seca">
+                        <p class="legenda-figura">A planície avermelhada descrita por Graciliano, onde a vegetação xerófila resiste ao sol. <br>Fonte: Mundo Educação.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--danger);">
+                        <img src="solo-seco.jpg" alt="Solo Rachado">
+                        <p class="legenda-figura">Solo rachado pela estiagem, refletindo a aridez que escalda os pés dos retirantes. <br>Fonte: FBMC.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--info);">
+                        <img src="casebre-barro.webp" alt="Casebre de Barro">
+                        <p class="legenda-figura">Habitações rústicas de barro, comuns no interior do semiárido brasileiro. <br>Fonte: Mundo Educação.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-top: 50px; text-align: center;">
+                <h2>Exploração Geográfica em Vídeo</h2>
+                <p>Para complementar sua visão sobre a riqueza e os desafios do sertão, recomendamos o documentário da <strong>TV PUC-Rio</strong>. O canal produz conteúdos educativos de alto nível, fundamentais para a divulgação cultural e científica no Brasil. Este vídeo ajudará você a visualizar a fisionomia da caatinga citada por Graciliano.</p>
+                <a href="https://www.youtube.com/watch?v=TSkFkcA26_E&t=10s" target="_blank" style="text-decoration:none;">
+                    <div class="video-fake-player">
+                        <img src="https://img.youtube.com/vi/TSkFkcA26_E/maxresdefault.jpg" alt="Biomas do Brasil - Caatinga">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                </a>
+                <p style="font-size: 0.85em; color: #dfe6e9; font-style: italic;">Conteúdo Externo | Fonte: Canal TV-PUC-Rio.</p>
+            </section>
+
+            <div class="nota-aprofundamento">
+                Deseja aprofundar seus estudos? Acesse o artigo do <a href="https://ihu.unisinos.br/categorias/592171-o-ainda-desconhecido-semiarido-brasileiro" target="_blank">IHU Unisinos</a> ou explore os dados do <a href="https://mundoeducacao.uol.com.br/geografia/clima-semiarido.htm" target="_blank">Mundo Educação</a>.
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px;">
+            <footer class="secao-referencias">
+                <h4>REFERÊNCIAS</h4>
+                <div class="ref-item">FBMC. <strong>Calamidade climática no semiárido</strong>: uma tempestade silenciosa. 2021. Disponível em: https://fbmc.org.br/artigo/calamidade-climatica-no-semiarido-uma-tempestade-silenciosa/. Acesso em: 02 ago. 2026.</div>
+                <div class="ref-item">IHU UNISINOS. <strong>O ainda desconhecido Semiárido brasileiro</strong>. 2019. Disponível em: https://ihu.unisinos.br/categorias/592171-o-ainda-desconhecido-semiarido-brasileiro. Acesso em: 02 ago. 2026.</div>
+                <div class="ref-item">MUNDO EDUCAÇÃO. <strong>Clima semiárido</strong>: características e onde ocorre. [s.d.]. Disponível em: https://mundoeducacao.uol.com.br/geografia/clima-semiarido.htm. Acesso em: 02 ago. 2026.</div>
+                <div class="ref-item">SOUSA, Joacileide Bezerra de. <strong>Geografia e literatura</strong>: um posicionamento a partir da obra “Vidas Secas” de Graciliano Ramos. 2013. TCC (Licenciatura em Geografia) - UFCG, 2013. Disponível em: https://dspace.sti.ufcg.edu.br/. Acesso em: 02 ago. 2026.</div>
+                <div class="ref-item">TV PUC-RIO. <strong>Biomas do Brasil | Ep. 6 | Caatinga: Semiárido nordestino</strong>. YouTube, 2021. Disponível em: https://www.youtube.com/watch?v=TSkFkcA26_E. Acesso em: 02 ago. 2026.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            dots[slideIndex].classList.remove('active');
+            slideIndex = n;
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

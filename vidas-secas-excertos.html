@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de Excertos: Vidas Secas - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --accent: #ffeaa7;
+            --bg-body: #1a1a1a;
+            --bg-card: rgba(255, 255, 255, 0.08);
+            --text-color: #ffffff;
+            --font-reader: 'Merriweather', serif;
+        }
+
+        body.sepia { --bg-body: #f4ecd8; --bg-card: rgba(255, 255, 255, 0.6); --text-color: #433422; --primary: #8c7ae6; }
+        body.dark { --bg-body: #0f0f0f; --bg-card: rgba(20, 20, 20, 0.8); --text-color: #e0e0e0; }
+
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('estante-livros4.jpg') no-repeat center center fixed;
+            background-size: cover; color: var(--text-color); transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.85em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        .controles-visualizacao { margin: 20px 0; display: flex; gap: 10px; }
+        .btn-theme { padding: 8px 15px; border-radius: 10px; border: 1px solid var(--primary); background: var(--bg-card); color: var(--text-color); cursor: pointer; font-size: 0.8em; transition: 0.2s; }
+        .btn-theme:hover { background: var(--primary); color: white; }
+
+        main { max-width: 850px; width: 92%; margin-bottom: 120px; }
+        .card-leitura { background: var(--bg-card); backdrop-filter: blur(15px); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 550px; }
+
+        .pagina { display: none; animation: fadeIn 0.5s; }
+        .pagina.ativa { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .texto-obra { font-family: var(--font-reader); font-size: 1.22em; line-height: 2; text-align: justify; }
+        h2 { font-family: 'Inter', sans-serif; color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 30px; font-size: 1.4em; text-transform: uppercase; }
+
+        .progresso-footer { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .bar-container { width: 100%; max-width: 600px; height: 8px; background: #333; border-radius: 10px; overflow: hidden; }
+        #bar-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+        .controles-paginacao { display: flex; gap: 30px; }
+        .btn-page { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-page:hover:not(:disabled) { transform: scale(1.05); background: #5649c0; }
+        .btn-page:disabled { opacity: 0.3; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav><a href="vidas-secas-contexto.html" class="btn-nav">Sair da Leitura</a></nav>
+    </header>
+
+    <div class="controles-visualizacao">
+        <button class="btn-theme" onclick="setTheme('default')">☀ Padrão</button>
+        <button class="btn-theme" onclick="setTheme('sepia')">📜 Sépia</button>
+        <button class="btn-theme" onclick="setTheme('dark')">🌙 Noturno</button>
+    </div>
+
+    <main>
+        <article class="card-leitura texto-obra">
+            
+            <div class="pagina ativa" id="p1">
+                <h2>1. A Travessia e a Fome</h2>
+                <p>Na planície avermelhada os juazeiros alargavam duas manchas verdes. Os infelizes tinham caminhado o dia inteiro, estavam cansados e famintos. Ordinariamente andavam pouco, mas como haviam repousado bastante na areia do rio seco, a viagem progredira bem três léguas. Fazia horas que procuravam uma sombra. A folhagem dos juazeiros apareceu longe, através dos galhos pelados da catinga rala.</p>
+                <p>Pararam. Sinhá Vitória assentou-se no chão, pondo no colo a cabeça do filho mais velho, que de vez em quando estremecia, assustado. Fabiano largou o baú, a espingarda e o saco de mantimentos, olhou o céu com desgosto. Estava tudo azul, de um azul terrível que cegava.</p>
+                <p>Baleia, as costelas à mostra, lambia as feridas das patas. Estava exausta, mas não reclamava. O menino mais novo começou a chorar baixinho. Sinhá Vitória, com os dedos grossos e cascudos, catava-lhe os carrapatos, num gesto mecânico de paciência desesperada.</p>
+            </div>
+
+            <div class="pagina" id="p2">
+                <h2>2. A Nuvem e a Esperança</h2>
+                <p>Fabiano seguiu-a com a vista e espantou-se: uma sombra passava por cima do monte. Tocou o braço da mulher, apontou o céu, ficaram os dois algum tempo aguentando a claridade do sol. Enxugaram as lágrimas, foram agachar-se perto dos filhos, suspirando, conservaram-se encolhidos, temendo que a nuvem se tivesse desfeito, vencida pelo azul terrível, aquele azul que deslumbrava e endoidecia a gente.</p>
+                <p>Miudinhos, perdidos no deserto queimado, os fugitivos agarraram-se, somaram as suas desgraças e os seus pavores. O coração de Fabiano bateu junto do coração de sinhá Vitória, um abraço cansado aproximou os farrapos que os cobriam. Resistiram à fraqueza, afastaram-se vergonhosos, sem ânimo de afrontar de novo a luz dura, receosos de perder a esperança que os alentava.</p>
+                <p>Lembrou-se dos filhos, da mulher e da cachorra, que estavam lá em cima, debaixo de um juazeiro, com sede. Lembrou-se do preá morto. Encheu a cuia, ergueu-se, afastou-se, lento, para não derramar a água salobra. Subiu a ladeira. A aragem morna acudia os xiquexiques e os mandacarus. Uma palpitação nova.</p>
+            </div>
+
+            <div class="pagina" id="p3">
+                <h2>3. O Orgulho de ser Bicho</h2>
+                <p>Fabiano ia satisfeito. Sim senhor, arrumara-se. Chegara naquele estado, com a família morrendo de fome, comendo raízes. Caíra no fim do pátio, debaixo de um juazeiro, depois tomara conta da casa deserta. Ele, a mulher e os filhos tinham-se habituado à camarinha escura, pareciam ratos — e a lembrança dos sofrimentos passados esmorecera.</p>
+                <p>"Fabiano, você é um homem", exclamou em voz alta. Conteve-se, notou que os meninos estavam perto, com certeza iam admirar-se ouvindo-o falar só. E, pensando bem, ele não era homem: era apenas um cabra ocupado em guardar coisas dos outros. Vermelho, queimado, tinha os olhos azuis, a barba e os cabelos ruivos; mas como vivia em terra alheia, cuidava de animais alheios, descobria-se, encolhia-se na presença dos brancos e julgava-se um cabra.</p>
+                <p>Olhou em torno, com receio de que, fora os meninos, alguém tivesse percebido a frase imprudente. Corrigiu-a, murmurando: "Você é um bicho, Fabiano". Isto para ele era motivo de orgulho. Sim senhor, um bicho, capaz de vencer dificuldades.</p>
+            </div>
+
+            <div class="pagina" id="p4">
+                <h2>4. O Abismo da Linguagem</h2>
+                <p>Vivia longe dos homens, só se dava bem com animais. Os seus pés duros quebravam espinhos e não sentiam a quentura da terra. Montado, confundia-se com o cavalo, grudava-se a ele. E falava uma linguagem cantada, monossilábica e gutural, que o companheiro entendia.</p>
+                <p>Na verdade falava pouco. Admirava as palavras compridas e difíceis da gente da cidade, tentava reproduzir algumas, em vão, mas sabia que elas eram inúteis e talvez perigosas. Estava acostumado a ser mandado. Nunca aprendera, não sabia explicar-se.</p>
+                <p>Às vezes largava nomes arrevesados, por embromação. Via perfeitamente que tudo era besteira. Não podia arrumar o que tinha no interior. Se pudesse, ah! Se pudesse, atacaria os soldados amarelos que maltratavam as criaturas inofensivas.</p>
+            </div>
+
+            <div class="pagina" id="p5">
+                <h2>5. O Desejo de Sinhá Vitória</h2>
+                <p>Avizinhou-se da janela baixa da cozinha, viu os meninos entretidos no barreiro, sujos de lama, fabricando boi de barro, que secavam ao sol, sob o pé-de-turco, e não encontrou motivo para repreendê-los. Pensou de novo na cama de varas e mentalmente xingou Fabiano. Dormiam naquilo, tinha-se acostumado, mas seria mais agradável dormirem numa cama de lastro de couro, como outras pessoas.</p>
+                <p>Fazia mais de um ano que falava nisso ao marido. No começo Fabiano rira, dissera que não era gente de luxo. Depois se calara, admitira a ideia, mas não tomara providências. Sinhá Vitória desejava uma cama real, de couro e sucupira, igual à de seu Tomás da bolandeira.</p>
+                <p>Estremeceu lembrando-se da seca, o rosto moreno desbotou, os olhos pretos arregalaram-se. Diligenciou afastar a recordação, temendo que ela virasse realidade. Rezou baixinho uma ave-maria, já tranquila, a atenção desviada para um buraco que havia na cerca do chiqueiro das cabras.</p>
+            </div>
+
+            <div class="pagina" id="p6">
+                <h2>6. A Herança do Sertanejo</h2>
+                <p>Baixou a cabeça, tornou a olhar a poça escura que o gado esvaziara. Uns riachos miúdos marejavam na areia como artérias abertas de animais. Recordou-se das cabras abatidas a mão de pilão, penduradas de cabeça para baixo num caibro do copiar, sangrando.</p>
+                <p>Retirou-se. A humilhação atenuou-se pouco a pouco e morreu. Precisava entrar em casa, jantar, dormir. E precisava crescer, ficar tão grande como Fabiano, matar cabras a mão de pilão, trazer uma faca de ponta à cintura.</p>
+                <p>Ia crescer, espichar-se numa cama de varas, fumar cigarros de palha, calçar sapatos de couro cru. Subiu a ladeira, chegou-se a casa devagar, entortando as pernas, banzeiro. Quando fosse homem, caminharia assim, pesado, cambaio, importante, as rosetas das esporas tilintando.</p>
+            </div>
+
+            <div class="pagina" id="p7">
+                <h2>7. O Prenúncio da Água</h2>
+                <p>As vacas vinham abrigar-se junto à parede da casa, pegada ao curral, a chuva fustigava-as, os chocalhos batiam. Iriam engordar com o pasto novo, dar crias. O pasto cresceria no campo, as árvores se enfeitariam, o gado se multiplicaria.</p>
+                <p>Engordariam todos, ele Fabiano, a mulher, os dois filhos e a cachorra Baleia. Talvez sinhá Vitória adquirisse uma cama de lastro de couro. Realmente o jirau de varas onde se espichavam era incômodo.</p>
+                <p>Fabiano gesticulava. Sinhá Vitória agitava o abano para sustentar as labaredas no angico molhado. Os meninos, sentindo frio numa banda e calor na outra, não podiam dormir e escutavam as lorotas do pai. Fabiano, seguro, baseado nas informações dos mais velhos, narrava uma briga de que saíra vencedor. A briga era sonho, mas Fabiano acreditava nela.</p>
+            </div>
+
+            <div class="pagina" id="p8">
+                <h2>8. O Sonho de Baleia</h2>
+                <p>A cachorra Baleia estava para morrer, moribunda. Tinha emagrecido, o pelo caíra-lhe em vários pontos, as costelas avultavam num fundo róseo, onde manchas escuras supuravam e sangravam, cobertas de moscas.</p>
+                <p>Olhou-se de novo, aflita. Que lhe estaria acontecendo? O nevoeiro engrossava e aproximava-se. Sentiu o cheiro bom dos preás que desciam do morro, mas o cheiro vinha fraco e havia nele partículas de outros viventes.</p>
+                <p>Baleia queria dormir. Acordaria feliz, num mundo cheio de preás. E lamberia as mãos de Fabiano, um Fabiano enorme. As crianças se espojariam com ela, rolariam com ela num pátio enorme, num chiqueiro enorme. O mundo ficaria todo cheio de preás, gordos, enormes.</p>
+            </div>
+
+            <div class="pagina" id="p9">
+                <h2>9. A Injustiça das Contas</h2>
+                <p>O patrão realizava cálculos incompreensíveis. Fabiano deixara indignado o escritório do branco, certo de que fora enganado. Não podia dizer em voz alta que aquilo era um furto, mas era.</p>
+                <p>Desejava saber o tamanho da extorsão. Da última vez que fizera contas com o amo o prejuízo parecia menor. Alarmou-se. Ouvira falar em juros e em prazos. Isto lhe dera uma impressão bastante penosa. Esfolavam-no. Muito bom uma criatura ser assim, ter recursos para se defender. Ele não tinha.</p>
+                <p>Se ele soubesse falar como Sinha Terta, procuraria serviço noutra fazenda, haveria de arranjar-se. Não sabia. Baixava a crista. Se não baixasse, desocuparia a terra. E onde iria amarrar o bode? Morreriam todos de fome.</p>
+            </div>
+
+            <div class="pagina" id="p10">
+                <h2>10. O Destino Circular</h2>
+                <p>Mas quando a fazenda se despovoou, viu que tudo estava perdido, combinou a viagem com a mulher, matou o bezerro morrinhento que possuíam, salgou a carne, largou-se com a família, sem se despedir do amo. Não poderia nunca liquidar aquela dívida exagerada. Só lhe restava jogar-se no mundo, como negro fugido.</p>
+                <p>Iriam para diante, alcançariam uma terra desconhecida. Fabiano estava contente e acreditava nessa terra, porque não sabia como ela era nem onde era. E andavam para o sul, metidos naquele sonho. Uma cidade grande, cheia de pessoas fortes. Os meninos em escolas, aprendendo coisas difíceis e necessárias.</p>
+                <p>Chegariam a uma terra desconhecida e civilizada, ficariam presos nela. E o sertão continuaria a mandar gente para lá. O sertão mandaria para a cidade homens fortes, brutos, como Fabiano, Sinhá Vitória e os dois meninos.</p>
+            </div>
+
+        </article>
+    </main>
+
+    <footer class="progresso-footer">
+        <div class="bar-container"><div id="bar-fill"></div></div>
+        <span id="label-progresso" style="font-size: 0.9em; color: var(--accent); font-weight: bold;">Trecho 1 de 10</span>
+        <div class="controles-paginacao">
+            <button class="btn-page" id="btnPrev" onclick="mudarPagina(-1)" disabled>Anterior</button>
+            <button class="btn-page" id="btnNext" onclick="mudarPagina(1)">Próximo</button>
+        </div>
+    </footer>
+
+    <script>
+        let paginaAtual = 1;
+        const totalPaginas = 10;
+
+        function mudarPagina(direcao) {
+            document.getElementById(`p${paginaAtual}`).classList.remove('ativa');
+            paginaAtual += direcao;
+            document.getElementById(`p${paginaAtual}`).classList.add('ativa');
+
+            document.getElementById('btnPrev').disabled = (paginaAtual === 1);
+            document.getElementById('btnNext').disabled = (paginaAtual === totalPaginas);
+
+            const progresso = ((paginaAtual - 1) / (totalPaginas - 1)) * 100;
+            document.getElementById('bar-fill').style.width = progresso + "%";
+            document.getElementById('label-progresso').innerText = `Trecho ${paginaAtual} de ${totalPaginas}`;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setTheme(theme) {
+            document.body.className = '';
+            if(theme !== 'default') document.body.classList.add(theme);
+        }
+    </script>
+</body>
+</html>

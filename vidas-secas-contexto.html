@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidas Secas: Paisagens e Identidades - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        
+        .card-contexto {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+
+        .video-fake-player {
+            position: relative; width: 100%; background-color: #000; border-radius: 20px;
+            overflow: hidden; cursor: pointer; margin: 30px 0 10px; aspect-ratio: 16 / 9;
+            border: 2px solid var(--accent); display: block;
+        }
+        .video-fake-player img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.3s; }
+        .video-fake-player:hover img { opacity: 0.5; transform: scale(1.01); }
+        .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.2); transition: 0.3s;
+        }
+        .play-button {
+            width: 80px; height: 80px; background: var(--video-btn); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-size: 30px; box-shadow: 0 0 30px rgba(231, 76, 60, 0.5);
+        }
+
+        .grid-interdisciplinar { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card-link-disciplina {
+            background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: white;
+            transition: 0.3s; display: block;
+        }
+        .card-link-disciplina:hover { background: rgba(108, 92, 231, 0.15); border-color: var(--accent); transform: translateY(-5px); }
+
+        .grid-acoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+        .btn-acao {
+            background: rgba(255, 255, 255, 0.08); padding: 25px; border-radius: 25px;
+            text-align: center; text-decoration: none; color: white; transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column;
+            align-items: center; gap: 10px;
+        }
+        .btn-acao:hover { background: var(--primary); border-color: var(--accent); transform: translateY(-5px); }
+        .btn-acao strong { font-size: 1.1em; color: var(--accent); }
+        .btn-acao span { font-size: 2.5em; }
+
+        .secao-referencias {
+            margin-top: 50px; padding: 40px; background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px; font-size: 0.85em; border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ref-item { margin-bottom: 20px; color: #dfe6e9; text-align: justify; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="paisagens-identidades.html" class="btn-nav-topo">Voltar ao Eixo</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-contexto">
+            <h1>Vidas Secas</h1>
+            <section>
+                <p>Publicado em 1938, <strong>Vidas Secas</strong> é a obra-prima de Graciliano Ramos e um dos marcos definitivos do Regionalismo de 30 no Brasil. Em um cenário dominado pela aridez da caatinga e pela inclemência do sol, acompanhamos a saga de uma família de retirantes — Fabiano, Sinhá Vitória, seus dois filhos e a cachorra Baleia — em uma luta pela sobrevivência. A narrativa é marcada por uma estética da secura, que evita o sentimentalismo para expor a crueza da condição humana no sertão.</p>
+                <p>Mais do que um relato sobre a falta de chuva, o romance denuncia as <strong>vidas secas</strong>: existências despojadas de direitos e voz por um sistema social opressor. Através da exploração latifundiária e da violência de figuras de autoridade, a obra revela como a miséria social é, muitas vezes, mais devastadora que a própria seca da natureza.</p>
+            </section>
+
+            <section>
+                <h2>Análise e Reflexão</h2>
+                <p>Para uma imersão profunda nos temas de descaso social e exploração humana presentes na obra, recomendamos a análise do professor <strong>Thiago Mio Salla</strong> (ECA-USP). Em uma produção de excelência do <strong>Canal USP</strong>, referência em conteúdo acadêmico e cultural de qualidade, o professor explora a artesania da palavra de Graciliano e a atemporalidade de sua denúncia.</p>
+
+                <a href="https://www.youtube.com/watch?v=dtCJFIyjYvE" target="_blank" style="text-decoration:none;">
+                    <div class="video-fake-player">
+                        <img src="https://img.youtube.com/vi/dtCJFIyjYvE/maxresdefault.jpg" alt="Análise Vidas Secas - Canal USP">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                </a>
+                <p style="font-size: 0.85em; text-align: center; color: #dfe6e9; font-style: italic;">Conteúdo Externo | Fonte: Canal USP l Prof. Thiago Mio Salla.</p>
+            </section>
+
+            <section style="margin-top: 40px; border-left: 5px solid var(--primary); padding-left: 20px;">
+                <h2 style="margin-top: 0; background-color: var(--primary); color: white; padding: 2px 10px; display: inline-block;">Do ponto de vista da...</h2>
+                <p style="margin-top: 20px;">Para uma formação <strong>integral</strong>, explore como as diferentes áreas iluminam a obra:</p>
+                
+                <div class="grid-interdisciplinar">
+                    <a href="vidas-secas-geografia.html" class="card-link-disciplina">
+                        <strong style="color: var(--accent); display: block; margin-bottom: 12px; font-size: 1.1em;">🌵 Geografia: Espaço e Meio</strong>
+                        <p style="font-size: 0.95em; margin: 0; line-height: 1.5;">Entenda a relação entre o semiárido, o bioma da caatinga e os fluxos migratórios retratados por Graciliano.</p>
+                    </a>
+                    <a href="vidas-secas-sociologia.html" class="card-link-disciplina">
+                        <strong style="color: var(--accent); display: block; margin-bottom: 12px; font-size: 1.1em;">⚖️ Sociologia: Poder e Exclusão</strong>
+                        <p style="font-size: 0.95em; margin: 0; line-height: 1.5;">Analise as estruturas de dominação, a exploração do trabalho e a falta de cidadania no sertão.</p>
+                    </a>
+                </div>
+            </section>
+
+            <div class="grid-acoes">
+                <a href="graciliano-autor.html" class="btn-acao"><span>✍️</span><strong>O Autor</strong></a>
+                <a href="modernismo.html" class="btn-acao"><span>🏛️</span><strong>Modernismo</strong></a>
+                <a href="vidas-secas-excertos.html" class="btn-acao" style="background: rgba(108, 92, 231, 0.3);"><span>📖</span><strong>Trechos da Obra</strong></a>
+                <a href="vidas-secas-glossario.html" class="btn-acao"><span>🔍</span><strong>Glossário</strong></a>
+                <a href="professor-vidas-secas.html" class="btn-acao"><span>👨‍🏫</span><strong>Espaço do Professor</strong></a>
+                <a href="https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/255/2025/04/vidas-secas.pdf" target="_blank" class="btn-acao"><span>⬇️</span><strong>Obra Completa</strong></a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="secao-referencias">
+        <h4 style="color: var(--accent); text-transform: uppercase; margin-bottom: 25px;">📚 Referências Bibliográficas</h4>
+        
+        <div class="ref-item">ARAUJO, Gabriela. <strong>A cultura de resistência em Vidas Secas de Graciliano Ramos</strong>. In: Gelne, 2014. Disponível em: https://gelne.com.br/arquivos/anais/gelne-2014/anexos/476.pdf. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">BOSI, Alfredo. <strong>História Concisa da Literatura Brasileira</strong>. São Paulo: Cultrix, 2006.</div>
+
+        <div class="ref-item">BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">CANAL USP. <strong>“Vidas Secas” denuncia o descaso social e a exploração humanas</strong>. Entrevistado: Thiago Mio Salla. YouTube, 2018. Disponível em: https://www.youtube.com/watch?v=dtCJFIyjYvE. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">CANDIDO, Antonio. <strong>A Personagem de Ficção</strong>. São Paulo: Perspectiva, 2009.</div>
+
+        <div class="ref-item">COELHO, Victor de Oliveira Pinto. <strong>Vidas secas e o sol da esperança</strong>: uma análise da obra de Graciliano Ramos. Literatura E Autoritarismo, n. 11, 2008. Disponível em: https://periodicos.ufsm.br/LA/article/view/73939/51264. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">GOMES, L. C. A.; LIMA, C. M. D.; SILVA, C. C. G. <strong>A Busca da Felicidade na Obra Vidas Secas, de Graciliano Ramos</strong>: Território Simbólico, Identidade e Cultura. Revista Tópicos, v. 4, n. 34, p. 1-18, 2026. Disponível em: https://revistatopicos.com.br/generate/pdf_zenodo/pub_781549504.pdf. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">GUIA DO ESTUDANTE. <strong>“Vidas secas” – Análise da obra de Graciliano Ramos</strong>. 2012. Disponível em: https://guiadoestudante.abril.com.br/estudo/vidas-secas-analise-da-obra-de-graciliano-ramos/. Acesso em: 02 ago. 2026.</div>
+
+       <div class="ref-item">RAMOS, Graciliano. <strong>Vidas Secas</strong>. Rio de Janeiro: José Olympio, 1938. Disponível em: https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/255/2025/04/vidas-secas.pdf. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">SALLA, Thiago Mio. <strong>“Vidas Secas” denuncia o descaso social e a exploração humana</strong>. Jornal da USP, 2018. Disponível em: https://jornal.usp.br/cultura/vidas-secas-denuncia-o-descaso-social-e-a-exploracao-humana/. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">SOUSA, Joacileide Bezerra de. <strong>Geografia e literatura</strong>: uma abordagem a partir da obra "Vidas Secas". 2013. TCC (Licenciatura em Geografia) - UFCG, Campina Grande, 2013. Disponível em: https://dspace.sti.ufcg.edu.br/bitstream/riufcg/10390/3/JOACILEIDE%20BEZERRA%20DE%20SOUSA%20-%20TCC%20LICENCIATURA%20EM%20GEOGRAFIA%202013.pdf. Acesso em: 02 ago. 2026.</div>
+
+        <div class="ref-item">SOUZA, Warley. <strong>Vidas secas</strong>: análise da obra de Graciliano Ramos. Brasil Escola, [s.d.]. Disponível em: https://brasilescola.uol.com.br/literatura/vidas-secas.htm. Acesso em: 02 ago. 2026.</div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura: O Cortiço - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-card: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --text-color: #ffffff;
+        }
+        body.sepia { --bg-card: rgba(244, 236, 215, 0.95); --text-color: #433422; }
+        body.dark { --bg-card: rgba(20, 20, 25, 0.95); --text-color: #e0e0e0; }
+        
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('estante-livros4.jpg') no-repeat center center fixed;
+            background-size: cover; color: var(--text-color); transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.85em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        .controles-visualizacao { margin: 20px 0; display: flex; gap: 10px; }
+        .btn-theme { padding: 8px 15px; border-radius: 10px; border: 1px solid var(--primary); background: var(--bg-card); color: var(--text-color); cursor: pointer; font-size: 0.8em; }
+        
+        main { max-width: 850px; width: 92%; margin-bottom: 120px; }
+        .card-leitura { background: var(--bg-card); backdrop-filter: blur(15px); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 550px; }
+        
+        .pagina { display: none; animation: fadeIn 0.5s; }
+        .pagina.ativa { display: block; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 30px; font-size: 1.4em; }
+        p { line-height: 1.9; font-size: 1.15em; text-align: justify; margin-bottom: 20px; }
+
+        .progresso-footer { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .bar-container { width: 100%; max-width: 600px; height: 8px; background: #333; border-radius: 10px; overflow: hidden; }
+        #bar-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+        .controles-paginacao { display: flex; gap: 30px; }
+        .btn-page { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-page:hover:not(:disabled) { transform: scale(1.05); background: #5649c0; }
+        .btn-page:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="cortico-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial18:21 01/08/2026</a>
+        </nav>
+    </header>
+
+    <div class="controles-visualizacao">
+        <button class="btn-theme" onclick="setTheme('default')">Padrão</button>
+        <button class="btn-theme" onclick="setTheme('sepia')">Sépia</button>
+        <button class="btn-theme" onclick="setTheme('dark')">Escuro</button>
+    </div>
+
+    <main>
+        <article class="card-leitura">
+            <!-- Trecho 1: A Gênese da Ambição -->
+            <div class="pagina ativa" id="p1">
+                <h2>Trecho 1: A Gênese da Ambição (Capítulo I)</h2>
+                <p>João Romão foi, dos treze aos vinte e cinco anos, empregado de um vendeiro que enriqueceu entre as quatro paredes de uma suja e obscura taverna nos refolhos do bairro do Botafogo; e tanto economizou do pouco que ganhara nessa dúzia de anos, que, ao retirar-se o patrão para a terra, lhe deixou, em pagamento de ordenados vencidos, nem só a venda com o que estava dentro, como ainda um conto e quinhentos em dinheiro.</p>
+                <p>Proprietário e mestre de si, João Romão tornou-se um tipo de egoísmo e de ambição. Não pensou mais em casar, não pensou em divertir-se; pensou unicamente em juntar dinheiro. E para isso não teve escrúpulos. Começou por mentir na balança e nos pesos; continuou por falsificar os vinhos e a aguardente; e acabou por roubar escandalosamente os seus fregueses.</p>
+                <p>Uniu-se a Bertoleza, uma crioula robusta que ganhava a vida a vender peixe. Bertoleza amava o trabalho e era econômica; João Romão convenceu-a de que deviam juntar os seus capitais e trabalhar para um futuro comum. Ele tomou conta do dinheiro dela e, para segurá-la melhor, forjou uma carta de alforria, fazendo-a acreditar que estava livre, enquanto na verdade ele apenas a escravizava para o seu próprio lucro.</p>
+            </div>
+
+            <!-- Trecho 2: O Despertar do "Organismo" -->
+            <div class="pagina" id="p2">
+                <h2>Trecho 2: O Despertar do "Organismo" (Capítulo III)</h2>
+                <p>Eram cinco horas da manhã e o cortiço acordava, abrindo, não os olhos, mas a sua infinidade de portas e janelas alinhadas. Um acordar alegre e farto de quem dormiu de uma assentada sete horas de chumbo. Como que se sentiam ainda na indolência de neblina as derradeiras notas da última guitarra da noite antecedente, dissolvendo-se à luz loura e tenra da aurora, que nem um suspiro de saudade perdido em terra alheia.</p>
+                <p>A roupa lavada, que ficara de véspera nos coradouros, umedecia o ar e punha-lhe um farto acre de sabão ordinário. As pedras do chão, esbranquiçadas no lugar da lavagem e em alguns pontos azuladas pelo anil, mostravam uma palidez grisalha e triste, feita de acumulações de espumas secas. Entretanto, das portas surgiam cabeças congestionadas de sono; ouviam-se amplos bocejos, fortes como o marulhar das ondas.</p>
+                <p>E naquela terra encharcada e fumegante, naquela umidade quente e lodosa, começou a minhocar, a esfervilhar, a crescer, um mundo, uma coisa viva, uma geração que parecia brotar espontânea, ali mesmo, daquele lamério, e multiplicar-se como larvas no esterco.</p>
+            </div>
+
+            <!-- Trecho 3: A Fervura do Trabalho -->
+            <div class="pagina" id="p3">
+                <h2>Trecho 3: A Fervura do Trabalho (Capítulo III)</h2>
+                <p>O rumor crescia, condensando-se; o zunzum de todos os dias acentuava-se; já se não distinguíam vozes isoladas, mas um só ruído formidável, que enchia o pátio e as vizinhanças. O trabalho começava; e o cortiço, em plena atividade, fervia de uma ponta a outra, como uma colmeia cujas abelhas voltassem de súbito ao serviço.</p>
+                <p>As lavadeiras, de braços nus, esfregavam a roupa com furor; a água espumama nas tinas e corria pelo chão, levando consigo a sujeira e o suor daquela massa humana. Os pedreiros e cavouqueiros preparavam-se para a pedreira; os caixeiros de João Romão corriam de um lado para outro, atendendo aos pedidos que choviam na venda.</p>
+                <p>Era a luta pela vida em sua forma mais crua; o esforço muscular de homens e mulheres que, debaixo de um sol implacável, davam o melhor de si para garantir o pão de cada dia, enquanto o dono da estalagem, vigilante, contabilizava cada centavo arrancado àquela miséria coletiva.</p>
+            </div>
+
+            <!-- Trecho 4: A Chegada de Jerônimo -->
+            <div class="pagina" id="p4">
+                <h2>Trecho 4: A Chegada de Jerônimo (Capítulo IV)</h2>
+                <p>Jerônimo era um homem de trinta anos, forte, calmo, com uma seriedade de animal bom e paciente. Chegara de Portugal com a mulher, Piedade, e a filha, Marianita, trazendo consigo a honestidade e a disposição para o trabalho pesado. João Romão logo viu nele o trabalhador ideal para a sua pedreira, alguém capaz de impor ordem e disciplina onde antes reinava a ineficiência.</p>
+                <p>— Jerônimo, para o servir. — Servir a Deus. Sua mulher lava? — É lavadeira, sim senhor. — Bem, precisamos ver-lhe uma tina. E o vendeiro empurrou a porta do fundo da estalagem, de onde escapou, como de uma panela fervendo que se destapa, uma baforada quente, vozeria tresandante à fermentação de suores e roupa ensaboada secando ao sol.</p>
+                <p>A princípio, o português manteve os seus costumes europeus; era econômico, sóbrio e voltado unicamente para a família e para a esperança de um dia voltar à pátria. Mas o cortiço, com o seu calor e a sua promiscuidade, já começava a estender os seus tentáculos invisíveis sobre aquele espírito comedido.</p>
+            </div>
+
+            <!-- Trecho 5: O Furacão Rita Baiana -->
+            <div class="pagina" id="p5">
+                <h2>Trecho 5: O Furacão Rita Baiana (Capítulo VII)</h2>
+                <p>Rita Baiana apareceu à porta da sua casa, rindo, com o seu olhar de pecado e a sua graça de mestiça. Vinha acompanhada por um moleque, que trazia na cabeça um enorme samburá carregado de compras feitas no mercado; um grande peixe espiava por entre folhas de alface com o seu olhar embaciado e triste, contrastando com as risonhas cores dos rabanetes.</p>
+                <p>Acudiu quase todo o cortiço para recebê-la. Choveram abraços e as chufas do bom acolhimento. Por onde andara aquele diabo, que não aparecia para mais de três meses? — Ora, nem me fales, coração! Sabe? Pagode de roça! Que hei de fazer? É a minha cachaça velha!...</p>
+                <p>Ela era a alegria e o desequilíbrio daquela habitação; onde Rita estava, havia música, havia riso e havia desejo. O seu corpo, que parecia feito de borracha, movia-se com uma volúpia que perturbava os homens e despertava inveja nas outras mulheres; ela era a própria encarnação do meio tropical, ardente e perigoso.</p>
+            </div>
+
+            <!-- Trecho 6: A Dança da Sedução -->
+            <div class="pagina" id="p6">
+                <h2>Trecho 6: A Dança da Sedução (Capítulo VII)</h2>
+                <p>E aquela música de fogo doidejava no ar como um aroma quente de plantas brasileiras, em torno das quais se nutrem, girando, moscardos sensuais e besouros venenosos, freneticamente, bêbedos do delicioso perfume que os mata de volúpia. Calaram-se as melancólicas toadas dos de além-mar ante a viva crepitação da música baiana.</p>
+                <p>Rita Baiana surgiu de ombros e braços nus para dançar. A lua envolvia-a na sua coma de prata, a cujo refulgir os meneios da mestiça melhor se acentuavam, cheios de uma graça irresistível, simples, primitiva, feita toda de pecado, toda de paraíso, com muito de serpente e muito de mulher.</p>
+                <p>Ela saltou em meio da roda, rebolando as ilhargas e bamboleando a cabeça, num requebrado luxurioso que a punha ofegante. Em torno o entusiasmo tocava ao delírio; um grito de aplausos explodia de vez em quando, rubro e quente como deve ser um grito saído do sangue. E Jerônimo via e escutava, sentindo ir-se-lhe toda a alma pelos olhos enamorados.</p>
+            </div>
+
+            <!-- Trecho 7: A Metamorfose do Português -->
+            <div class="pagina" id="p7">
+                <h2>Trecho 7: A Metamorfose do Português (Capítulo IX)</h2>
+                <p>Uma transformação, lenta e profunda, operava-se em Jerônimo, dia a dia, hora a hora, reviscerando-lhe o corpo e alando-lhe os sentidos, num trabalho misterioso e surdo de crisálida. A sua energia afrouxava lentamente: fazia-se contemplativo e amoroso. A vida americana e a natureza do Brasil patenteavam-lhe agora aspectos imprevistos e sedutores que o comoviam.</p>
+                <p>Esquecia-se dos seus primitivos sonhos de ambição; para idealizar felicidades novas, picantes e violentas; tornava-se liberal, imprevidente e franco, mais amigo de gastar que de guardar; adquiria desejos, tomava gosto aos prazeres, e volvia-se preguiçoso resignando-se, vencido, às imposições do sol e do calor.</p>
+                <p>E o curioso é que quanto mais ia ele caindo nos usos e costumes brasileiros, tanto mais os seus sentidos se apuravam, posto que em detrimento das suas forças físicas. Rita apagara-lhe a última réstia das recordações da pátria; secou, ao calor dos seus lábios grossos e vermelhos, a derradeira lágrima de saudade que o desterrado lançou do coração.</p>
+            </div>
+
+            <!-- Trecho 8: O Despertar Malicioso de Pombinha -->
+            <div class="pagina" id="p8">
+                <h2>Trecho 8: O Despertar Malicioso de Pombinha (Capítulo XII)</h2>
+                <p>Pombinha, de mãos postas sobre o regaço, a cabeça pendida, olhava para o chão, mergulhada em pensamentos que a levavam para longe daquela esterqueira. Só depois que o sol lhe abençoou o ventre; depois que nas suas entranhas ela sentiu o primeiro grito de sangue de mulher, teve olhos para as violentas misérias dolorosas ao seu redor.</p>
+                <p>A sua intelectualidade, tal como seu corpo, desabrochara inesperadamente, atingindo de súbito uma lucidez que a deliciava e surpreendia. Agora, encarando a vida, ela compreendeu e avaliou a fraqueza dos homens, a fragilidade desses animais fortes, mas que se deixavam conduzir humildes pela soberana e delicada mão da fêmea.</p>
+                <p>Sentiu diante dos olhos aquela massa informe de machos e fêmeas a comichar e fremir concupiscente. E na sua alma enfermiça, a moça pressentiu que nunca daria de si uma companheira amiga e leal; pressentiu que o mundo era um lugar de trocas e interesses, onde a inocência era apenas um obstáculo a ser superado.</p>
+            </div>
+
+            <!-- Trecho 9: O Crime Passional -->
+            <div class="pagina" id="p9">
+                <h2>Trecho 9: O Crime Passional (Capítulo XV)</h2>
+                <p>O Pataca alcançou o Firmo já na rua e passou-lhe o braço na cintura, amigavelmente. — Vamos devagar... disse; se não o pássaro se arisca! A praia estava deserta. Caía um chuvisco. Ventos frios sopravam do mar. O céu era um fundo negro, de uma só tinta; do lado oposto da baía os lampiões pareciam surgir d’água.</p>
+                <p>De repente, um vulto saltou da sombra. Houve um movimento rápido, um brilho de aço no ar, e um grito sufocado que morreu no barulho das ondas. Firmo caiu pesadamente sobre a areia úmida, sem tempo para defesa. Jerônimo, de pé sobre o rival, segurava a navalha ainda quente de sangue.</p>
+                <p>— De cuidar da nossa vida... segredou ele a Rita mais tarde, ao entrar em casa, encharcado e sujo, com uma terrível expressão de crime no rosto. — E ele? — Está morto. — Quem o matou? — Eu. Agora, estou disposto a tudo para ficar contigo. Sairemos os dois daqui para onde melhor for.</p>
+            </div>
+
+            <!-- Trecho 10: O Triunfo e a Tragédia Final -->
+            <div class="pagina" id="p10">
+                <h2>Trecho 10: O Triunfo e a Tragédia Final (Capítulo XXIII)</h2>
+                <p>João Romão fugira até ao canto mais escuro do armazém, tapando o rosto com as mãos. Ouvia-se lá fora o rugido de Bertoleza, que, ao ver-se traída e prestes a ser devolvida ao cativeiro, preferiu a morte à perda da sua falsa liberdade. Ela embarcou para a frente, rugindo e esfocinhando moribunda numa lameira de sangue.</p>
+                <p>Nesse momento parava à porta da rua uma carruagem luxuosa. Era uma comissão de abolicionistas que vinha, de casaca, trazer-lhe respeitosamente o diploma de sócio benemérito. O dono do cortiço, agora um homem respeitável e rico, limpou o suor da fronte e preparou o sorriso para receber os seus convidados.</p>
+                <p>O cortiço de São Romão, agora transformado em Vila, continuava a ferver, mas sob uma nova ordem. A exploração apenas mudara de face, consolidando o triunfo do capitalista sobre a massa de desvalidos, enquanto o sangue de Bertoleza secava esquecido nas pedras do pátio, como um sacrifício necessário ao progresso de seu senhor.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="progresso-footer">
+        <div class="bar-container"><div id="bar-fill"></div></div>
+        <span id="label-progresso" style="font-size: 0.9em; color: var(--accent); font-weight: bold;">Página 1 de 10</span>
+        <div class="controles-paginacao">
+            <button class="btn-page" id="btnPrev" onclick="mudarPagina(-1)" disabled>Anterior</button>
+            <button class="btn-page" id="btnNext" onclick="mudarPagina(1)">Próxima</button>
+        </div>
+    </footer>
+
+    <script>
+        let paginaAtual = 1;
+        const totalPaginas = 10;
+
+        function mudarPagina(direcao) {
+            document.getElementById(`p${paginaAtual}`).classList.remove('ativa');
+            paginaAtual += direcao;
+            document.getElementById(`p${paginaAtual}`).classList.add('ativa');
+
+            document.getElementById('btnPrev').disabled = (paginaAtual === 1);
+            document.getElementById('btnNext').disabled = (paginaAtual === totalPaginas);
+
+            const progresso = ((paginaAtual - 1) / (totalPaginas - 1)) * 100;
+            document.getElementById('bar-fill').style.width = progresso + "%";
+            document.getElementById('label-progresso').innerText = `Página ${paginaAtual} de ${totalPaginas}`;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setTheme(theme) {
+            document.body.className = '';
+            if(theme !== 'default') document.body.classList.add(theme);
+        }
+    </script>
+</body>
+</html>

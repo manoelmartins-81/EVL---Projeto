@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Cortiço: do ponto de vista da Sociologia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --info: #3498db;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-disciplina {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+
+        .tooltip { position: relative; display: inline-block; border-bottom: 1.5px dashed var(--accent); color: var(--accent); cursor: help; font-weight: 700; }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 280px; background-color: #2d3436; color: #fff;
+            text-align: center; border-radius: 10px; padding: 15px; position: absolute;
+            z-index: 100; bottom: 125%; left: 50%; margin-left: -140px; opacity: 0;
+            transition: opacity 0.3s; font-size: 0.85em; font-weight: normal; line-height: 1.4;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 1px solid var(--primary);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .slide-container { background: rgba(0,0,0,0.25); border-radius: 25px; padding: 40px; margin: 40px 0; position: relative; min-height: 250px; border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; }
+        .slide { display: none; flex: 1; text-align: center; animation: slideIn 0.4s ease-out; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide h3 { color: var(--accent); font-size: 1.5em; margin-bottom: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+        .slide-nav { padding: 15px; display: flex; justify-content: center; gap: 10px; }
+        .dot { height: 8px; width: 60px; background-color: rgba(255,255,255,0.2); border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .dot.active { background-color: var(--primary); }
+
+        .atlas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .atlas-item { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 20px; border-top: 4px solid var(--primary); transition: 0.3s; }
+        .atlas-item:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+        .icon-metafora { font-size: 2em; display: block; margin-bottom: 10px; }
+
+        .nota-aprofundamento {
+            background: rgba(108, 92, 231, 0.2); padding: 30px; border-radius: 20px;
+            border: 1px dashed var(--accent); margin-top: 30px; text-align: center;
+        }
+        .video-fake-player {
+            position: relative; width: 100%; max-width: 700px; margin: 20px auto; background-color: #000;
+            border-radius: 20px; overflow: hidden; cursor: pointer; aspect-ratio: 16 / 9;
+            border: 2px solid var(--accent); display: block;
+        }
+        .video-fake-player img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.3s; }
+        .play-button { width: 70px; height: 70px; background: var(--video-btn); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 20px rgba(231, 76, 60, 0.4); }
+
+        .linha-separadora { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px; }
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 15px; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+
+        @media (max-width: 768px) { .atlas-grid { grid-template-columns: 1fr; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="cortico-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>O Cortiço: do ponto de vista da Sociologia...</h1>
+
+            <section>
+                <h2>Capitalismo Selvagem e o Microcosmo do Brasil</h2>
+                <p>
+                    A Sociologia encontra em <em>O Cortiço</em> um retrato cru da transição do Brasil para o capitalismo no final do século XIX. A habitação coletiva de São Romão funciona como uma miniatura da sociedade brasileira, onde a exploração extrema e a busca desenfreada pelo lucro revelam as feridas de um país que acabara de sair da escravidão oficial. João Romão personifica o capitalista que enriquece através do trabalho alheio, demonstrando como o poder econômico pode esmagar a dignidade humana.
+                </p>
+
+                <p>
+                    O autor utiliza o ambiente do cortiço para analisar como a falta de recursos e a vida em condições precárias afetam a mente e o corpo dos moradores. Nesse contexto, o ser humano é visto como um produto das condições materiais, onde a sobrevivência imediata muitas vezes anula os valores morais. A obra denuncia como a ganância transforma pessoas em ferramentas de produção, retirando delas a autonomia e transformando o trabalhador em uma simples engrenagem de um sistema que só visa acumular riqueza.
+                </p>
+
+                <p>
+                    Mais do que uma história sobre moradia, o livro expõe a segregação que empurra as classes mais pobres para as margens da cidade. A rivalidade entre o cortiço e o sobrado vizinho mostra que, no Brasil, o espaço físico é uma arma de poder. Enquanto o dono do cortiço sobe degraus sociais através da traição e do roubo, os moradores são mantidos em uma estrutura de dependência, revelando que a desigualdade social é a base sobre a qual se ergueu a nossa modernidade urbana.
+                </p>
+
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>💰 Acumulação Predatória</h3>
+                        <p>João Romão representa o crescimento econômico baseado na exploração do vulnerável, usando a miséria alheia para construir seu império imobiliário e comercial.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🧬 O Meio Determinante</h3>
+                        <p>A tese de que o ambiente molda o homem. No cortiço, o calor, a promiscuidade e a sujeira são forças que impulsionam os personagens para a decadência moral.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🔗 Animalização do Sujeito</h3>
+                        <p>A "zoomorfização" reduz o homem aos seus instintos animais, justificando relações de trabalho onde o indivíduo é tratado como besta de carga para gerar lucro.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🏙️ Segregação Geográfica</h3>
+                        <p>A barreira invisível, mas real, entre a massa trabalhadora do cortiço e a elite do sobrado, refletindo a exclusão social que define as cidades brasileiras.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="atlas-container">
+                <h3 style="color: var(--accent); text-align: center; text-transform: uppercase;">📊 Atlas Sociológico: Da Estalagem à Comunidade</h3>
+                
+                <p>
+                    A evolução do cortiço para a favela não é um acidente, mas um processo histórico de exclusão. Quando o cortiço de São Romão se "moderniza" e se torna a Vila São Romão, os moradores mais pobres e inadaptados são expulsos, buscando refúgio no rival Cabeça-de-Gato ou nas encostas dos morros. Esse movimento antecipa as reformas urbanas do século XX, que demoliram as habitações populares do centro e empurraram a população marginalizada para as periferias, dando origem ao fenômeno das favelas modernas.
+                </p>
+
+                <p>
+                    Assim, a favela surge como a evolução social do cortiço: ambos são respostas à falta de 
+                    <span class="tooltip"><strong>moradia social</strong>
+                        <span class="tooltiptext">Políticas públicas de habitação digna que visam garantir o direito à moradia para as classes de baixa renda, combatendo a segregação urbana.</span>
+                    </span> 
+                    e ao direito negado à cidade. A "higienização" dos centros urbanos apenas transferiu o problema de lugar, mantendo a lógica de exploração e a invisibilidade dessas populações. Entender <em>O Cortiço</em> é compreender as raízes da desigualdade habitacional que ainda molda a paisagem das metrópoles brasileiras hoje.
+                </p>
+
+                <div class="atlas-grid">
+                    <div class="atlas-item" style="border-top-color: var(--success);">
+                        <span class="icon-metafora">🏚️</span>
+                        <strong style="color: var(--accent);">Raiz da Favela</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A expulsão dos moradores do centro para os morros após as reformas urbanas do Rio de Janeiro.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--info);">
+                        <span class="icon-metafora">⚙️</span>
+                        <strong style="color: var(--accent);">Engrenagem do Lucro</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A transformação da terra e da casa em mercadoria, excluindo quem não pode pagar os novos preços.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--warning);">
+                        <span class="icon-metafora">🏢</span>
+                        <strong style="color: var(--accent);">Função Social</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A discussão urgente sobre o direito à moradia digna frente à especulação imobiliária predatória.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--danger);">
+                        <span class="icon-metafora">⚖️</span>
+                        <strong style="color: var(--accent);">Poder Privado</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">O dono do espaço (o senhor do cortiço ou do território) exercendo controle absoluto sobre a vida alheia.</p>
+                    </div>
+                </div>
+
+                <div class="nota-aprofundamento">
+                    <strong>🎬 Visão Crítica</strong>
+                    <p>Assista a esta análise do canal <strong>O Reconstrutor</strong> que retrata a formação social brasileira e o nascimento das periferias.</p>
+                    
+                    <a href="https://www.youtube.com/watch?v=ClJIh7Aw7Lo" target="_blank" style="text-decoration:none;">
+                        <div class="video-fake-player">
+                            <img src="https://img.youtube.com/vi/ClJIh7Aw7Lo/0.jpg" alt="Sociologia em O Cortiço">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </a>
+                    <p style="font-size: 0.85em; color: #dfe6e9; font-style: italic;">Conteúdo Externo | Fonte: Canal O Reconstrutor.</p>
+                </div>
+            </section>
+
+            <hr class="linha-separadora">
+
+            <footer class="secao-referencias">
+                <h4>REFERÊNCIAS</h4>
+                <div class="ref-item">AZEVEDO, Aluísio. <strong>O Cortiço</strong>. Brasília: Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/bitstreams/de177383-d58e-45f4-a1af-e09529d033d2/download. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">BRASIL. Ministério da Educação. <strong>Base Nacional Comum Curricular</strong>: Ensino Médio. Brasília: MEC, 2018. Disponível em: http://basenacionalcomum.mec.gov.br/. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">O RECONSTRUTOR. <strong> A História Completa da Favela da Rocinha em 23 minutos</strong>. YouTube, 2021. Disponível em: https://www.youtube.com/watch?v=ClJIh7Aw7Lo. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">SILVA, Ednilson Esmério Toledo da. <strong>Além do Cortiço</strong>: um estudo sobre o Naturalismo na perspectiva lukacsiana. Escola de Sociologia e Política de São Paulo, [s.d.]. Disponível em: https://d1wqtxts1xzle7.cloudfront.net/. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">SILVA, Monalisa Rodrigues Oliveira da. <strong>Abordagem do tema transversal meio ambiente, em uma escola do ensino fundamental, através de jogos educativos</strong>. Revista Eletrônica do Mestrado em Educação Ambiental, v. 10, n. 37, 2011. Disponível em: http://www.revistaea.org/artigo.php?idartigo=1110. Acesso em: 01 ago. 2026.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            dots[slideIndex].classList.remove('active');
+            slideIndex = n;
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

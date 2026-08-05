@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário: O Cortiço - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6c5ce7; --bg-glass: rgba(255, 255, 255, 0.12); --accent: #ffeaa7; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('estante-livros4.jpg');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header { width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .btn-nav { text-decoration: none; color: white; font-weight: bold; font-size: 0.8em; padding: 8px 18px; border-radius: 30px; border: 1.5px solid white; transition: 0.3s; margin-left: 10px; }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1000px; width: 95%; margin: 40px 0; }
+        .card-glossario { background: var(--bg-glass); backdrop-filter: blur(15px); padding: 45px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+
+        h1 { color: var(--accent); text-transform: uppercase; margin-bottom: 25px; font-size: 2.2em; text-align: center; }
+        .instrucoes { line-height: 1.8; text-align: center; font-size: 1.05em; margin-bottom: 30px; opacity: 0.95; padding: 0 20px; }
+
+        .busca-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 45px; }
+        .input-group { width: 100%; max-width: 700px; display: flex; gap: 10px; }
+        #inputBusca { flex: 1; padding: 16px 25px; border-radius: 40px; border: 2px solid var(--accent); background: rgba(255,255,255,0.1); color: white; font-size: 1em; outline: none; transition: 0.3s; }
+        #inputBusca:focus { background: rgba(255,255,255,0.2); box-shadow: 0 0 15px rgba(255, 234, 167, 0.3); }
+        .btn-dicionario { background: var(--primary); color: white; border: 1.5px solid white; padding: 0 25px; border-radius: 40px; cursor: pointer; font-weight: bold; font-size: 0.9em; transition: 0.3s; text-transform: uppercase; }
+        .btn-dicionario:hover { background: white; color: var(--primary); transform: scale(1.05); }
+
+        .glossario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .item-termo { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; border-left: 5px solid var(--primary); transition: 0.3s; }
+        .item-termo:hover { background: rgba(108, 92, 231, 0.2); transform: translateX(5px); }
+        .item-termo strong { color: var(--accent); display: block; margin-bottom: 8px; font-size: 1.1em; text-transform: lowercase; font-variant: small-caps; }
+        .item-termo p { margin: 0; font-size: 0.95em; line-height: 1.5; opacity: 0.9; text-align: justify; }
+
+        .referencias-secao { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .referencias-secao h3 { color: var(--accent); text-transform: uppercase; font-size: 1.1em; margin-bottom: 15px; }
+        .ref-item { font-size: 0.85em; line-height: 1.6; opacity: 0.7; text-align: left; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 40px;">
+        <nav>
+            <a href="cortico-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-glossario">
+            <h1>Glossário: O Cortiço</h1>
+            
+            <p class="instrucoes">
+                Para facilitar sua leitura do clássico de Aluísio Azevedo, selecionamos abaixo 15 termos e expressões extraídos diretamente da obra. 
+                Caso encontre outra palavra cujo sentido escape ao contexto, utilize o campo de busca ou consulte o 
+                <strong>Dicionário Michaelis</strong> em tempo real.
+            </p>
+
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="inputBusca" placeholder="Busque um termo da obra ou no Michaelis..." onkeyup="filtrarGlossario()">
+                    <button class="btn-dicionario" onclick="pesquisarMichaelis()">Pesquisar no Dicionário</button>
+                </div>
+            </div>
+
+            <div class="glossario-grid" id="listaGlossario">
+                <div class="item-termo"><strong>Ror</strong><p>Grande quantidade ou abundância de algo.</p></div>
+                <div class="item-termo"><strong>Pachola</strong><p>Janota, elegante; sujeito folgado ou que se veste com pretensão.</p></div>
+                <div class="item-termo"><strong>Capadócio</strong><p>Espertalhão, trapaceiro; indivíduo que vive de expedientes duvidosos.</p></div>
+                <div class="item-termo"><strong>Pernóstico</strong><p>Pessoa pretensiosa ou esnobe; que tenta aparentar superioridade intelectual.</p></div>
+                <div class="item-termo"><strong>Gaforina</strong><p>Cabeleira vasta, alta e geralmente emaranhada.</p></div>
+                <div class="item-termo"><strong>Cantáridas</strong><p>Referência metafórica a desejos sexuais ardentes e descontrolados.</p></div>
+                <div class="item-termo"><strong>Finório</strong><p>Indivíduo astuto, esperto, que age com malícia para obter vantagens materiais.</p></div>
+                <div class="item-termo"><strong>Parati</strong><p>Denominação popular para a cachaça ou aguardente de cana.</p></div>
+                <div class="item-termo"><strong>Cocote</strong><p>Designação para cortesã ou prostituta de luxo.</p></div>
+                <div class="item-termo"><strong>Escopro</strong><p>Ferramenta de corte e entalhe usada por marceneiros e pedreiros; formão.</p></div>
+                <div class="item-termo"><strong>Tisna</strong><p>Mancha provocada por fuligem, cinza ou fumaça.</p></div>
+                <div class="item-termo"><strong>Mourejar</strong><p>Trabalhar de forma árdua, contínua e sem descanso.</p></div>
+                <div class="item-termo"><strong>Estalagem</strong><p>Habitação coletiva; sinônimo de cortiço no contexto da narrativa.</p></div>
+                <div class="item-termo"><strong>Quitanda</strong><p>Pequeno estabelecimento comercial que vende gêneros alimentícios e utilitários.</p></div>
+                <div class="item-termo"><strong>Comua</strong><p>Instalação sanitária de uso comum; latrina ou privada coletiva.</p></div>
+            </div>
+
+            <section class="referencias-secao">
+                <h3>Referências</h3>
+                <div class="ref-item">AZEVEDO, Aluísio. O Cortiço. Brasília: Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/bitstreams/de177383-d58e-45f4-a1af-e09529d033d2/download. Acesso em: 01 ago. 2026.</div>
+                <div class="ref-item">MICHAELIS. <strong>Dicionário Brasileiro da Língua Portuguesa</strong>. São Paulo: Melhoramentos, 2026. Disponível em: https://michaelis.uol.com.br/. Acesso em: 01 ago. 2026.</div>
+            </section>
+        </article>
+    </main>
+
+    <script>
+        function filtrarGlossario() {
+            let input = document.getElementById('inputBusca').value.toLowerCase();
+            let termos = document.getElementsByClassName('item-termo');
+            for (let i = 0; i < termos.length; i++) {
+                let txtTermo = termos[i].textContent || termos[i].innerText;
+                if (txtTermo.toLowerCase().indexOf(input) > -1) {
+                    termos[i].style.display = "";
+                } else {
+                    termos[i].style.display = "none";
+                }
+            }
+        }
+
+        function pesquisarMichaelis() {
+            let termo = document.getElementById('inputBusca').value;
+            if (termo) {
+                let url = "https://michaelis.uol.com.br/moderno-portugues/busca/portugues-brasileiro/" + encodeURIComponent(termo);
+                window.open(url, '_blank');
+            } else {
+                alert("Por favor, digite uma palavra para pesquisar no Michaelis.");
+            }
+        }
+    </script>
+</body>
+</html>

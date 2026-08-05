@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Cortiço: do ponto de vista da Filosofia... - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+            --info: #3498db;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --video-btn: #e74c3c;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0;
+        }
+        .btn-nav-topo {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav-topo:hover { background: white; color: var(--primary); }
+
+        main { max-width: 1100px; width: 95%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-disciplina {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.1em; opacity: 0.95; }
+
+        .tooltip { position: relative; display: inline-block; border-bottom: 1px dashed var(--accent); color: var(--accent); cursor: help; font-weight: 700; }
+        .tooltip .tooltiptext {
+            visibility: hidden; width: 280px; background-color: #2d3436; color: #fff;
+            text-align: center; border-radius: 10px; padding: 15px; position: absolute;
+            z-index: 100; bottom: 125%; left: 50%; margin-left: -140px; opacity: 0;
+            transition: opacity 0.3s; font-size: 0.85em; font-weight: normal; line-height: 1.4;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 1px solid var(--primary);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .slide-container { background: rgba(0,0,0,0.25); border-radius: 25px; padding: 40px; margin: 40px 0; position: relative; min-height: 250px; border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; }
+        .slide { display: none; flex: 1; text-align: center; animation: slideIn 0.4s ease-out; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide h3 { color: var(--accent); font-size: 1.5em; margin-bottom: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+        .slide-nav { padding: 15px; display: flex; justify-content: center; gap: 10px; }
+        .dot { height: 8px; width: 60px; background-color: rgba(255, 255, 255, 0.2); border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .dot.active { background-color: var(--primary); }
+
+        .atlas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .atlas-item { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 20px; border-top: 4px solid var(--primary); transition: 0.3s; }
+        .atlas-item:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+        .icon-metafora { font-size: 2em; display: block; margin-bottom: 10px; }
+
+        .nota-aprofundamento {
+            background: rgba(108, 92, 231, 0.2); padding: 30px; border-radius: 20px;
+            border: 1px dashed var(--accent); margin-top: 30px; text-align: center;
+        }
+        .video-fake-player {
+            position: relative; width: 100%; max-width: 700px; margin: 20px auto; background-color: #000;
+            border-radius: 20px; overflow: hidden; cursor: pointer; aspect-ratio: 16 / 9;
+            border: 2px solid var(--accent); display: block;
+        }
+        .video-fake-player img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.3s; }
+        .play-button { width: 70px; height: 70px; background: var(--video-btn); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 25px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 20px rgba(231, 76, 60, 0.4); }
+
+        .linha-separadora { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 40px 0 20px; }
+        .secao-referencias { font-size: 0.85em; color: #dfe6e9; }
+        .secao-referencias h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 15px; }
+        .ref-item { margin-bottom: 12px; text-align: justify; line-height: 1.5; }
+
+        @media (max-width: 768px) { .atlas-grid { grid-template-columns: 1fr; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="cortico-contexto.html" class="btn-nav-topo">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav-topo">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-disciplina">
+            <h1>O Cortiço: do ponto de vista da Filosofia...</h1>
+
+            <section>
+                <h2>O Império da Razão e a Verdade Científica</h2>
+                <p>
+                    A Filosofia em <em>O Cortiço</em> é profundamente marcada pelo 
+                    <span class="tooltip">Positivismo
+                        <span class="tooltiptext">Corrente filosófica fundada por Auguste Comte que defende o conhecimento científico como a única forma de atingir a verdade absoluta sobre o ser humano e a sociedade.</span>
+                    </span> de Auguste Comte. No final do século XIX, a literatura brasileira abandonou as idealizações do espírito para focar na crueza da matéria. Através de Aluísio Azevedo, a obra se torna um campo de experimentação onde as ações humanas não são explicadas pelo livre-arbítrio, mas por leis biológicas e sociais rigorosas, revelando uma visão de mundo onde a ciência é a medida de todas as coisas.
+                </p>
+
+                <p>
+                    Essa mentalidade divide a história humana em estágios de evolução, colocando o pensamento científico no topo da civilização. No livro, os personagens são analisados sob uma lente objetiva que ignora a "alma" em favor da fisiologia. O 
+                    <span class="tooltip">Objetivismo Científico
+                        <span class="tooltiptext">Postura que busca retratar a realidade sem projeções utópicas ou sentimentais, fundamentando cada comportamento nas teorias vigentes da época.</span>
+                    </span> transforma o cortiço de São Romão em uma miniatura de laboratório, onde as teses do determinismo e do evolucionismo são testadas nos moradores, provando que o meio ambiente é a força suprema que molda o destino do indivíduo.
+                </p>
+
+                <div class="slide-container">
+                    <div class="slide active">
+                        <h3>📏 A Lei dos Três Estados</h3>
+                        <p>Auguste Comte propôs que a humanidade evolui do estágio teológico (religioso) para o metafísico (abstrato) até chegar ao positivo (científico), o auge da racionalidade humana.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🔬 O Homem Biológico</h3>
+                        <p>Diferente do Romantismo, o Naturalismo vê o ser humano como um animal complexo. Suas escolhas são frutos de instintos e heranças biológicas, não de uma vontade divina.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>⚙️ Física Social</h3>
+                        <p>Comte via a Sociologia como uma "Física Social". Assim como a gravidade rege os corpos, leis fixas regeriam o comportamento das massas dentro de habitações coletivas.</p>
+                    </div>
+                    <div class="slide">
+                        <h3>🇧🇷 Ordem e Progresso</h3>
+                        <p>O lema positivista influenciou a elite intelectual brasileira. Em <em>O Cortiço</em>, a busca de João Romão por "ordem" em sua estalagem visa atingir o "progresso" material a qualquer custo.</p>
+                    </div>
+                    <div class="slide-nav">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="atlas-container">
+                <h3 style="color: var(--accent); text-align: center; text-transform: uppercase;">📊 Atlas Ético: Pilares do Pensamento Positivo</h3>
+                
+                <div class="atlas-grid">
+                    <div class="atlas-item" style="border-top-color: var(--success);">
+                        <span class="icon-metafora">🧪</span>
+                        <strong style="color: var(--accent);">Cientificismo</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A crença absoluta de que a ciência pode explicar e resolver todos os problemas da convivência humana e da saúde social.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--info);">
+                        <span class="icon-metafora">🧬</span>
+                        <strong style="color: var(--accent);">Evolucionismo</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A aplicação das ideias de Darwin na sociedade, sugerindo que apenas os mais adaptados ao sistema capitalista conseguem prosperar.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--warning);">
+                        <span class="icon-metafora">📍</span>
+                        <strong style="color: var(--accent);">Realismo Brutal</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A rejeição de utopias. O filósofo positivista foca no que é "real" e "útil", descrevendo a miséria sem adornos poéticos.</p>
+                    </div>
+                    <div class="atlas-item" style="border-top-color: var(--danger);">
+                        <span class="icon-metafora">🕯️</span>
+                        <strong style="color: var(--accent);">Religião da Humanidade</strong>
+                        <p style="font-size: 0.9em; margin-top: 10px;">A proposta de Comte de substituir o culto aos deuses pelo culto ao Homem, à Razão e ao desenvolvimento técnico-científico.</p>
+                    </div>
+                </div>
+
+                <div class="nota-aprofundamento">
+                    <strong>🎬 Mergulho Filosófico</strong>
+                    <p>Para você que deseja compreender as engrenagens do pensamento que moldou a nossa bandeira e a mente dos intelectuais do século XIX, não perca a aula do professor <strong>Tulio Augustus</strong>. Com uma didática impecável, ele explica as nuances do Positivismo e como essa doutrina transformou a ciência no eixo central da vida moderna.</p>
+                    
+                    <a href="https://www.youtube.com/watch?v=MY6RZcMAzIk" target="_blank" style="text-decoration:none;">
+                        <div class="video-fake-player">
+                            <img src="https://img.youtube.com/vi/MY6RZcMAzIk/0.jpg" alt="Positivismo - Tulio Augustus">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </a>
+                    <p style="font-size: 0.85em; color: #dfe6e9; font-style: italic;">Conteúdo Externo | Fonte: Canal Tulio Augustus.</p>
+                </div>
+            </section>
+
+            <hr class="linha-separadora">
+
+            <footer class="secao-referencias">
+                <h4>REFERÊNCIAS</h4>
+                <div class="ref-item">AUGUSTUS, Tulio. <strong>O Positivismo e Auguste Comte</strong>. YouTube, 2021. Disponível em: https://www.youtube.com/watch?v=MY6RZcMAzIk. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">AZEVEDO, Aluísio. <strong>O Cortiço</strong>. Brasília: Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/items/df801f46-f448-4c66-9b42-7d9f1ff518f6. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">DIANA, Daniela. <strong>Naturalismo</strong>. Toda Matéria, [s.d.]. Disponível em: https://www.todamateria.com.br/naturalismo-movimento-naturalista/. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">HARTMANN, Lucas Misciato. <strong>O Positivismo e o Cortiço</strong>. Prezi, 2015. Disponível em: https://prezi.com/l5lowcbh39zn/o-positivismo-e-o-cortico/. Acesso em: 01 ago. 2026.</div>
+                
+                <div class="ref-item">SOUZA, Warley. <strong>O Cortiço, de Aluísio Azevedo</strong>. Brasil Escola, [s.d.]. Disponível em: https://brasilescola.uol.com.br/literatura/o-cortico-de-aluisio-azevedo.htm. Acesso em: 01 ago. 2026.</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function currentSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            dots[slideIndex].classList.remove('active');
+            slideIndex = n;
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

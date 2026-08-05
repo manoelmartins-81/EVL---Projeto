@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Autor: Aluísio Azevedo - EVL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --bg-glass: rgba(255, 255, 255, 0.12);
+            --accent: #ffeaa7;
+        }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), 
+                        url('estante-livros4.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        header {
+            width: 100%; padding: 15px 40px; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;
+        }
+        .btn-nav {
+            text-decoration: none; color: white; font-weight: bold; font-size: 0.8em;
+            padding: 8px 18px; border-radius: 30px; border: 1.5px solid white;
+            transition: 0.3s; margin-left: 10px;
+        }
+        .btn-nav:hover { background: white; color: var(--primary); }
+
+        main { max-width: 900px; width: 90%; margin: 40px 0; display: flex; flex-direction: column; gap: 30px; }
+        .card-autora {
+            background: var(--bg-glass); backdrop-filter: blur(15px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        h1 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--accent); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        p { line-height: 1.8; text-align: justify; font-size: 1.05em; opacity: 0.95; }
+
+        .foto-autora-container { text-align: center; margin: 20px 0 40px; }
+        .wrapper-foto { display: inline-block; max-width: 300px; }
+        .foto-autora { width: 100%; border-radius: 50%; border: 4px solid var(--accent); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+        .legenda-foto { font-size: 0.85em; margin-top: 15px; color: #dfe6e9; font-style: italic; text-align: center; line-height: 1.4; }
+
+        .cards-interativos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .card-interativo { height: 220px; perspective: 1000px; cursor: pointer; }
+        .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .card-interativo:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 25px;
+            border-radius: 20px; box-sizing: border-box;
+        }
+        .card-front { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2); font-size: 1.1em; color: var(--accent); }
+        .card-front span { font-size: 2.8em; margin-bottom: 10px; }
+        .card-back { background: var(--primary); color: white; transform: rotateY(180deg); font-size: 0.9em; line-height: 1.5; }
+
+        .podcast-container {
+            background: rgba(108, 92, 231, 0.15);
+            padding: 30px; border-radius: 25px; border: 1px solid var(--accent);
+            margin: 40px 0; text-align: center;
+        }
+
+        .secao-referencias {
+            margin-top: 50px; padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px; font-size: 0.85em;
+        }
+        .ref-item { margin-bottom: 15px; text-align: left; color: #dfe6e9; line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-evl.png" alt="EVL" style="height: 45px;">
+        <nav>
+            <a href="cortico-contexto.html" class="btn-nav">Voltar ao Contexto</a>
+            <a href="index.html" class="btn-nav">Página Inicial</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="card-autora">
+            <h1>Aluísio Azevedo</h1>
+
+            <section class="foto-autora-container">
+                <div class="wrapper-foto">
+                    <img src="aluisio-azevedo.jpg" alt="Aluísio Azevedo" class="foto-autora">
+                    <p class="legenda-foto">
+                        Aluísio Azevedo (1857-1913).<br>
+                        Escritor, caricaturista e diplomata.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Trajetória e Impacto</h2>
+                <p>
+                    Nascido em São Luís do Maranhão, Aluísio Tancredo Gonçalves de Azevedo foi a figura central que rompeu com as idealizações românticas para fundar o <strong>Naturalismo no Brasil</strong>. Homem de talentos múltiplos, foi caricaturista antes de ser romancista, o que deu à sua escrita uma precisão visual única: ele não apenas narrava, mas "desenhava" seus personagens com luzes, sombras e detalhes biológicos crus. 
+                </p>
+                <p>
+                    Sua obra é marcada por uma dualidade fascinante: de um lado, o escritor que produzia folhetins populares para sustentar a família; de outro, o intelectual revolucionário que utilizava o livro como um "documento social"  para diagnosticar as patologias da sociedade brasileira. Em 1895, no auge do reconhecimento, abandonou a literatura para seguir carreira diplomática, falecendo anos depois em Buenos Aires.
+                </p>
+            </section>
+
+            <section class="podcast-container">
+                <h2 style="margin-top: 0; font-size: 1.3em; color: var(--accent);">🎧 Podcast: Aluísio e o Bisturi Literário</h2>
+                <audio controls style="width: 100%; max-width: 500px;">
+                    <source src="podcast-aluisio.mp3" type="audio/mpeg">
+                    Seu navegador não suporta áudio.
+                </audio>
+                <p style="font-size: 0.8em; margin-top: 15px; font-style: italic; opacity: 0.7;">Análise: O gênio por trás de "O Cortiço". Duração: 5 min 30s.</p>
+            </section>
+
+            <section>
+                <h2>Explorar Legado</h2>
+                <div class="cards-interativos-grid">
+                    <!-- Card 1 -->
+                    <div class="card-interativo">
+                        <div class="card-inner">
+                            <div class="card-front"><span>🔬</span><strong>O Mulato (1881)</strong></div>
+                            <div class="card-back">Obra que inaugurou o Naturalismo no Brasil, chocando a sociedade maranhense ao denunciar o preconceito racial e o clero.</div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="card-interativo">
+                        <div class="card-inner">
+                            <div class="card-front"><span>🎨</span><strong>Olhar de Pintor</strong></div>
+                            <div class="card-back">Sua formação em Belas Artes permitiu descrições minuciosas que "fotografavam" o ambiente degradado dos cortiços.</div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="card-interativo">
+                        <div class="card-inner">
+                            <div class="card-front"><span>🏛️</span><strong>Fundador da ABL</strong></div>
+                            <div class="card-back">Apesar de sua estética agressiva, foi um dos fundadores da Academia Brasileira de Letras, ocupando a cadeira nº 4.</div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="card-interativo">
+                        <div class="card-inner">
+                            <div class="card-front"><span>🧬</span><strong>Determinismo</strong></div>
+                            <div class="card-back">Aplicou as teses científicas da época para provar que o meio, a raça e o momento histórico moldam o caráter humano.</div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="card-interativo">
+                        <div class="card-inner">
+                            <div class="card-front"><span>🌎</span><strong>Diplomata</strong></div>
+                            <div class="card-back">Serviu o Brasil na Espanha, Japão, Uruguai e Argentina, demonstrando uma faceta cosmopolita além da ficção.</div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="card-interativo">
+                        <div class="card-inner">
+                            <div class="card-front"><span>🏚️</span><strong>O Personagem Coletivo</strong></div>
+                            <div class="card-back">Inovou ao transformar o aglomerado urbano no verdadeiro protagonista de sua obra-prima, "O Cortiço".</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+   <footer class="secao-referencias">
+    <h4 style="color: var(--accent); text-transform: uppercase; margin-bottom: 20px;">Referências</h4>
+    
+    <div class="ref-item">
+        ALUÍSIO Azevedo. In: <strong>ACADEMIA Brasileira de Letras</strong>. Rio de Janeiro: ABL, 2026. Disponível em: https://www.academia.org.br/academicos/aluisio-azevedo. Acesso em: 01 ago. 2026. 
+    </div>
+
+    <div class="ref-item">
+        AZEVEDO, Aluísio. <strong>O Cortiço</strong>. Brasília: Edições Câmara, 2018. Disponível em: https://bd.camara.leg.br/bd/bitstreams/de177383-d58e-45f4-a1af-e09529d033d2/download. Acesso em: 01 ago. 2026. 
+    </div>
+
+    <div class="ref-item">
+        BRANDINO, Luiza. <strong>Aluísio Azevedo</strong>. Brasil Escola, [s.d.]. Disponível em: https://brasilescola.uol.com.br/literatura/aluisio-azevedo.htm. Acesso em: 01 ago. 2026. 
+    </div>
+
+    <div class="ref-item">
+        DIANA, Daniela. <strong>O Cortiço</strong>. Toda Matéria, [s.d.]. Disponível em: https://www.todamateria.com.br/o-cortico/. Acesso em: 01 ago. 2026. 
+    </div>
+
+    <div class="ref-item">
+        LITERATURA COM O ALENCAR. O CORTIÇO: resumo e análise | Aluísio Azevedo. YouTube, 2020. Disponível em: https://www.youtube.com/watch?v=RrFS_CWTdM8. Acesso em: 01 ago. 2026.
+    </div>
+
+    <div class="ref-item">
+        MENDES, Leonardo. <strong>O naturalismo na livraria do século XIX</strong>. Revista Letras, Curitiba, UFPR, n. 100, p. 71-90, jul./dez. 2019. Disponível em: https://d1wqtxts1xzle7.cloudfront.net/64040791/O_naturalismo_na_livraria_do_se%CC%81c._xix-libre.pdf. Acesso em: 01 ago. 2026. 
+    </div>
+
+    <div class="ref-item">
+        SILVA, Ednilson Esmério Toledo da. <strong>Além do Cortiço</strong>: um estudo sobre o Naturalismo na perspectiva lukacsiana. Escola de Sociologia e Política de São Paulo, [s.d.]. Disponível em: https://d1wqtxts1xzle7.cloudfront.net/33653400/Azevedo-Alem_do_Cortico-libre.pdf. Acesso em: 01 ago. 2026. 
+    </div>
+
+    <div class="ref-item">
+        SILVA, Mônica Back Barbosa da. <strong>O naturalismo em O cortiço de Aluísio Azevedo e Maggie de Stephen Crane</strong>. 1981. Dissertação (Mestrado em Letras) – Universidade Federal do Paraná, Curitiba, 1981. Disponível em: https://acervodigital.ufpr.br/xmlui/handle/1884/24355. Acesso em: 01 ago. 2026. 
+    </div>
+</footer>
+</body>
+</html>
